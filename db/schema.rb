@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813181655) do
+ActiveRecord::Schema.define(version: 20160813202332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 20160813181655) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "parent_tab_id"
-    t.string   "nickname"
+    t.string   "name"
+    t.text     "url"
     t.index ["tree_id"], name: "index_tabs_on_tree_id", using: :btree
     t.index ["user_id"], name: "index_tabs_on_user_id", using: :btree
   end
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160813181655) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
     t.index ["user_id"], name: "index_trees_on_user_id", using: :btree
   end
 

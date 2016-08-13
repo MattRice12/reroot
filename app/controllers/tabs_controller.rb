@@ -52,7 +52,6 @@ class TabsController < ApplicationController
   private
 
   def tab_params
-    params.require(:tab).permit(:user_id, :parent_tab_id, :nickname)
+    params.require(:tab).permit(:user_id, :name, :url, :parent_tab_id)
   end
-
 end
