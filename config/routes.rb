@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :tabs
-  resources :branches
   resources :trees
   resources :users
 

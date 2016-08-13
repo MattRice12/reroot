@@ -15,24 +15,14 @@ ActiveRecord::Schema.define(version: 20160813181655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "branches", force: :cascade do |t|
-    t.integer  "tree_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "parent_branch_id"
-    t.index ["tree_id"], name: "index_branches_on_tree_id", using: :btree
-    t.index ["user_id"], name: "index_branches_on_user_id", using: :btree
-  end
-
   create_table "tabs", force: :cascade do |t|
-    t.integer  "branch_id"
+    t.integer  "tree_id"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "parent_tab_id"
     t.string   "nickname"
-    t.index ["branch_id"], name: "index_tabs_on_branch_id", using: :btree
+    t.index ["tree_id"], name: "index_tabs_on_tree_id", using: :btree
     t.index ["user_id"], name: "index_tabs_on_user_id", using: :btree
   end
 
@@ -51,9 +41,7 @@ ActiveRecord::Schema.define(version: 20160813181655) do
     t.string   "password",   null: false
   end
 
-  add_foreign_key "branches", "trees"
-  add_foreign_key "branches", "users"
-  add_foreign_key "tabs", "branches"
+  add_foreign_key "tabs", "trees"
   add_foreign_key "tabs", "users"
   add_foreign_key "trees", "users"
 end

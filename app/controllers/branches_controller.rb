@@ -1,2 +1,0 @@
-class BranchesController < ApplicationController
-end
