@@ -43,7 +43,7 @@ class TreesController < ApplicationController
   end
 
   def destroy
-    tree = Tree.find(id :params[id])
+    tree = Tree.find(id: params[:id])
     if tree.destroy
       render message: "Take that, Greenpeace!"
     else
