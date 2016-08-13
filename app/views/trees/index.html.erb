@@ -2,30 +2,32 @@
 <% trees.each do |tree| %>
   <h1> <%= tree.id %> </h1>
 
-    <% tree.tabs.each do |tab| %>
+  <% tree.tabs.each do |tab| %>
 
-      <% if tab.parent.nil? %>
-        <h2> <%= tab.name %> </h2>
+    <% if tab.parent.nil? %>
+    <div class="trunk">
 
-        <div class="big-block">
-          <% tab.children.each do |child| %>
+      <h3><%= tab.name %></h3>
 
-          <div class="branch">
-          <h3 class="leaf"><%= child.name %></h3>
+      <div class="big-block">
+        <% tab.children.each do |child| %>
+
+        <div class="branch">
+          <h3 class="leaf">
+            <%= child.name %>
+          </h3>
 
           <% child.children.each do |gchild| %>
             <h5 class="leaf"><%= gchild.name %></h5>
-
             <% gchild.children.each do |ggchild| %>
               <h5 class="leaf"><%= ggchild.name %></h5>
             <% end %>
-          </div>
-
           <% end %>
+        </div>
+
         <% end %>
       </div>
-
-      <% end %>
+    </div>
     <% end %>
-
+  <% end %>
 <% end %>

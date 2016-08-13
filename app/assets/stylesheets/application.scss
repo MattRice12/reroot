@@ -14,6 +14,14 @@
  *= require_self
  */
 
+.trunk {
+  text-align: center;
+  display: inline-block;
+  border: 2px solid black;
+  padding-top: 10px;
+  margin: 10px;
+}
+
 .big-block {
   display: flex;
   .branch {
