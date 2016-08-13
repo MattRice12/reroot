@@ -7,12 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(name: "admin", email: "admin@example.com", password: "password")
-Tree.create!(user_id: 1)
+user = User.create!(name: "admin", email: "admin@example.com", password: "password")
+tree = Tree.create!(user_id: user.id)
 
-3.times do
-  branch = Branch.create(user_id: 1, tree_id: 1)
-  tab = Tab.create!(user_id: 1, branch_id: branch.id)
-  tab2 = Tab.create!(user_id: 1, branch_id: branch.id, parent_tab_id: tab.id)
-  Tab.create!(user_id: 1, branch_id: branch.id, parent_tab_id: tab2.id)
+tab = Tab.create(user_id: user.id, tree_id: tree.id) #only 1 tab can have a nil parent_tab_id per tree
+
+2.times do
+  tab2 = Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: tab.id)
+  tab3 = Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: tab2.id)
+  Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: tab3.id)
 end
