@@ -7,11 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-user = User.create!(name: "admin", email: "admin@example.com", password: "password")
-tree = Tree.create!(user_id: user)
+User.create!(name: "admin", email: "admin@example.com", password: "password")
+Tree.create!(user_id: 1)
+
 3.times do
-  branch = Branch.create(user_id: user, tree_id: tree)
-  3.times do
-    Tab.create(user_id: user, branch_id: branch)
-  end
+  branch = Branch.create(user_id: 1, tree_id: 1)
+  tab = Tab.create!(user_id: 1, branch_id: branch.id)
+  tab2 = Tab.create!(user_id: 1, branch_id: branch.id, parent_tab_id: tab.id)
+  Tab.create!(user_id: 1, branch_id: branch.id, parent_tab_id: tab2.id)
 end
