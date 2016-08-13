@@ -17,24 +17,24 @@ tree = Tree.create!(user_id: user.id, name: "Tree: 1")
 tab = Tab.create(user_id: user.id,
                  tree_id: tree.id,
                  url: url,
-                 name: url) #only 1 tab can have a nil parent_tab_id per tree
+                 name: "Main Branch") #only 1 tab can have a nil parent_tab_id per tree
 
 2.times do
   tab2 = Tab.create!(user_id: user.id,
                      tree_id: tree.id,
                      parent_tab_id: tab.id,
                      url: url,
-                     name: url)
+                     name: "Children")
 
   tab3 = Tab.create!(user_id: user.id,
                      tree_id: tree.id,
                      parent_tab_id: tab2.id,
                      url: url,
-                     name: url)
+                     name: "Grandchildren")
 
   Tab.create!(user_id: user.id,
               tree_id: tree.id,
               parent_tab_id: tab3.id,
               url: url,
-              name: url)
+              name: "Great Grandchildren")
 end

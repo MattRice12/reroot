@@ -1,0 +1,31 @@
+
+<% trees.each do |tree| %>
+  <h1> <%= tree.id %> </h1>
+
+    <% tree.tabs.each do |tab| %>
+
+      <% if tab.parent.nil? %>
+        <h2> <%= tab.name %> </h2>
+
+        <div class="big-block">
+          <% tab.children.each do |child| %>
+
+          <div class="branch">
+          <h3 class="leaf"><%= child.name %></h3>
+
+          <% child.children.each do |gchild| %>
+            <h5 class="leaf"><%= gchild.name %></h5>
+
+            <% gchild.children.each do |ggchild| %>
+              <h5 class="leaf"><%= ggchild.name %></h5>
+            <% end %>
+          </div>
+
+          <% end %>
+        <% end %>
+      </div>
+
+      <% end %>
+    <% end %>
+
+<% end %>
