@@ -41,7 +41,7 @@ class TabsController < ApplicationController
   end
 
   def destroy
-    tab = Tab.find(id :params[id])
+    tab = Tab.find_by(id: params.fetch(:id))
     if tab.destroy
       render message: "Take that, Greenpeace!"
     else
