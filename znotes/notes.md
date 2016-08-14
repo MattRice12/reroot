@@ -14,7 +14,8 @@
 	Token Auth
 
 ##Be able to rename tabs
-##Be able to color-coordinate tabs (to highlight important ones)
+
+##Favorites -- Be able to color-coordinate tabs (to highlight important ones)
 
 
 ##Edit tree (like OneTab's Export/Import option) -- maybe order the URLs by moving the stack around

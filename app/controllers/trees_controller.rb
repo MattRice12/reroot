@@ -1,6 +1,6 @@
 class TreesController < ApplicationController
   def index
-    trees = Tree.all
+    trees = Tree.all.includes(:tabs)
     render locals: { trees: trees }
   end
 
