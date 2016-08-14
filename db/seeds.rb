@@ -19,7 +19,7 @@ tab = Tab.create(user_id: user.id,
                  url: url,
                  name: "Main Branch") #only 1 tab can have a nil parent_tab_id per tree
 
-3.times do
+2.times do
   tab2 = Tab.create!(user_id: user.id,
                      tree_id: tree.id,
                      parent_tab_id: tab.id,
@@ -42,7 +42,7 @@ end
 10.times do
   Tab.create!(user_id: user.id,
               tree_id: tree.id,
-              parent_tab_id: rand(1..7),
+              parent_tab_id: rand(2..7),
               url: url,
-              name: "Extras")
+              name: "#{rand(1..100)}")
 end
