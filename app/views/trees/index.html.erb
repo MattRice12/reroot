@@ -15,12 +15,11 @@
               <div class="branch">
                 <h3 class="leaf" id="child"><%= child.name %></h3> <%# first set of branches %>
 
-
-                  <% ########### LOOP THIS ##### %>
+                  <% ########### Recursion! ##### %>
 
                   <%= render( partial: 'rechild', locals: { children: child.children }) if child %>
 
-                  <% ########### /LOOP THIS ##### %>
+                  <% ########### /Recursion! ##### %>
               </div>
           <% end %>
 

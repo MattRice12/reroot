@@ -24,19 +24,19 @@ tab = Tab.create(user_id: user.id,
                      tree_id: tree.id,
                      parent_tab_id: tab.id,
                      url: url,
-                     name: "Children")
+                     name: "Child")
 
   tab3 = Tab.create!(user_id: user.id,
                      tree_id: tree.id,
                      parent_tab_id: tab2.id,
                      url: url,
-                     name: "Grandchildren")
+                     name: "Grandchild")
 
   Tab.create!(user_id: user.id,
               tree_id: tree.id,
               parent_tab_id: tab3.id,
               url: url,
-              name: "Great Grandchildren")
+              name: "Great Grandchild")
 end
 
 10.times do
