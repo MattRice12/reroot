@@ -19,7 +19,7 @@
 }
 
 .trunk {
-  text-align: -webkit-center;
+  text-align: center;
   display: inline-block;
   border: 2px solid black;
   padding-top: 10px;
@@ -65,7 +65,7 @@
   .branch {
     border: 1px dotted lightgray;
     display: table-cell;
-    text-align: -webkit-center;
+    text-align: center;
     .leaf {
       border: 1px solid black;
       border-radius: 5px;

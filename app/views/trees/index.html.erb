@@ -9,7 +9,7 @@
       <div class="trunk" id="root">
         <h3><%= link_to tab.name, tab.url, class: 'btn leaf-main' %>
           <div>
-            <span> <%= link_to "+", new_tab_path, class: 'btn sub-add' %></span>
+            <span> <%= link_to "+", new_tab_path(parent_tab_id: tab.id), class: 'btn sub-add' %></span>
             <span> <%= link_to "x", tab_path(tab), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
           </div>
         </h3>
@@ -20,8 +20,8 @@
               <div class="branch">
                 <h3><%= link_to child.name, child.url, class: 'btn leaf' %>
                   <div>
-                    <span> <%= link_to "+", new_tab_path, class: 'btn sub-add' %></span>
-                    <span> <%= link_to "x", tabs_path(child), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
+                    <span> <%= link_to "+", new_tab_path(parent_tab_id: child.id), class: 'btn sub-add' %></span>
+                    <span> <%= link_to "x", tab_path(child), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
                   </div>
                 </h3>
 

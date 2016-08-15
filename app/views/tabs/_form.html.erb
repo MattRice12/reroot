@@ -1,0 +1,31 @@
+<%= form_for(tab) do |f| %>
+
+  <div class="field">
+    <label for="user_id">User: </label>
+    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <label for="user_id">Tree: </label>
+    <%= f.select :tree_id, options_from_collection_for_select(Tree.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+
+  <div class="actions">
+    <%= f.hidden_field :parent_tab_id, value: params[:parent_tab_id] %>
+  </div>
+
+  <div class="waves-effect waves-light btn">
+    <%= f.submit %>
+  </div>
+
+<% end %>

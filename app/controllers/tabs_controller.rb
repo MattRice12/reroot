@@ -20,7 +20,7 @@ class TabsController < ApplicationController
   def create
     tab = Tab.new(tab_params)
     if tab.save
-      redirect_to tab
+      redirect_to root_path
     else
       flash[:alert] = tab.errors
       render template: 'tabs/new.html.erb', locals: { tab: tab}
@@ -53,6 +53,6 @@ class TabsController < ApplicationController
   private
 
   def tab_params
-    params.require(:tab).permit(:user_id, :name, :url, :parent_tab_id)
+    params.require(:tab).permit(:tree_id, :user_id, :name, :url, :parent_tab_id)
   end
 end
