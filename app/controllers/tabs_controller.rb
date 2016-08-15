@@ -41,9 +41,10 @@ class TabsController < ApplicationController
   end
 
   def destroy
-    tab = Tab.find_by(id: params.fetch(:id))
+    tab = Tab.find(params.fetch(:id))
     if tab.destroy
-      render message: "Take that, Greenpeace!"
+      flash[:alert] = "Take that, Greenpeace!"
+      redirect_to root_path
     else
       render message: "Tab not found."
     end
