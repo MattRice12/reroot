@@ -1,0 +1,6 @@
+<% children.each do |child| %>
+  <div class="branch">
+    <h3 class="leaf" id="child"><%= child.name %></h3> <%# first set of branches %>
+    <%= render( partial: 'rechild', locals: { children: child.children }) if child.children %>
+  </div>
+<% end %>

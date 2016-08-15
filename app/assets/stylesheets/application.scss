@@ -15,10 +15,20 @@
  */
 
 .trunk {
-  text-align: center;
+  text-align: -webkit-center;
   display: inline-block;
   border: 2px solid black;
   padding-top: 10px;
+  margin: 10px;
+}
+
+.leaf-main {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+  word-wrap: break-word;
+  padding: 10px;
   margin: 10px;
 }
 
@@ -29,6 +39,10 @@
     text-align: -webkit-center;
     .leaf {
       border: 1px solid black;
+      border-radius: 5px;
+      font-size: inherit;
+      width: 110px;
+      word-wrap: break-word;
       padding: 10px;
       margin: 10px;
     }

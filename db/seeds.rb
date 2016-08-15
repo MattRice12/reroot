@@ -46,3 +46,11 @@ end
               url: url,
               name: "#{rand(1..100)}")
 end
+
+10.times do
+  Tab.create!(user_id: user.id,
+              tree_id: tree.id,
+              parent_tab_id: rand(7..17),
+              url: url,
+              name: "#{rand(1..100)}")
+end

@@ -1,42 +1,28 @@
 
+
 <% trees.each do |tree| %>
   <h1> <%= tree.id %> </h1>
 
   <% tree.tabs.each do |tab| %>
 
     <% if tab.parent.nil? %>
-      <div class="trunk">
-        <h3 class="leaf"><%= tab.name %></h3>
+      <div class="trunk" id="root">
+        <h3 class="leaf-main" ><%= tab.name %></h3>
 
         <div class="big-block">
 
-          <% ########### LOOP THIS ##### %>
           <% tab.children.each do |child| %>
               <div class="branch">
-                <h3 class="leaf"><%= child.name %></h3> <%# first set of branches %>
+                <h3 class="leaf" id="child"><%= child.name %></h3> <%# first set of branches %>
 
-                  <% child.children.each do |child| %>
-                      <div class="branch">
-                        <h3 class="leaf"><%= child.name %></h3> <%# first set of branches %>
 
-                          <% child.children.each do |child| %>
-                              <div class="branch">
-                                <h3 class="leaf"><%= child.name %></h3> <%# first set of branches %>
+                  <% ########### LOOP THIS ##### %>
 
-                                  <% child.children.each do |child| %>
-                                      <div class="branch">
-                                        <h3 class="leaf"><%= child.name %></h3> <%# first set of branches %>
-                                      </div>
-                                    <% end %>
-                              </div>
-                            <% end %>
-                      </div>
-                    <% end %>
+                  <%= render( partial: 'rechild', locals: { children: child.children }) if child %>
+
+                  <% ########### /LOOP THIS ##### %>
               </div>
           <% end %>
-
-
-          <% ########### /LOOP THIS ##### %>
 
         </div>
       </div>
