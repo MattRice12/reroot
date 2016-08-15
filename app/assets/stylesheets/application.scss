@@ -26,40 +26,6 @@
   margin: 10px;
 }
 
-.leaf-main {
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 100px;
-  text-align: center;
-  word-wrap: break-word;
-  padding: 10px 10px 30px 10px;
-  &:hover {
-    background: lightblue;
-  }
-}
-
-.sub-add {
-  padding: 0 5px 0 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: white;
-  margin: -3px;
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.sub-del {
-  padding: 0 5px 0 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: white;
-  margin: -3px;
-  &:hover {
-    background: pink;
-  }
-}
-
 .big-block {
   display: flex;
   .branch {
@@ -74,6 +40,10 @@
       word-wrap: break-word;
       padding: 10px;
       margin: 10px;
+      text-decoration: none;
+      a {
+        text-decoration: none;
+      }
       &:hover {
         background: lightblue;
       }
@@ -81,8 +51,37 @@
   }
 }
 
+/////////////// BUTTONS ///////////////
 
-
-.parallel-leaves {
-  display: flex;
+.add-del-edit {
+  padding: 0 5px 0 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  margin: 0;
+  text-decoration: none;
+  &:hover {
+    background: lightgreen;
+  }
 }
+
+.add-del-edit.edit {
+  margin: -3px;
+  &:hover {
+    background: cyan;
+  }
+}
+
+.add-del-edit.add {
+  &:hover {
+    background: lightgreen;
+  }
+}
+
+.add-del-edit.del {
+  &:hover {
+    background: red;
+  }
+}
+
+/////////////// BUTTONS ///////////////

@@ -3,6 +3,4 @@ class Tab < ApplicationRecord
   belongs_to :parent, class_name: "Tab", foreign_key: :parent_tab_id, optional: true
 
   belongs_to :tree
-
-
 end

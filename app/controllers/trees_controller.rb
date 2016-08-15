@@ -1,6 +1,6 @@
 class TreesController < ApplicationController
   def index
-    trees = Tree.all.includes(tabs: [:children])
+    trees = Tree.all.includes(tabs: [:children]).order(:id)
     render locals: { trees: trees }
   end
 
@@ -22,7 +22,7 @@ class TreesController < ApplicationController
     tab = Tab.new(tab_params)
     if tree.save
       tab.save
-      redirect_to tree
+      redirect_to root_path
     else
       flash[:alert] = tree.errors
       render template: 'trees/new.html.erb', locals: { tree: tree}
@@ -36,7 +36,7 @@ class TreesController < ApplicationController
   def update
     tree = Tree.find(params.fetch(:id))
     if tree.update(tree_params)
-      redirect_to tree
+      redirect_to root_path
     else
       render template: 'trees/edit.html.erb', locals: { tree: tree }
     end
@@ -54,7 +54,7 @@ class TreesController < ApplicationController
   private
 
   def tree_params
-    params.require(:tree).permit(:user_id)
+    params.require(:tree).permit(:user_id, :name)
   end
 
   def tab_params

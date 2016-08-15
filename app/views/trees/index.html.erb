@@ -1,17 +1,19 @@
 
 
 <% trees.each do |tree| %>
-  <h1> <%= tree.id %> </h1>
+  <h1> <%= tree.name %>
+    <sup class="btn sup-edit"><%= link_to ">", edit_tree_path(tree), class: 'btn add-del-edit' %></sup>
+  </h1>
 
   <% tree.tabs.each do |tab| %>
 
     <% if tab.parent.nil? %>
       <div class="trunk" id="root">
-        <h3 class="btn leaf"><%= link_to tab.name, tab.url %>
-          <sup><%= link_to ">", edit_tab_path(tab), class: 'btn sub-edit' %></sup>
+        <h3 class="btn leaf"><%= link_to tab.name, url_with_protocol(tab.url) %>
+          <sup><%= link_to ">", edit_tab_path(tab), class: 'btn add-del-edit edit' %></sup>
           <div>
-            <span> <%= link_to "+", new_tab_path(parent_tab_id: tab.id), class: 'btn sub-add' %></span>
-            <span> <%= link_to "x", tab_path(tab), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
+            <span> <%= link_to "+", new_tab_path(parent_tab_id: tab.id), class: 'btn add-del-edit add' %></span>
+            <span> <%= link_to "x", tab_path(tab), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn add-del-edit del' %></span>
           </div>
         </h3>
 
@@ -19,11 +21,11 @@
 
           <% tab.children.each do |child| %>
               <div class="branch">
-                <h3 class="btn leaf"><%= link_to child.name, child.url %>
-                  <sup><%= link_to ">", edit_tab_path(child, parent_tab_id: child.parent_tab_id), class: 'btn sub-edit' %></sup>
+                <h3 class="btn leaf"><%= link_to child.name, url_with_protocol(child.url) %>
+                  <sup><%= link_to ">", edit_tab_path(child, parent_tab_id: child.parent_tab_id), class: 'btn add-del-edit edit' %></sup>
                   <div>
-                    <span> <%= link_to "+", new_tab_path(parent_tab_id: child.id), class: 'btn sub-add' %></span>
-                    <span> <%= link_to "x", tab_path(child), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
+                    <span> <%= link_to "+", new_tab_path(parent_tab_id: child.id), class: 'btn add-del-edit add' %></span>
+                    <span> <%= link_to "x", tab_path(child), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn add-del-edit del' %></span>
                   </div>
                 </h3>
 
