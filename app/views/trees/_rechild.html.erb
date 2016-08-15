@@ -1,6 +1,7 @@
 <% children.each do |child| %>
   <div class="branch">
-    <h3><%= link_to child.name, child.url, class: 'btn leaf' %>
+    <h3 class="btn leaf"><%= link_to child.name, child.url %>
+      <sup><%= link_to ">", edit_tab_path(child, parent_tab_id: child.parent_tab_id), class: 'btn sub-edit' %></sup>
       <div>
         <span> <%= link_to "+", new_tab_path(parent_tab_id: child.id), class: 'btn sub-add' %></span>
         <span> <%= link_to "x", tab_path(child), method: :delete, class: 'btn sub-del' %></span>

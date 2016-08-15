@@ -34,7 +34,7 @@ class TabsController < ApplicationController
   def update
     tab = Tab.find(params.fetch(:id))
     if tab.update(tab_params)
-      redirect_to tab
+      redirect_to root_path
     else
       render template: 'tabs/edit.html.erb', locals: { tab: tab }
     end
