@@ -1,6 +1,11 @@
 <% children.each do |child| %>
   <div class="branch">
-    <h3 class="leaf" id="child"><%= child.name %></h3> <%# first set of branches %>
+    <h3><%= link_to child.name, child.url, class: 'btn leaf' %>
+      <div>
+        <span> <%= link_to "+", new_tab_path, class: 'btn sub-add' %></span>
+        <span> <%= link_to "x", tab_path(child), method: :destroy, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn sub-del' %></span>
+      </div>
+    </h3> <%# first set of branches %>
     <%= render( partial: 'rechild', locals: { children: child.children }) if child.children %>
   </div>
 <% end %>

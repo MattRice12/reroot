@@ -28,26 +28,56 @@
   width: 100px;
   text-align: center;
   word-wrap: break-word;
-  padding: 10px;
-  margin: 10px;
+  padding: 10px 10px 30px 10px;
+  &:hover {
+    background: lightblue;
+  }
+}
+
+.sub-add {
+  padding: 0 5px 0 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  margin: -3px;
+  &:hover {
+    background: lightgreen;
+  }
+}
+
+.sub-del {
+  padding: 0 5px 0 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  margin: -3px;
+  &:hover {
+    background: pink;
+  }
 }
 
 .big-block {
   display: flex;
   .branch {
+    border: 1px dotted lightgray;
     display: table-cell;
     text-align: -webkit-center;
     .leaf {
       border: 1px solid black;
       border-radius: 5px;
       font-size: inherit;
-      width: 100px;
+      width: 150px;
       word-wrap: break-word;
-      padding: 10px;
-      margin: 10px;
+      padding: 10px 10px 30px 10px;
+      margin: 10px 10px 50px 10px;
+      &:hover {
+        background: lightblue;
+      }
     }
   }
 }
+
+
 
 .parallel-leaves {
   display: flex;

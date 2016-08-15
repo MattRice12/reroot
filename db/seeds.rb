@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-url = ["http://rubyonrails.org/"]
+url = "http://rubyonrails.org/"
 
 user = User.create!(name: "admin",
                     email: "admin@example.com",
