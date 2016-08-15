@@ -9,9 +9,9 @@
 
     <% if tab.parent.nil? %>
       <div class="trunk" id="root">
-        <h3 class="btn leaf"><%= link_to tab.name, url_with_protocol(tab.url) %>
-          <sup><%= link_to ">", edit_tab_path(tab), class: 'btn add-del-edit edit' %></sup>
+        <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
           <div>
+            <span><%= link_to ">", edit_tab_path(tab), class: 'btn add-del-edit edit' %></span>
             <span> <%= link_to "+", new_tab_path(parent_tab_id: tab.id), class: 'btn add-del-edit add' %></span>
             <span> <%= link_to "x", tab_path(tab), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn add-del-edit del' %></span>
           </div>
@@ -21,9 +21,9 @@
 
           <% tab.children.each do |child| %>
               <div class="branch">
-                <h3 class="btn leaf"><%= link_to child.name, url_with_protocol(child.url) %>
-                  <sup><%= link_to ">", edit_tab_path(child, parent_tab_id: child.parent_tab_id), class: 'btn add-del-edit edit' %></sup>
+                <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
                   <div>
+                    <span><%= link_to ">", edit_tab_path(child, parent_tab_id: child.parent_tab_id), class: 'btn add-del-edit edit' %></span>
                     <span> <%= link_to "+", new_tab_path(parent_tab_id: child.id), class: 'btn add-del-edit add' %></span>
                     <span> <%= link_to "x", tab_path(child), method: :delete, data: { confirm: 'Are you sure you want to delete this note?'}, class: 'btn add-del-edit del' %></span>
                   </div>

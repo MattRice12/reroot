@@ -42,6 +42,15 @@ class TabsController < ApplicationController
 
   def destroy
     tab = Tab.find(params.fetch(:id))
+
+    if tab.parent
+      tabchild = Tab.where(parent_tab_id: params.fetch(:id))
+      tabchild.each do |tc|
+        tc.parent_tab_id = tab.parent.id
+        tc.save
+      end
+    end
+
     if tab.destroy
       flash[:alert] = "Take that, Greenpeace!"
       redirect_to root_path

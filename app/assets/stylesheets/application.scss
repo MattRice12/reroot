@@ -14,74 +14,26 @@
  *= require_self
  */
 
+@import 'variables';
+@import 'trees';
+
+a {
+  color: blue;
+  text-decoration: none;
+  &:hover {
+    color: darkblue;
+  }
+}
+
+h2, h3, h4 {
+  font-family: $display-font;
+  font-weight: lighter;
+}
+
 #flash {
   color: red;
 }
 
-.trunk {
-  text-align: center;
-  display: inline-block;
-  border: 2px solid black;
-  padding-top: 10px;
-  margin: 10px;
-}
 
-.big-block {
-  display: flex;
-  .branch {
-    border: 1px dotted lightgray;
-    display: table-cell;
-    text-align: center;
-    .leaf {
-      border: 1px solid black;
-      border-radius: 5px;
-      font-size: inherit;
-      width: 100px;
-      word-wrap: break-word;
-      padding: 10px;
-      margin: 10px;
-      text-decoration: none;
-      a {
-        text-decoration: none;
-      }
-      &:hover {
-        background: lightblue;
-      }
-    }
-  }
-}
-
-/////////////// BUTTONS ///////////////
-
-.add-del-edit {
-  padding: 0 5px 0 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: white;
-  margin: 0;
-  text-decoration: none;
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.edit {
-  margin: -3px;
-  &:hover {
-    background: cyan;
-  }
-}
-
-.add-del-edit.add {
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.del {
-  &:hover {
-    background: red;
-  }
-}
 
 /////////////// BUTTONS ///////////////
