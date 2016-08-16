@@ -18,13 +18,21 @@
   }
 }
 
-.search-box {
-  display: flex;
-  margin-top: 10px;
-  input {
-    margin: 0;
-  }
+.input-field {
   form {
     margin: 0;
+    .search-box {
+      display: flex;
+      margin-top: 10px;
+      margin-bottom: 0;
+
+      input {
+        margin: 0 1px;
+
+      }
+      form {
+        margin: 0;
+      }
+    }
   }
 }

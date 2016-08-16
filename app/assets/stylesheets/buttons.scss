@@ -1,30 +1,11 @@
 @import 'variables';
 
 .add-del-edit {
-  padding: 0 5px 0 5px;
-  border: 1px solid $secondary-color;
-  border-radius: 5px;
-  background: white;
-  margin: 0;
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.edit {
-  &:hover {
-    background: cyan;
-  }
-}
-
-.add-del-edit.add {
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.del {
-  &:hover {
-    background: red;
+  img {
+    height: 15px;
+    width: 15px;
+    &:hover {
+      box-shadow: 5px 5px 5px black;
+    }
   }
 }

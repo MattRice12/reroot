@@ -15,11 +15,14 @@
   padding: 10px;
   margin: 10px;
   &:hover {
-    background: lightblue;
+    background: $button-color;
     box-shadow: 1px 1px 1px;
   }
   a {
     color: $secondary-color;
     text-decoration: none;
+    &:hover {
+      color: yellow;
+    }
   }
 }

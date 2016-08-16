@@ -1,0 +1,17 @@
+<span>
+  <%= link_to edit_tab_path(tab), class: 'btn add-del-edit edit' do %>
+    <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+  <% end %>
+</span>
+
+<span>
+  <%= link_to new_tab_path(parent_tab_id: tab.id), class: 'btn add-del-edit add' do %>
+    <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
+  <% end %>
+</span>
+
+<span>
+  <%= link_to tab_path(tab), method: :delete, data: { confirm: 'Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del' do %>
+    <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+  <% end %>
+</span>
