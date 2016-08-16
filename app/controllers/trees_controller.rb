@@ -1,7 +1,11 @@
 class TreesController < ApplicationController
   def index
-    trees = Tree.all.includes(tabs: [:children]).order(:id)
-    render locals: { trees: trees }
+    if params[:search]
+      search_params
+    else
+      trees = Tree.all.includes(tabs: [:children]).order(:id)
+      render locals: { trees: trees }
+    end
   end
 
   def show

@@ -1,0 +1,5 @@
+<h3> Search Results: </h3>
+
+<% tabs.each do %>
+  <h3 class="btn leaf"><%= link_to child.name, url_with_protocol(tab.url) %></h3>
+<% end %>
