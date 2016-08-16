@@ -4,7 +4,7 @@ class TreesController < ApplicationController
       search_params
     else
       trees = Tree.all.includes(tabs: [:children])
-      render "trees/default.html.erb", locals: { trees: trees }
+      render locals: { trees: trees }
     end
   end
 
