@@ -14,9 +14,15 @@
   word-wrap: break-word;
   padding: 5px;
   margin: 5px;
+  vertical-align: top;
+  .editor {
+    display: none;
+  }
   &:hover {
     background: $button-color;
-    box-shadow: 1px 1px 1px;
+    .editor {
+      display: block;
+    }
   }
   a {
     color: $secondary-color;
