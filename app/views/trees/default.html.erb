@@ -2,7 +2,11 @@
 <div class="row">
   <% trees.each do |tree| %>
     <h1> <%= tree.name %>
-      <sup class="btn sup-edit"><%= link_to ">", edit_tree_path(tree), class: 'btn add-del-edit edit' %></sup>
+      <sup class="btn sup-edit">
+        <%= link_to edit_tree_path(tree), class: 'btn add-del-edit edit' do %>
+          <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+        <% end %>
+      </sup>
     </h1>
 
     <% tree.tabs.each do |tab| %>
