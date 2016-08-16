@@ -1,7 +1,11 @@
 class TabsController < ApplicationController
   def index
-    tabs = Tab.all
-    render locals: { tabs: tabs }
+    if params[:search]
+      search_params
+    else
+      tabs = Tab.all
+      render locals: { tabs: tabs }
+    end
   end
 
   def show

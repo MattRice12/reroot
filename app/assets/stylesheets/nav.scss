@@ -1,18 +1,30 @@
 @import 'variables';
 
 .nav-row {
-  margin-bottom: 60px;
-
+  margin-bottom: 80px;
 }
+
 .nav-wrapper {
+  display: flex;
   position: fixed;
   margin-bottom: 20px;
   background-color: $primary-color;
   a {
     color: white;
-    font-size: xx-large;
+    font-size: 37px;
     &:hover {
       color: white;
     }
+  }
+}
+
+.search-box {
+  display: flex;
+  margin-top: 10px;
+  input {
+    margin: 0;
+  }
+  form {
+    margin: 0;
   }
 }

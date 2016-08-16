@@ -3,8 +3,8 @@ class TreesController < ApplicationController
     if params[:search]
       search_params
     else
-      trees = Tree.all.includes(tabs: [:children]).order(:id)
-      render locals: { trees: trees }
+      trees = Tree.all
+      render "trees/default.html.erb", locals: { trees: trees }
     end
   end
 
