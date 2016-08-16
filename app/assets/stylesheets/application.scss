@@ -15,7 +15,10 @@
  */
 
 @import 'variables';
+@import 'reset';
 @import 'trees';
+@import 'tabs';
+@import 'buttons';
 
 a {
   color: blue;
@@ -34,6 +37,8 @@ h2, h3, h4 {
   color: red;
 }
 
-
-
-/////////////// BUTTONS ///////////////
+footer small {
+  display: block;
+  color: $footer-color;
+  text-align: center;
+}

@@ -9,60 +9,12 @@
   border: 2px solid black;
   padding-top: 10px;
   margin: 10px;
-}
-
-.big-block {
-  display: flex;
-  .branch {
-    border: 1px dotted lightgray;
-    display: table-cell;
-    text-align: center;
-  }
-}
-
-.leaf {
-  border: 1px solid black;
-  display: inline-block;
-  border-radius: 5px;
-  text-align: center;
-  font-size: inherit;
-  width: 100px;
-  word-wrap: break-word;
-  padding: 10px;
-  margin: 10px;
-  &:hover {
-    background: lightblue;
-    box-shadow: 1px 1px 1px;
-  }
-}
-
-/////////////// BUTTONS ///////////////
-
-.add-del-edit {
-  padding: 0 5px 0 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: white;
-  margin: 0;
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.edit {
-  &:hover {
-    background: cyan;
-  }
-}
-
-.add-del-edit.add {
-  &:hover {
-    background: lightgreen;
-  }
-}
-
-.add-del-edit.del {
-  &:hover {
-    background: red;
+  .big-block {
+    display: flex;
+    .branch {
+      border: 1px dotted lightgray;
+      display: table-cell;
+      text-align: center;
+    }
   }
 }
