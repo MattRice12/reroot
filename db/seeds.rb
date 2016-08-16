@@ -13,44 +13,48 @@ user = User.create!(name: "admin",
                     password: "password")
 
 tree = Tree.create!(user_id: user.id, name: "Tree: 1")
-
-tab = Tab.create(user_id: user.id,
-                 tree_id: tree.id,
-                 url: url,
-                 name: "Main Branch") #only 1 tab can have a nil parent_tab_id per tree
+tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
 
 2.times do
-  tab2 = Tab.create!(user_id: user.id,
-                     tree_id: tree.id,
-                     parent_tab_id: tab.id,
-                     url: url,
-                     name: "Child")
+  tab = Tab.create(user_id: user.id,
+                   tree_id: tree.id,
+                   url: url,
+                   name: "Main Branch") #only 1 tab can have a nil parent_tab_id per tree
 
-  tab3 = Tab.create!(user_id: user.id,
-                     tree_id: tree.id,
-                     parent_tab_id: tab2.id,
-                     url: url,
-                     name: "Grandchild")
+  2.times do
+    tab2 = Tab.create!(user_id: user.id,
+                       tree_id: tree.id,
+                       parent_tab_id: tab.id,
+                       url: url,
+                       name: "Child")
 
-  Tab.create!(user_id: user.id,
-              tree_id: tree.id,
-              parent_tab_id: tab3.id,
-              url: url,
-              name: "Great Grandchild")
-end
+    tab3 = Tab.create!(user_id: user.id,
+                       tree_id: tree.id,
+                       parent_tab_id: tab2.id,
+                       url: url,
+                       name: "Grandchild")
 
-10.times do
-  Tab.create!(user_id: user.id,
-              tree_id: tree.id,
-              parent_tab_id: rand(2..7),
-              url: url,
-              name: "#{rand(1..100)}")
-end
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: tab3.id,
+                url: url,
+                name: "Great Grandchild")
+  end
 
-10.times do
-  Tab.create!(user_id: user.id,
-              tree_id: tree.id,
-              parent_tab_id: rand(7..17),
-              url: url,
-              name: "#{rand(1..100)}")
+  10.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(2..7),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+
+  10.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(7..17),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+  tree = tree2
 end

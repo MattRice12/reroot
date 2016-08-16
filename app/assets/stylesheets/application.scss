@@ -23,6 +23,13 @@
 @import 'buttons';
 @import 'users';
 
+
+body {
+  .container {
+    position: static;
+  }
+}
+
 a {
   color: black;
   text-decoration: none;

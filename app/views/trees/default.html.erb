@@ -1,45 +1,47 @@
 
 <div class="row">
-  <% trees.each do |tree| %>
-    <h1> <%= tree.name %>
-      <sup class="btn sup-edit">
-        <%= link_to edit_tree_path(tree), class: 'btn add-del-edit edit' do %>
-          <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-        <% end %>
-      </sup>
-    </h1>
+  <div class="tree-set">
+    <% trees.each do |tree| %>
+      <h1> <%= tree.name %>
+        <small class="btn sup-edit editor">
+          <%= link_to edit_tree_path(tree), class: 'btn add-del-edit edit' do %>
+            <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+          <% end %>
+        </small>
+      </h1>
 
-    <% tree.tabs.each do |tab| %>
+      <% tree.tabs.each do |tab| %>
 
-      <% if tab.parent.nil? %>
-        <div class="trunk" id="root">
-          <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
-            <div>
-              <%= render "shared/buttons_tabs.html.erb", tab: tab %>
+        <% if tab.parent.nil? %>
+          <div class="trunk" id="root">
+            <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
+              <div class="editor">
+                <%= render "shared/buttons_tabs.html.erb", tab: tab %>
+              </div>
+            </h3>
+
+            <div class="big-block">
+
+              <% tab.children.each do |child| %>
+                  <div class="branch">
+                    <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
+                      <div class="editor">
+                        <%= render "shared/buttons_tc.html.erb", tab: tab, child: child %>
+                      </div>
+                    </h3>
+
+                      <% ########### Recursion! ##### %>
+
+                      <%= render( partial: 'rechild', locals: { children: child.children }) if child %>
+
+                      <% ########### /Recursion! ##### %>
+                  </div>
+              <% end %>
+
             </div>
-          </h3>
-
-          <div class="big-block">
-
-            <% tab.children.each do |child| %>
-                <div class="branch">
-                  <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
-                    <div>
-                      <%= render "shared/buttons_tc.html.erb", tab: tab, child: child %>
-                    </div>
-                  </h3>
-
-                    <% ########### Recursion! ##### %>
-
-                    <%= render( partial: 'rechild', locals: { children: child.children }) if child %>
-
-                    <% ########### /Recursion! ##### %>
-                </div>
-            <% end %>
-
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

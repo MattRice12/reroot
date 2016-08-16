@@ -1,7 +1,7 @@
 <% children.each do |child| %>
   <div class="branch">
     <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
-      <div>
+      <div class="editor">
         <%= render "shared/buttons_children.html.erb", child: child %>
       </div>
     </h3> <%# first set of branches %>
