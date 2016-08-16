@@ -1,0 +1,18 @@
+@import 'variables';
+
+.nav-row {
+  margin-bottom: 60px;
+
+}
+.nav-wrapper {
+  position: fixed;
+  margin-bottom: 20px;
+  background-color: $primary-color;
+  a {
+    color: white;
+    font-size: xx-large;
+    &:hover {
+      color: white;
+    }
+  }
+}

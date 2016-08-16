@@ -9,14 +9,20 @@
   </head>
 
   <body>
+
     <div id="flash">
       <% flash.each do |key, value| -%>
         <div id="flash_<%= key %>"><%= value %></div>
       <% end %>
     </div>
-    <section class='content'>
-      <%= yield %>
-    </section>
+
+    <%= render "shared/nav.html.erb" unless @disable_nav %>
+
+    <div class="container">
+      <section class='content'>
+        <%= yield %>
+      </section>
+    </div>
     <footer>
       <small>Tabasaurus Rex © Matt Rice Studios</small>
     </footer>

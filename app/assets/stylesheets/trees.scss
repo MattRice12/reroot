@@ -2,11 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'variables';
 
 .trunk {
   text-align: center;
   display: inline-block;
-  border: 2px solid black;
+  border: 2px solid $secondary-color;
   padding-top: 10px;
   margin: 10px;
   .big-block {

@@ -1,6 +1,8 @@
+@import 'variables';
+
 .add-del-edit {
   padding: 0 5px 0 5px;
-  border: 1px solid black;
+  border: 1px solid $secondary-color;
   border-radius: 5px;
   background: white;
   margin: 0;

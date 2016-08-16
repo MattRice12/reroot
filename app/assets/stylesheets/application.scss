@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require normalize
+ *= require skeleton
  */
 
 @import 'variables';
@@ -19,6 +21,7 @@
 @import 'trees';
 @import 'tabs';
 @import 'buttons';
+@import 'users';
 
 a {
   color: blue;

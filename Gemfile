@@ -48,7 +48,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pry-rails'
-gem 'materialize-sass'
+gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 gem 'faker'
 gem 'kaminari'
 gem 'bcrypt'
