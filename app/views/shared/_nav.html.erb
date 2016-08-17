@@ -30,16 +30,19 @@
         <div class="two columns heading">
           <%= link_to "Teams", root_path %>
         </div>
+
         <div class="two columns heading">
           <%= link_to "Saved", trees_path %>
         </div>
 
         <div class="three columns heading sign">
-          <% if signed_in? %>
-            <div class="col s6 heading-right">
+          <div class="col s6 heading-right">
+            <% if signed_in? %>
               <%= link_to "Sign Out", sign_out_path, method: :delete %>
-            </div>
-          <% end %>
+            <% else %>
+              <%= link_to "Sign In", sign_in_path %>
+            <% end %>
+          </div>
         </div>
 
       </div>
