@@ -17,6 +17,9 @@
             <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
               <div class="editor">
                 <%= render "shared/buttons_tabs.html.erb", obj: tab %>
+                <div class="creation">
+                  <%= render "shared/create_tab.html.erb", obj: tab %>
+                </div>
               </div>
             </h3>
 
@@ -27,6 +30,9 @@
                     <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
                       <div class="editor">
                         <%= render "shared/buttons_tabs.html.erb", obj: tab, child: child %>
+                        <div class="creation">
+                          <%= render "shared/create_tab.html.erb", obj: child %>
+                        </div>
                       </div>
                     </h3>
 

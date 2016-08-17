@@ -24,11 +24,32 @@
     .editor {
       display: block;
       transition: all .2s;
-
     }
   }
   a {
     color: $secondary-color;
     text-decoration: none;
+  }
+}
+
+.branch {
+  .creation {
+      display: none;
+    }
+  &:hover {
+    .creation {
+      display: block;
+    }
+  }
+}
+
+.creation {
+  #tab_name, #tab_url {
+    width: 98px;
+  }
+  .button-primary {
+    width: 98px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
