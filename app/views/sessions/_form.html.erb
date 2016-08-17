@@ -1,21 +1,23 @@
-<%= form_for :session, url: session_path do |form| %>
+<div class="row sign-in-page">
+  <%= form_for :session, url: session_path do |form| %>
 
-  <div class="text-field">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
-  </div>
+    <div class="text-field">
+      <%= form.label :email %>
+      <%= form.text_field :email, type: 'email' %>
+    </div>
 
-  <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+    <div class="password-field">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
 
-  <div class="submit-field">
-    <%= form.submit "Submit", class: "button-primary" %>
-  </div>
+    <div class="submit-field">
+      <%= form.submit "Submit", class: "button-primary" %>
+    </div>
 
-  <div class="other-links">
-    <p><%= link_to "Sign Up", sign_up_path %></p>
-    <p><%= link_to "Forgot Password?", new_password_path %></p>
-  </div>
-<% end %>
+    <div class="other-links">
+      <p><%= link_to "Sign Up", sign_up_path %></p>
+      <p><%= link_to "Forgot Password?", new_password_path %></p>
+    </div>
+  <% end %>
+</div>
