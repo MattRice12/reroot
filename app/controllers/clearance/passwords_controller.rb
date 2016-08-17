@@ -1,6 +1,6 @@
 require 'active_support/deprecation'
 
-class PasswordsController < ApplicationController
+class Clearance::PasswordsController < ApplicationController
   if respond_to?(:before_action)
     skip_before_action :require_login,
       only: [:create, :edit, :new, :update],

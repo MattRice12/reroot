@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Clearance::UsersController < Clearance::BaseController
   if respond_to?(:before_action)
     before_action :redirect_signed_in_users, only: [:create, :new]
     skip_before_action :require_login, only: [:create, :new], raise: false
@@ -11,30 +11,34 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render locals: { users: users }
+    render template: 'users/index.html.erb', locals: { users: users }
   end
 
   def show
     user = User.find(params.fetch(:id))
     if user
-      render locals: { user: user }
+      render template: 'users/show.html.erb', locals: { user: user }
     else
       redirect_to users
     end
   end
 
   def new
-    render locals: { user: User.new }
+    if signed_in?
+      redirect_to "/users"
+    else
+      @user = user_from_params
+      render template: "users/new.html.erb"
+    end
   end
 
   def create
     @user = user_from_params
-
     if @user.save
       sign_in @user
-      redirect_back_or url_after_create
+      url_after_create
     else
-      render template: "users/new"
+      render template: "users/new.html.erb"
     end
   end
 
