@@ -1,5 +1,8 @@
 <h3> Search Results: </h3>
 
 <% tabs.each do |tab| %>
-  <h3 class="btn leaf"><%= link_to tab.name, url_with_protocol(tab.url) %></h3>
+<h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
+  <div class="editor">
+    <%= render "shared/buttons_tabs.html.erb", tab: tab %>
+  </div>
 <% end %>

@@ -3,7 +3,7 @@ class TreesController < ApplicationController
     if params[:search]
       search_params
     else
-      trees = Tree.all.includes(tabs: [:children])
+      trees = Tree.all.includes(tabs: [:children]).order(:created_at)
       render locals: { trees: trees }
     end
   end
