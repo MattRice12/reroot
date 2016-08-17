@@ -22,17 +22,23 @@
   }
   .heading-block {
     display: flex;
-    margin-left: 10px;
+    margin-left: 5px;
     a {
       font-size: x-large;
       padding: 0;
     }
     .heading {
       padding-top: 10px;
+      padding: 10px 2% 10px 2%;
+      margin: 0 10px;
       min-width: 60px;
     }
     .sign {
       min-width: 120px;
+    }
+    .home {
+      margin-left: 2%;
+      border-left: 1px solid black;
     }
   }
 }
