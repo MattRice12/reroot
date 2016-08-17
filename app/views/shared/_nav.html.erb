@@ -1,11 +1,12 @@
 <nav>
   <div class="row nav-row">
-    <div class="twelve column nav-wrapper">
+    <div class="twelve columns nav-wrapper">
 
-      <div class="two column nav-title">
+      <div class="two columns nav-title">
         <a href="/" class="brand-logo">Tab Tree</a>
       </div>
-      <div class="four column input-field ">
+
+      <div class="five columns input-field ">
         <form>
           <div class="search-box">
             <%= form_tag(search_path, id: "search-form") do %>
@@ -15,6 +16,35 @@
           </div>
         </form>
       </div>
+
+      <div class="five columns heading-block">
+
+        <div class="two columns heading">
+          <%= link_to "Users", users_path  %>
+        </div>
+
+        <div class="two columns heading">
+          <%= link_to "Home", root_path %>
+        </div>
+
+        <div class="two columns heading">
+          <%= link_to "Teams", root_path %>
+        </div>
+        <div class="two columns heading">
+          <%= link_to "Saved", trees_path %>
+        </div>
+
+        <div class="three columns heading sign">
+          <%= link_to "Sign Out", root_path %>
+        </div>
+
+      </div>
+
     </div>
+
+    <div class="five columns nav-drop-down">
+      <%# INSERT DROPDOWN FOR USERS, TEAMS, SAVED PRJECTS, SIGN_OUT #%>
+    </div>
+
   </div>
 </nav>

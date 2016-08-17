@@ -9,6 +9,9 @@
   position: fixed;
   margin-bottom: 20px;
   background-color: $primary-color;
+  .nav-title {
+    min-width: 160px;
+  }
   a {
     padding: 10px;
     color: white;
@@ -17,9 +20,52 @@
       color: white;
     }
   }
+  .heading-block {
+    display: flex;
+    margin-left: 10px;
+    a {
+      font-size: x-large;
+      padding: 0;
+    }
+    .heading {
+      padding-top: 10px;
+      min-width: 60px;
+    }
+    .sign {
+      min-width: 120px;
+    }
+  }
 }
 
-.input-field {
+@media (max-width: 1050px) {
+  .nav-wrapper {
+    .heading-block {
+      display: flex;
+      a {
+        font-size: large;
+      }
+      .heading {
+        padding-top: 15px;
+        margin-left: 5px;
+        min-width: 50px;
+      }
+      .sign {
+        min-width: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-wrapper {
+    .heading-block {
+      visibility: hidden;
+    }
+  }
+}
+
+.five.columns.input-field {
+  margin: 0;
   form {
     margin: 0;
     .search-box {
@@ -36,4 +82,9 @@
       }
     }
   }
+}
+
+#search {
+  width: 100%;
+  min-width: 150px;
 }

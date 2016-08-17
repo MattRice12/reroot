@@ -4,10 +4,10 @@
   img {
     height: 15px;
     width: 15px;
+    transition: all .1s;
     &:hover {
-      text-decoration: underline;
-      transition: all 1s;
-
+      border-bottom: 1px solid $button-color;
+      transition: all .1s;
     }
   }
 }

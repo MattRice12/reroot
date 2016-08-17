@@ -2,7 +2,7 @@
   <div class="branch">
     <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
       <div class="editor">
-        <%= render "shared/buttons_children.html.erb", child: child %>
+        <%= render "shared/buttons_tabs.html.erb", obj: child %>
       </div>
     </h3> <%# first set of branches %>
     <%= render( partial: 'rechild', locals: { children: child.children }) if child.children %>
