@@ -5,6 +5,6 @@
         <%= render "shared/buttons_tabs.html.erb", obj: child %>
       </div>
     </h3> <%# first set of branches %>
-    <%= render( partial: 'rechild', locals: { children: child.children }) if child.children %>
+    <%= render( partial: 'rechild', locals: { children: child.children.includes(:children) }) if child.children %>
   </div>
 <% end %>

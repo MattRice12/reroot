@@ -56,3 +56,10 @@ footer small {
   color: $footer-color;
   text-align: center;
 }
+
+.field.tab-tree {
+  display: flex;
+  .tab-select {
+    margin-left: 5px;
+  }
+}

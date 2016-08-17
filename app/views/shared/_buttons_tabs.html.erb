@@ -4,7 +4,7 @@
   <% end %>
 </span>
 
-<span>
+<span class="create-tab">
   <%= link_to new_tab_path(parent_tab_id: obj.id), class: 'btn add-del-edit add' do %>
     <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
   <% end %>
@@ -15,3 +15,4 @@
     <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
   <% end %>
 </span>
+<%= render "shared/create_tab.html.erb", obj: obj %>
