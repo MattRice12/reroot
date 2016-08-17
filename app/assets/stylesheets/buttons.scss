@@ -4,9 +4,15 @@
   img {
     height: 15px;
     width: 15px;
+    &:hover {
+      text-decoration: underline;
+      transition: all 1s;
+
+    }
   }
 }
 
+//////// ADD A LINE OR SOMETHING UNDER THE ICONS/////
 .sup-edit {
   img {
     margin-bottom: 20px;

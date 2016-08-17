@@ -19,7 +19,7 @@
     display: none;
   }
   &:hover {
-    background: $button-color;
+    background: #F0F3FC;
     .editor {
       display: block;
     }
@@ -27,8 +27,5 @@
   a {
     color: $secondary-color;
     text-decoration: none;
-    &:hover {
-      color: yellow;
-    }
   }
 }
