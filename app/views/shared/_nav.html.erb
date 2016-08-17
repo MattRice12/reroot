@@ -2,34 +2,30 @@
   <div class="row nav-row">
     <div class="twelve columns nav-wrapper">
 
-      <div class="two columns nav-title">
-        <a href="/" class="brand-logo">Tab Tree</a>
-      </div>
-
+      <div class="two columns nav-title"><a href="/" class="brand-logo">Tab Tree</a></div>
       <div class="five columns input-field ">
-        <form>
-          <div class="search-box">
-            <%= form_tag(search_path, id: "search-form") do %>
-              <%= search_field_tag("search", params[:search], placeholder: "Search Tabs") %>
-              <%= submit_tag("Search", id: "submit", name: nil, class: "button-primary") %>
-            <% end %>
-          </div>
-        </form>
+            <form>
+              <div class="search-box">
+                <%= form_tag(search_path, id: "search-form") do %>
+                  <%= search_field_tag("search", params[:search], placeholder: "Search Tabs") %>
+                  <%= submit_tag("Search", id: "submit", name: nil, class: "button-primary") %>
+                <% end %>
+              </div>
+            </form>
       </div>
-
       <div class="five columns heading-block">
-
-        <% if signed_in? %>
-          <div class="two columns heading in user"><%= link_to "#{current_user.name}" %></div>
-          <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
-          <div class="two columns heading in"><%= link_to "Teams", root_path %></div>
-          <div class="two columns heading in"><%= link_to "Saved", trees_path %></div>
-          <div class="three columns heading in sign"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
-        <% else %>
-          <div class="two columns heading out home"><%= link_to "Home", root_path %></div>
-          <div class="three columns heading out sign"><%= link_to "Sign In", sign_in_path %></div>
-        <% end %>
+            <% if signed_in? %>
+              <div class="two columns heading in user"><%= link_to "#{current_user.name}" %></div>
+              <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
+              <div class="two columns heading in"><%= link_to "Teams", root_path %></div>
+              <div class="two columns heading in"><%= link_to "Saved", trees_path %></div>
+              <div class="three columns heading in sign"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
+            <% else %>
+              <div class="two columns heading out home"><%= link_to "Home", root_path %></div>
+              <div class="three columns heading out sign"><%= link_to "Sign In", sign_in_path %></div>
+            <% end %>
       </div>
+
     </div>
   </div>
 </nav>

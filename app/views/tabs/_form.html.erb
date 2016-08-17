@@ -6,7 +6,7 @@
   </div>
 
   <div class="field">
-    <label for="user_id">Tree: </label>
+    <label for="tree_id">Tree: </label>
     <%= f.select :tree_id, options_from_collection_for_select(Tree.all, :id, :name) %>
   </div>
 
@@ -21,7 +21,11 @@
   </div>
 
   <div class="actions">
-    <%= f.hidden_field :parent_tab_id, value: params[:parent_tab_id] %>
+    <% if tab.persisted? %>
+      <%= f.select :parent_tab_id, options_from_collection_for_select(Tab.where(tree_id: tab.tree.id), :id, :name, selected: tab.parent.id) %>
+    <% else %>
+      <%= f.hidden_field :parent_tab_id, value: params.fetch(:parent_tab_id, tab.parent_tab_id) %>
+    <% end %>
   </div>
 
   <div class="waves-effect waves-light btn">
