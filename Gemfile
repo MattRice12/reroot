@@ -51,7 +51,7 @@ gem 'pry-rails'
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 gem 'faker'
 gem 'kaminari'
-gem 'bcrypt'
+gem 'clearance'
 group :production do
   gem 'rails_12factor'
 end

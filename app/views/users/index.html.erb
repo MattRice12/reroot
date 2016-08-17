@@ -1,0 +1,11 @@
+<ol>
+  <% users.each do |user| %>
+<div class="card file-card">
+  <div class="card-content">
+    <p>
+      <%= link_to user.name, user %>
+    </p>
+  </div>
+</div>
+  <% end %>
+</ol>

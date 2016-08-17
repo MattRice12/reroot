@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   has_many :trees
 
   validates :name, presence: true
