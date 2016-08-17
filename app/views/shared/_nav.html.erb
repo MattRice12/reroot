@@ -20,40 +20,16 @@
       <div class="five columns heading-block">
 
         <% if signed_in? %>
-          <div class="two columns heading user">
-              <%= link_to "#{current_user.name}" %>
-          </div>
-
-          <div class="two columns heading home">
-            <%= link_to "Home", root_path %>
-          </div>
-
-          <div class="two columns heading">
-              <%= link_to "Teams", root_path %>
-          </div>
-
-          <div class="two columns heading">
-              <%= link_to "Saved", trees_path %>
-          </div>
-
+          <div class="two columns heading in user"><%= link_to "#{current_user.name}" %></div>
+          <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
+          <div class="two columns heading in"><%= link_to "Teams", root_path %></div>
+          <div class="two columns heading in"><%= link_to "Saved", trees_path %></div>
+          <div class="three columns heading in sign"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
         <% else %>
-          <div class="two columns heading home">
-            <%= link_to "Home", root_path %>
-          </div>
+          <div class="two columns heading out home"><%= link_to "Home", root_path %></div>
+          <div class="three columns heading out sign"><%= link_to "Sign In", sign_in_path %></div>
         <% end %>
-
-        <div class="three columns heading sign">
-          <div class="col s6 heading-right">
-            <% if signed_in? %>
-              <%= link_to "Sign Out", sign_out_path, method: :delete %>
-            <% else %>
-              <%= link_to "Sign In", sign_in_path %>
-            <% end %>
-          </div>
-        </div>
-
       </div>
-
     </div>
   </div>
 </nav>

@@ -34,7 +34,7 @@
       min-width: 60px;
     }
     .sign {
-      min-width: 120px;
+      min-width: 130px;
     }
     .home {
       margin-left: 2%;
@@ -42,6 +42,7 @@
     }
   }
 }
+
 @media (min-width: 550px) {
 
 }
@@ -49,26 +50,45 @@
 @media (max-width: 1050px) {
   .nav-wrapper {
     .heading-block {
-      display: flex;
       a {
         font-size: large;
       }
-      .heading {
+      .heading.in {
         padding-top: 15px;
         margin-left: 5px;
         min-width: 50px;
       }
-      .sign {
-        min-width: 100px;
+      .heading.out {
+        padding-top: 15px;
+        min-width: 60px;
+        padding-left: 10px;
+      }
+      .in.sign {
+        min-width: 120px;
+      }
+      .out.sign {
+        min-width: 120px;
       }
     }
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 850px) {
   .nav-wrapper {
     .heading-block {
-      visibility: hidden;
+      .in {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .nav-wrapper {
+    .heading-block {
+      .out {
+        visibility: hidden;
+      }
     }
   }
 }
