@@ -28,7 +28,7 @@ class TabsController < ApplicationController
       tab = Tab.new(tab_params)
       tab.user = current_user
       if tab.save
-        redirect_to root_path
+        redirect_to :back
       else
         flash[:alert] = "The tab could not be created"
         render template: 'tabs/new.html.erb', locals: { tab: tab}
