@@ -1,14 +1,10 @@
 class TreesController < ApplicationController
   def index
-    if current_user.nil?
-      redirect_to sign_in_path
+    if params[:search]
+      search_params
     else
-      if params[:search]
-        search_params
-      else
-        trees = Tree.all.includes(tabs: [:children]).order(:created_at)
-        render locals: { trees: trees }
-      end
+      trees = Tree.all.includes(tabs: [:children]).order(:created_at)
+      render locals: { trees: trees }
     end
   end
 
