@@ -1,1 +1,13 @@
-<h3><%= link_to user.name, user %></h3>
+<h1><%= "#{user.name.capitalize}'s profile:" %></h1>
+
+<h2> Teams: </h2>
+<ol>
+  <h4>
+    <% user.teams.each do |team| %>
+      <li>
+        <%= link_to team.name, team_path(team) %>
+        <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+      </li>
+    <% end %>
+  </h4>
+</ol>

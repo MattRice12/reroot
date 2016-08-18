@@ -15,7 +15,7 @@
       </div>
       <div class="five columns heading-block">
             <% if signed_in? %>
-              <div class="two columns heading in user"><%= link_to "#{current_user.name}" %></div>
+              <div class="two columns heading in user"><%= link_to "#{current_user.name}", user_path(current_user) %></div>
               <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
               <div class="two columns heading in"><%= link_to "Teams", teams_path %></div>
               <div class="two columns heading in"><%= link_to "Saved", trees_path %></div>

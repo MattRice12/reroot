@@ -1,8 +1,8 @@
 <h1> Your Teams: </h1>
-  <ol>
-    <h3>
-      <% current_user.teams.each do |team| %>
-        <li><%= link_to team.name, team_path(team) %></li>
-      <% end %>
-    </h3>
-  </ol>
+<ol>
+  <h3>
+    <% current_user.teams.each do |team| %>
+      <li><%= link_to team.name, team_path(team) %></li>
+    <% end %>
+  </h3>
+</ol>

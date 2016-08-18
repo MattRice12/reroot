@@ -4,6 +4,7 @@ class User < ApplicationRecord
   attr_accessor :password_confirmation
 
   has_many :trees
+  has_many :tabs
 
   has_many :members, dependent: :destroy
   has_many :teams, through: :members
