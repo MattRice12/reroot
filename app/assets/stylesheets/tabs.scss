@@ -45,6 +45,26 @@
   }
 }
 
+.leaf-new {
+  border: 1px solid $secondary-color;
+  display: inline-block;
+  border-radius: 5px;
+  text-align: center;
+  font-size: small;
+  width: 100px;
+  word-wrap: break-word;
+  padding: 5px;
+  margin: 5px;
+  vertical-align: top;
+  &:hover {
+    background: #F0F3FC;
+  }
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+  }
+}
+
 .leaf {
   .creation {
       display: none;
