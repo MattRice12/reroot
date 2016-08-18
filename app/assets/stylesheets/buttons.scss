@@ -2,13 +2,9 @@
 
 .add-del-edit {
   img {
-    height: 15px;
-    width: 15px;
-    transition: all .1s;
-    &:hover {
-      border-bottom: 1px solid #F0F3FC;
-      transition: all .1s;
-    }
+    height: 25px;
+    width: 25px;
+    padding: 5px;
   }
 }
 

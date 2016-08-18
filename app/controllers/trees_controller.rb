@@ -1,10 +1,14 @@
 class TreesController < ApplicationController
   def index
-    if params[:search]
-      search_params
+    if current_user.nil?
+      redirect_to sign_in_path
     else
-      trees = Tree.all.includes(tabs: [:children]).order(:created_at)
-      render locals: { trees: trees }
+      if params[:search]
+        search_params
+      else
+        trees = Tree.all.includes(tabs: [:children]).order(:created_at)
+        render locals: { trees: trees }
+      end
     end
   end
 
@@ -23,9 +27,7 @@ class TreesController < ApplicationController
 
   def create
     tree = Tree.new(tree_params)
-    tab = Tab.new(tab_params)
     if tree.save
-      tab.save
       redirect_to root_path
     else
       flash[:alert] = tree.errors
@@ -59,9 +61,5 @@ class TreesController < ApplicationController
 
   def tree_params
     params.require(:tree).permit(:user_id, :name)
-  end
-
-  def tab_params
-    params.require(:tab).permit(:user_id, :name, :url, :parent_tab_id)
   end
 end

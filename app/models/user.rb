@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  attr_accessor :password_confirmation
+
   has_many :trees
 
   has_many :members, dependent: :destroy
@@ -9,6 +11,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   def team_member?(team)
     members.find_by(team_id: team.id)
