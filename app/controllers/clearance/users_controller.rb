@@ -62,7 +62,7 @@ class Clearance::UsersController < Clearance::BaseController
       render message: "User deleted."
       redirect_to users_path
     else
-      rener message: "User not found."
+      render message: "User not found."
     end
   end
 

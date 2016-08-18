@@ -1,13 +1,17 @@
 <h1><%= "#{user.name.capitalize}'s profile:" %></h1>
 
 <h2> Teams: </h2>
-<ol>
-  <h4>
-    <% user.teams.each do |team| %>
-      <li>
-        <%= link_to team.name, team_path(team) %>
-        <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
-      </li>
-    <% end %>
-  </h4>
-</ol>
+<% if user.teams.any? %>
+  <ol>
+    <h4 class="indent">
+      <% user.teams.each do |team| %>
+        <li>
+          <%= link_to team.name, team_path(team) %>
+          <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+        </li>
+      <% end %>
+    </h4>
+  </ol>
+<% else %>
+  <h4 class="indent"> None </h4>
+<% end %>

@@ -1,0 +1,22 @@
+<%= form_for(team) do |f| %>
+
+  <div class="errors">
+    <ul>
+      <% team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="button-primary">
+    <%= f.submit class: "button-primary"%>
+  </div>
+
+<% end %>

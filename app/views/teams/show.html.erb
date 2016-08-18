@@ -2,9 +2,12 @@
 
 <h2> Members: </h2>
   <ol>
-    <h3>
+    <h3 class="indent">
       <% team.users.each do |user| %>
-        <li><%= link_to user.name, user_path(user) %></li>
+        <li>
+          <%= link_to user.name, user_path(user) %>
+          <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+        </li>
       <% end %>
     </h3>
   </ol>

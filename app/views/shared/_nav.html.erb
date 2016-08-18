@@ -18,8 +18,9 @@
               <div class="two columns heading in user"><%= link_to "#{current_user.name}", user_path(current_user) %></div>
               <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
               <div class="two columns heading in"><%= link_to "Teams", teams_path %></div>
+              <div class="two columns heading in"><%= link_to "Users", users_path %></div>
               <div class="two columns heading in"><%= link_to "Saved", trees_path %></div>
-              <div class="three columns heading in sign"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
+              <div class="two columns heading in sign"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
             <% else %>
               <div class="two columns heading out home"><%= link_to "Home", root_path %></div>
               <div class="three columns heading out sign"><%= link_to "Sign In", sign_in_path %></div>
