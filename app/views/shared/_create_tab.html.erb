@@ -1,8 +1,12 @@
 <%= form_for(Tab.new) do |f| %>
   <%= f.hidden_field :parent_tab_id, value: obj.id %>
   <%= f.hidden_field :tree_id, value: obj.tree_id %>
-  <%= f.hidden_field :user_id, value: 1 %>
-  <%#= f.hidden_field :user_id, value: current_user.id %>
+
+  <%# if current_user.persisted? %>
+    <%# f.hidden_field :user_id, value: current_user.id %>
+  <%# else %>
+    <%# redirect_to sign_in_path %>
+  <%# end %>
 
   <%= "New Tab" %>
   <div class="field">

@@ -12,4 +12,25 @@ class TeamsController < ApplicationController
       redirect_to teams_path
     end
   end
+
+  def new
+  end
+
+  def create
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
+
+  def team_params
+    params.require(:team).permit(:name, :user_id)
+  end
 end

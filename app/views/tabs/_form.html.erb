@@ -1,24 +1,32 @@
 <%= form_for(tab) do |f| %>
 
+  <div class="errors">
+    <ul>
+      <% tab.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <div class="field">
     <label for="user_id">User: </label>
     <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :name) %>
   </div>
 
   <div class="field tab-tree">
-    <% if tab.parent %>
-      <div class="tree-select">
-        <label for="tree_id">Tree: </label>
-        <%= f.select :tree_id, options_from_collection_for_select(Tree.all, :id, :name) %>
-      </div>
-      <div class="tab-select">
-        <% if tab.persisted? %>
-            <label for="tree_id">Tab: </label>
-            <%= f.select :parent_tab_id, options_from_collection_for_select(Tab.where(tree_id: tab.tree.id), :id, :name, selected: tab.parent.id) %>
-        <% else %>
-          <%= f.hidden_field :parent_tab_id, value: params.fetch(:parent_tab_id, tab.parent_tab_id) %>
-        <% end %>
-      </div>
+    <% if tab.persisted? %>
+      <% if tab.parent %>
+        <div class="tree-select">
+          <label for="tree_id">Tree: </label>
+          <%= f.select :tree_id, options_from_collection_for_select(Tree.all, :id, :name, selected: tab.tab_root.id) %>
+        </div>
+        <div class="tab-select">
+          <label for="tree_id">Tab: </label>
+          <%= f.select :parent_tab_id, options_from_collection_for_select(Tab.where(tree_id: tab.tab_root.id), :id, :name, selected: tab.parent.id) %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= f.hidden_field :parent_tab_id, value: params.fetch(:parent_tab_id, tab.parent_tab_id) %>
     <% end %>
   </div>
 

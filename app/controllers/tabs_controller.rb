@@ -22,12 +22,17 @@ class TabsController < ApplicationController
   end
 
   def create
-    tab = Tab.new(tab_params)
-    if tab.save
-      redirect_to root_path
+    if current_user.nil?
+      redirect_to sign_in_path
     else
-      flash[:alert] = tab.errors
-      render template: 'tabs/new.html.erb', locals: { tab: tab}
+      tab = Tab.new(tab_params)
+      tab.user = current_user
+      if tab.save
+        redirect_to root_path
+      else
+        flash[:alert] = "The tab could not be created"
+        render template: 'tabs/new.html.erb', locals: { tab: tab}
+      end
     end
   end
 
