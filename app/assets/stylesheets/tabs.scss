@@ -32,11 +32,12 @@
   }
 }
 
-.branch {
+.leaf {
   .creation {
       display: none;
     }
   &:hover {
+    width: 200px;
     .creation {
       display: block;
     }
@@ -45,10 +46,10 @@
 
 .creation {
   #tab_name, #tab_url {
-    width: 98px;
+    width: 198px;
   }
   .button-primary {
-    width: 98px;
+    width: 198px;
     padding-left: 10px;
     padding-right: 10px;
   }
