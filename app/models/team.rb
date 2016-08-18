@@ -5,6 +5,5 @@ class Team < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 125 }
 
-  default_scope order: 'teams.name'
-    #RESEARCH THIS
+  # default_scope order: 'teams.name'
 end
