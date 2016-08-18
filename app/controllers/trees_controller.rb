@@ -47,7 +47,8 @@ class TreesController < ApplicationController
   def destroy
     tree = Tree.find_by(id: params.fetch(:id))
     if tree.destroy
-      render message: "Take that, Greenpeace!"
+      flash[:alert] = "Take that, Greenpeace!"
+      redirect_to :back
     else
       render message: "Tree not found."
     end

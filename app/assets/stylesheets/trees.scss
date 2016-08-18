@@ -4,6 +4,14 @@
 
 @import 'variables';
 
+.trunk-empty {
+  text-align: center;
+  display: table;
+  border: 2px solid $secondary-color;
+  padding-top: 10px;
+  margin: 10px;
+}
+
 .trunk {
   text-align: center;
   display: inline-block;

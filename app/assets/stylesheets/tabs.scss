@@ -4,12 +4,25 @@
 
 @import 'variables';
 
-.leaf {
+.create-leaf {
   border: 1px solid $secondary-color;
   display: inline-block;
   border-radius: 5px;
   text-align: center;
   font-size: inherit;
+  width: 100px;
+  word-wrap: break-word;
+  padding: 5px;
+  margin: 5px;
+  vertical-align: top;
+}
+
+.leaf {
+  border: 1px solid $secondary-color;
+  display: inline-block;
+  border-radius: 5px;
+  text-align: center;
+  font-size: small;
   width: 100px;
   word-wrap: break-word;
   padding: 5px;
@@ -52,5 +65,6 @@
     width: 198px;
     padding-left: 10px;
     padding-right: 10px;
+    font-size: small;
   }
 }

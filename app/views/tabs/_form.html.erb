@@ -8,10 +8,7 @@
     </ul>
   </div>
 
-  <div class="field">
-    <label for="user_id">User: </label>
-    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :name) %>
-  </div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="field tab-tree">
     <% if tab.persisted? %>
@@ -26,6 +23,7 @@
         </div>
       <% end %>
     <% else %>
+      <%= f.hidden_field :tree_id, value: params.fetch(:tree_id, tab.tree_id) %>
       <%= f.hidden_field :parent_tab_id, value: params.fetch(:parent_tab_id, tab.parent_tab_id) %>
     <% end %>
   </div>

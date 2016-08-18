@@ -7,23 +7,28 @@
         <% current_user.trees.each do |tree| %>
           <h1> <%= link_to tree.name, tree_path(tree) %>
             <small class="btn sup-edit editor">
-              <%= link_to edit_tree_path(tree), class: 'btn add-del-edit edit' do %>
+              <%= link_to edit_tree_path(tree), class: 'btn add-del-edit' do %>
                 <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
               <% end %>
             </small>
             <small class="btn sup-edit editor">
-              <% unless tree.tabs.any? %>
-                <%= link_to new_tab_path, class: 'btn add-del-edit new' do %>
-                  <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-                <% end %>
+              <%= link_to tree_path(tree), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit' do %>
+                <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
               <% end %>
             </small>
+            <% unless tree.tabs.any? %>
+            <div class="trunk-empty" id="root">
+              <small class="btn leaf">
+                <%= link_to "New Tab", new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new' %>
+              </small>
+            </div>
+          <% end %>
           </h1>
 
           <% tree.tabs.each do |tab| %>
             <% if tab.parent.nil? %>
               <div class="trunk" id="root">
-                <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
+                <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 14), url_with_protocol(tab.url) %>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: tab %>
                     <div class="creation">
@@ -36,7 +41,7 @@
 
                   <% tab.children.each do |child| %>
                       <div class="branch">
-                        <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
+                        <h3 class="btn leaf"><%= link_to truncate(child.name, length: 14), url_with_protocol(child.url) %>
                           <div class="editor">
                             <%= render "shared/buttons_tabs.html.erb", obj: child %>
                             <div class="creation">
@@ -61,7 +66,7 @@
         <% end %>
       </div>
       <div class="new-tree">
-        <%= link_to "Create tree", new_tree_path, class: 'btn add-del-edit new'%>
+        <%= link_to "New Tree", new_tree_path, class: 'btn add-del-edit new'%>
       </div>
     <% else %>
       <h3> You have no trees </h3>
