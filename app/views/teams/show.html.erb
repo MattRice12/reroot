@@ -11,29 +11,25 @@
 <h2> Members: </h2>
   <ol>
     <h3 class="indent">
-      <% team.team_order.each do |user| %>
-        <% if user.id == team.user_id %>
-          <li>
-            <span class="create-tab leader-badge">
-              <%= link_to user.name, user_path(user) %>
-              <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" />
-              <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+      <li>
+        <span class="create-tab leader-badge">
+          <%= link_to team.user.name, user_path(team.user) %>
+          <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" />
+          <span class="small-text"><i><%= "#{team.user.tabs.count} contributions" %></i></span>
+        </span>
+      </li>
+      <% team.team_members.order(:name).each do |user| %>
+        <li>
+          <%= link_to user.name, user_path(user) %>
+          <% if current_user.id == team.user_id %>
+            <span>
+              <%= link_to member_path(user.members.find_by(team_id: team.id)), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'team-btn' do %>
+                <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+              <% end %>
             </span>
-          </li>
-
-        <% else %>
-          <li>
-            <%= link_to user.name, user_path(user) %>
-            <% if current_user.id == team.user_id %>
-              <span>
-                <%= link_to member_path(user.members.find_by(team_id: team.id)), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'team-btn' do %>
-                  <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
-                <% end %>
-              </span>
-            <% end %>
-            <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
-          </li>
-        <% end %>
+          <% end %>
+          <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+        </li>
       <% end %>
     </h3>
   </ol>
@@ -45,3 +41,5 @@
   </div>
 
 <h2> Trees: </h2>
+
+<p> <%= link_to "Leave Team", members_path(user_id: current_user.id), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'team-btn' %> </p>

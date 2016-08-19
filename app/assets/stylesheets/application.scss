@@ -33,14 +33,17 @@ body {
     clear: both;
     padding-bottom: 270px;
   }
+  a {
+    color: $link-color;
+    &:hover {
+      color: $link-color-hover;
+    }
+  }
 }
 
 a {
   color: black;
   text-decoration: none;
-  &:hover {
-    color: black;
-  }
 }
 
 h2, h3, h4 {
@@ -79,7 +82,7 @@ footer small {
 }
 
 .headinger {
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid $headinger-color;
   box-shadow: 0 2px 0 black;
   border-radius: 5px;
 }

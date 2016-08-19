@@ -1,9 +1,16 @@
 $primary-color: #1C2528;
 $primary-color-dark: darken($primary-color, 30%); //need to change//
 
-$button-color: #33C3F0;
+$link-color: #57B8FF;
+$link-color-hover: darken($link-color, 10%);
+
+$button-color: #57B8FF;
+$button-hover-color: darken($button-color, 10%);
+
 $secondary-color:  #221D3E;
 $body-color: rgba(249, 240, 193, .25);
+
+$headinger-color: #FBB13C;
 
 $header-color: #555555; //need to change//
 $tag-color: #AAAAAA; //need to change//

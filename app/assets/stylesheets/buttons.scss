@@ -1,7 +1,17 @@
 @import 'variables';
 
+#submit.button-primary {
+  background: $button-color;
+  border: 1px solid $button-color;
+  &:hover {
+    background: $button-hover-color;
+    border: 1px solid $button-hover-color;
+  }
+}
+
 .add-del-edit {
   img {
+    // -webkit-filter: grayscale(100%);
     opacity: 0.4;
     height: 25px;
     width: 25px;
@@ -41,6 +51,7 @@
 .leader-badge {
   display: inline-table;
   img {
+    color: yellow;
     height: 20px;
     width: 20px;
     padding-bottom: 8px;

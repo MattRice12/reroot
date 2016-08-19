@@ -14,4 +14,5 @@ class User < ApplicationRecord
   def team_member?(team)
     members.find_by(team_id: team.id)
   end
+
 end
