@@ -10,14 +10,10 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    if current_user.id == team.user_id
-      member = Member.find(params[:id])
-      member.destroy
-      redirect_to team_path(member.team)
-    else
-      flash[:alert] = "Only the team leader can delete members."
-      redirect_to team_path(member.team)
-    end
+    team = Team.find(params[:id])
+    member = team.members.find_by(user_id: current_user.id)
+    member.destroy
+    redirect_to team_path(member.team)
   end
 
   private

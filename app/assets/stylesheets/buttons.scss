@@ -25,9 +25,9 @@
 .team-btn {
   img {
     opacity: 0.4;
-    height: 20px;
-    width: 20px;
-    margin-bottom: 10px;
+    height: 15px;
+    width: 15px;
+    margin-bottom: 15px;
     &:hover {
       opacity: 1.0;
     }
@@ -51,10 +51,8 @@
 .leader-badge {
   display: inline-table;
   img {
-    color: yellow;
-    height: 20px;
-    width: 20px;
-    padding-bottom: 8px;
-
+    height: 18px;
+    width: 18px;
+    padding-bottom: 15px;
   }
 }
