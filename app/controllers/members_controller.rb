@@ -12,8 +12,15 @@ class MembersController < ApplicationController
   def destroy
     team = Team.find(params[:id])
     member = team.members.find_by(user_id: current_user.id)
-    member.destroy
-    redirect_to team_path(member.team)
+    if member.destroy
+      flash[:alert] = "You left the team"
+      member = team.members.first
+      team.user_id = member.user_id
+      team.save
+      redirect_to teams_path
+    else
+      flash[:alert] = "You cannot leave"
+    end
   end
 
   private
