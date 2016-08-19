@@ -16,7 +16,6 @@
  *= require skeleton
  */
 
-
 @import 'variables';
 @import 'reset';
 @import 'trees';
@@ -83,4 +82,8 @@ footer small {
   border-bottom: 5px solid red;
   box-shadow: 0 2px 0 black;
   border-radius: 5px;
+}
+
+#member_user_id {
+  min-width: 172px;
 }

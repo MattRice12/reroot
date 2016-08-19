@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :teams, through: :members
 
-  validates :name, presence: true
-  validates :email, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   validates :password, presence: true
 
   def team_member?(team)
