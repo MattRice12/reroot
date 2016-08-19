@@ -26,7 +26,7 @@
             <%= link_to user.name, user_path(user) %>
             <% if current_user.id == team.user_id %>
               <span>
-                <%= link_to member_path(user.members.find_by(team_id: team.id)), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'btn add-del-edit del' do %>
+                <%= link_to member_path(user.members.find_by(team_id: team.id)), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'team-btn' do %>
                   <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
                 <% end %>
               </span>
