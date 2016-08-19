@@ -4,10 +4,23 @@
   <ol>
     <h3 class="indent">
       <% team.users.each do |user| %>
-        <li>
-          <%= link_to user.name, user_path(user) %>
-          <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
-        </li>
+        <% if user.id == team.user_id %>
+          <li>
+            <%= link_to user.name, user_path(user) %>
+            <span class="create-tab leader-badge">
+              <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" />
+            </span>
+            <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+
+
+          </li>
+
+        <% else %>
+          <li>
+            <%= link_to user.name, user_path(user) %>
+            <span class="small-text"><i><%= "#{user.tabs.count} contributions" %></i></span>
+          </li>
+        <% end %>
       <% end %>
     </h3>
   </ol>
