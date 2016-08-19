@@ -3,3 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import 'variables';
+
+
+.captainship {
+  font-size: large;
+  position: relative;
+  bottom: 10px;
+  display: inline-block;
+  #user_id {
+    width: 150px;
+  }
+  label {
+    opacity: 0.4;
+  }
+}

@@ -11,4 +11,11 @@ class Team < ApplicationRecord
   def team_members
     users.where.not(users: { id: user.id })
   end
+
+  def non_members
+    # User.all - self.users
+
+    User.where.not(id: users).order(:name)
+  end
+
 end
