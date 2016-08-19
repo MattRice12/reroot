@@ -36,8 +36,10 @@ class TeamsController < ApplicationController
     team = Team.find(params.fetch(:id))
     team.name = params[:name] if params[:name].present?
     team.user_id = params[:user_id]
+    user = team.users.find_by(id: params[:user_id])
     if team.save
-      redirect_to root_path
+      flash[:alert] = "You made #{user.name} the Team Captain."
+      redirect_to team_path
     else
       render template: 'teams/edit.html.erb', locals: { team: team }
     end
