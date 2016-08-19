@@ -43,20 +43,11 @@ class TeamsController < ApplicationController
 
   def destroy
     team = Team.find(params.fetch(:id))
-
-    if team.parent
-      teamchild = Team.where(parent_team_id: params.fetch(:id))
-      teamchild.each do |tc|
-        tc.parent_team_id = team.parent.id
-        tc.save
-      end
-    end
-
     if team.destroy
-      flash[:alert] = "Take that, Greenpeace!"
-      redirect_to root_path
+      flash[:alert] = "This team disbanded. Thanks, Obama."
+      redirect_to teams_path
     else
-      render message: "Team not found."
+      flash[:alert] = "This team cannot be deleted"
     end
   end
 

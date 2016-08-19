@@ -23,6 +23,7 @@
 @import 'tabs';
 @import 'buttons';
 @import 'users';
+@import 'teams';
 
 body {
   .container {
@@ -49,6 +50,7 @@ h2, h3, h4 {
 }
 
 #flash {
+  margin-left: 20px;
   color: red;
 }
 
@@ -67,4 +69,18 @@ footer small {
 
 .indent {
   margin-left: 30px;
+}
+
+.small-text {
+  font-size: medium;
+}
+
+.medium-text {
+  font-size: x-large;
+}
+
+.headinger {
+  border-bottom: 5px solid red;
+  box-shadow: 0 2px 0 black;
+  border-radius: 5px;
 }

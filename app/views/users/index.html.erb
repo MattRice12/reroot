@@ -1,11 +1,9 @@
+<h1 class="headinger"> Users </h1>
+
 <ol>
-  <% users.each do |user| %>
-<div class="card file-card">
-  <div class="card-content">
-    <p>
-      <%= link_to user.name, user %>
-    </p>
-  </div>
-</div>
-  <% end %>
+  <h3 class="indent">
+    <% users.each do |user| %>
+      <li><%= link_to user.name, user_path(user) %></li>
+    <% end %>
+  </h3>
 </ol>

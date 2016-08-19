@@ -1,4 +1,4 @@
-<h1><%= "#{user.name.capitalize}'s profile:" %></h1>
+<h1 class="headinger"> <%=  "#{user.name.capitalize}'s profile:"  %>
 
 <h2> Teams: </h2>
 <% if user.teams.any? %>
@@ -15,3 +15,10 @@
 <% else %>
   <h4 class="indent"> None </h4>
 <% end %>
+
+<h2> <%= "#{user.name.capitalize}'s stats" %>
+  <ul class="indent">
+    <li class="medium-text"> Total Trees: <%= user.trees.count %> </li>
+    <li class="medium-text"> Total Tabs: <%= user.tabs.count %> </li>
+  </ul>
+</h2>
