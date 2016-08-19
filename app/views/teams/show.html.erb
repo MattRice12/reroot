@@ -11,7 +11,7 @@
 <h2> Members: </h2>
   <ol>
     <h3 class="indent">
-      <% team.users.each do |user| %>
+      <% team.team_order.each do |user| %>
         <% if user.id == team.user_id %>
           <li>
             <span class="create-tab leader-badge">

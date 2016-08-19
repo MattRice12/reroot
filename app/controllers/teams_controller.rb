@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   def index
-    teams = Team.all.includes(:users)
+    teams = Team.all
     render locals: { teams: teams }
   end
 

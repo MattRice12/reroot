@@ -1,15 +1,17 @@
 <h1 class="headinger"> Your Teams </h1>
 <ol>
   <h3 class="indent">
-    <% current_user.teams.each do |team| %>
+    <% current_user.teams.order(:name).each do |team| %>
       <% if current_user.id == team.user_id %>
         <li>
           <span class="create-tab leader-badge">
           <%= link_to team.name, team_path(team) %>
           <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" />
           <span class="small-text"></span>
+          <span class="small-text"><i><%= "#{team.users.count} members" %></i></span>
       <% else %>
-        <li><%= link_to team.name, team_path(team) %></li>
+        <li><%= link_to team.name, team_path(team) %>
+        <span class="small-text"><i><%= "#{team.users.count} members" %></i></span></li>
       <% end %>
     <% end %>
   </h3>
