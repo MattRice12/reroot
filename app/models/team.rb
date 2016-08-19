@@ -15,7 +15,7 @@ class Team < ApplicationRecord
   def non_members
     # User.all - self.users
 
-    User.where.not(id: users).order(:name)
+    User.where.not(id: users).order("LOWER(name)")
   end
 
 end

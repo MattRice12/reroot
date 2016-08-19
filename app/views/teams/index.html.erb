@@ -1,7 +1,7 @@
 <h1 class="headinger"> Your Teams </h1>
 <ol>
   <h3 class="indent">
-    <% current_user.teams.order(:name).each do |team| %>
+    <% current_user.teams.order("LOWER(name)").each do |team| %>
       <% if current_user.id == team.user_id %>
         <li>
           <span class="create-tab leader-badge">

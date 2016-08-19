@@ -34,7 +34,7 @@
           <span class="small-text"><i><%= "#{team.user.tabs.count} contributions" %></i></span>
         </span>
       </li>
-      <% team.team_members.order(:name).each do |user| %>
+      <% team.team_members.order("LOWER(name)").each do |user| %>
         <li>
           <%= link_to user.name, user_path(user) %>
 

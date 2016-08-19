@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def search_params
     tabs = Tab.search(params[:search])
-    users = User.search(params[:search]).order(:name)
+    users = User.search(params[:search]).order("LOWER(name)")
     render template: 'trees/search.html.erb', locals: { tabs: tabs, users: users }
   end
 end
