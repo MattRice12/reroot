@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
 
   resources :members, as: 'members'
-  resources :teams, as: 'teams'
+  resources :teams, as: 'teams' do
+    member do
+      put 'captain'
+    end
+  end
 
   resources :tabs, as: 'tabs'
   resources :trees, as: 'trees'

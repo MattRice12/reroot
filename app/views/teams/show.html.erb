@@ -1,13 +1,19 @@
 <h1 class="headinger"> <%= "#{team.name}" %>
   <% if current_user.id == team.user_id %>
     <span>
+      <%= link_to edit_team_path(team), class: 'btn add-del-edit edit' do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+      <% end %>
+    </span>
+
+    <span>
       <%= link_to team_path(team), remote: true, method: :delete, data: { confirm: 'Going forward will delete this team. Are you sure you want continue?'}, class: 'team-btn' do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
       <% end %>
     </span>
 
     <span class="captainship">
-      <%= form_tag(team_path, method: "put", id: "captain-form") do %>
+      <%= form_tag(captain_team_path, method: "put", id: "captain-form") do %>
         <%= label_tag "transfer captainship" %>
 
         <%= select_tag(:user_id, options_from_collection_for_select(team.team_members, :id, :name)) %>

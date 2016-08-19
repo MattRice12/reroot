@@ -34,6 +34,16 @@ class TeamsController < ApplicationController
 
   def update
     team = Team.find(params.fetch(:id))
+    if team.update(team_params)
+      flash[:alert] = "You changed the team name to #{team.name}."
+      redirect_to team_path
+    else
+      render template: 'teams/edit.html.erb', locals: { team: team }
+    end
+  end
+
+  def captain
+    team = Team.find(params.fetch(:id))
     team.name = params[:name] if params[:name].present?
     team.user_id = params[:user_id]
     user = team.users.find_by(id: params[:user_id])
