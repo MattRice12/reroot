@@ -9,14 +9,11 @@ class ForestsController < ApplicationController
   end
 
   def destroy
-    project = Project.find(params[:id])
-    forest  = project.forests.find_by(user_id: current_user.id)
+    forest  = Forest.find(params[:id])
+    project = forest.project
     if forest.destroy
       flash[:alert] = "This forest was as ancient as time... and you destroyed it..."
-      forest = project.forests.first
-      project.user_id = forest.user_id
-      project.save
-      redirect_to projects_path
+      redirect_to project
     else
       flash[:alert] = "The fairies protect this forest. You fail to destroy it."
     end

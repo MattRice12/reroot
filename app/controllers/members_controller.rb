@@ -10,7 +10,7 @@ class MembersController < ApplicationController
   end
 
   def boot
-    member = Member.find_by(id: params[:id])
+    member  = Member.find(params[:id])
     project = member.project
     if member.destroy
       flash[:alert] = "You booted #{member.user.name}."
