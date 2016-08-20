@@ -8,9 +8,14 @@
 
 url = "http://rubyonrails.org/"
 
-user = User.create!(name: "admin",
-                    email: "admin@example.com",
+user = User.create!(name: "Ender",
+                    email: "Ender@example.com",
                     password: "password")
+
+User.create!(name: "Bean", email: "bean@example.com", password: "password")
+User.create!(name: "Petra", email: "petra@example.com", password: "password")
+User.create!(name: "Alai", email: "alai@example.com", password: "password")
+User.create!(name: "Dink", email: "dink@example.com", password: "password")
 
 tree = Tree.create!(user_id: user.id, name: "Tree: 1")
 tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
@@ -41,7 +46,7 @@ tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
                 name: "Great Grandchild")
   end
 
-  10.times do
+  3.times do
     Tab.create!(user_id: user.id,
                 tree_id: tree.id,
                 parent_tab_id: rand(2..7),
@@ -49,10 +54,39 @@ tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
                 name: "#{rand(1..100)}")
   end
 
-  10.times do
+  3.times do
     Tab.create!(user_id: user.id,
                 tree_id: tree.id,
-                parent_tab_id: rand(7..17),
+                parent_tab_id: rand(7..10),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+
+  3.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(11..14),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+  3.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(15..18),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+  3.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(19..22),
+                url: url,
+                name: "#{rand(1..100)}")
+  end
+  3.times do
+    Tab.create!(user_id: user.id,
+                tree_id: tree.id,
+                parent_tab_id: rand(23..26),
                 url: url,
                 name: "#{rand(1..100)}")
   end
@@ -60,5 +94,15 @@ tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
 end
 
 Project.create!(name: "Dragon Army", user_id: 1)
+Project.create!(name: "Rabbit Army", user_id: 2)
+Project.create!(name: "Salamander Army", user_id: 3)
+Project.create!(name: "Phoenix Army", user_id: 4)
+Project.create!(name: "Rat Army", user_id: 5)
+
 
 Member.create!(user_id: 1, project_id: 1)
+Member.create!(user_id: 2, project_id: 1)
+Member.create!(user_id: 2, project_id: 2)
+Member.create!(user_id: 3, project_id: 3)
+Member.create!(user_id: 4, project_id: 4)
+Member.create!(user_id: 5, project_id: 5)
