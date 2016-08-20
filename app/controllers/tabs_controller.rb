@@ -1,9 +1,9 @@
 class TabsController < ApplicationController
   def index
     if params[:search]
-      search_params
+      search_params.includes(:trees)
     else
-      tabs = Tab.all
+      tabs = Tab.all.includes(:trees)
       render locals: { tabs: tabs }
     end
   end

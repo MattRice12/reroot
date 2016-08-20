@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    projects = Project.all
+    projects = Project.all.includes(:members, :users)
     render locals: { projects: projects }
   end
 

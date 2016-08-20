@@ -106,3 +106,5 @@ Member.create!(user_id: 2, project_id: 2)
 Member.create!(user_id: 3, project_id: 3)
 Member.create!(user_id: 4, project_id: 4)
 Member.create!(user_id: 5, project_id: 5)
+
+Forest.create!(tree_id: 1, project_id: 1)

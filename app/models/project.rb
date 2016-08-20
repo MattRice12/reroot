@@ -1,6 +1,9 @@
 class Project < ApplicationRecord
   has_many :members, dependent: :destroy
-  has_many :users, through: :members
+  has_many :forests, dependent: :destroy
+  has_many :users,   through: :members
+  has_many :trees,   through: :forests
+
   belongs_to :user
 
   validates :user_id, presence: true
@@ -14,8 +17,11 @@ class Project < ApplicationRecord
 
   def non_members
     # User.all - self.users
-
     User.where.not(id: users).order("LOWER(name)")
+  end
+
+  def non_forests
+    Tree.where.not(id: trees).order("LOWER(name)")
   end
 
 end

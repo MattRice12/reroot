@@ -33,10 +33,24 @@ body {
     clear: both;
     padding-bottom: 270px;
   }
+  h2, h3, h4, ol {
+    font-family: $display-font;
+    font-weight: lighter;
+    margin-bottom: 0;
+  }
   a {
     color: $link-color;
     &:hover {
       color: $link-color-hover;
+    }
+  }
+  .button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
+    background: $button-color;
+    border: 1px solid $button-color;
+
+    &:hover {
+      background: $button-hover-color;
+      border: 1px solid $button-hover-color;
     }
   }
 }
@@ -46,10 +60,8 @@ a {
   text-decoration: none;
 }
 
-h2, h3, h4 {
-  font-family: $display-font;
-  font-weight: lighter;
-}
+
+
 
 #flash {
   margin-left: 20px;

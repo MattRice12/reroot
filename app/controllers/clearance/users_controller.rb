@@ -10,7 +10,7 @@ class Clearance::UsersController < Clearance::BaseController
   end
 
   def index
-    users = User.all
+    users = User.all.order(:name)
     render template: 'users/index.html.erb', locals: { users: users }
   end
 

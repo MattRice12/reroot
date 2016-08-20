@@ -1,0 +1,20 @@
+<%= form_for(forest) do |f| %>
+
+  <div class="errors">
+    <ul>
+      <% forest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= f.hidden_field :project_id, value: params[:project_id] %>
+
+  <label for="user_id">Select User: </label>
+  <div class="select-user"><%= f.select :tree_id, options_from_collection_for_select(Tree.find(params[:tree_id]).non_forests, :id, :name) %></div>
+
+  <div class="button-primary">
+    <%= f.submit class: "button-primary"%>
+  </div>
+
+<% end %>
