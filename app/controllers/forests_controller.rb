@@ -1,6 +1,12 @@
 class ForestsController < ApplicationController
   def new
-    render locals: { forest: Forest.new }
+    # forests = Forest.where(project_id: params[:project_id])
+    # trees = Tree.where(user_id: current_user.id)
+    # if (forests - trees ) == forests
+    #   render locals: { forests: forests, trees: trees }
+    # else
+      render locals: { forest: Forest.new }
+    # end
   end
 
   def create

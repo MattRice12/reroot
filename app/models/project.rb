@@ -21,6 +21,6 @@ class Project < ApplicationRecord
   end
 
   def non_forests
-    Tree.where.not(id: trees).order("LOWER(name)")
+    (Tree.where.not(id: trees)).order("LOWER(name)")
   end
 end

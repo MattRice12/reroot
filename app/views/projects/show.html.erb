@@ -62,7 +62,13 @@
 
 
 
-<h2> Trees: </h2>
+<h2> Trees:</h2>
+
+<div class="new-tree">
+  <%= link_to new_forest_path(project_id: project.id), class: 'btn add-del-edit' do %>
+    <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
+  <% end %>
+</div>
 
 <div class="row">
 
@@ -72,11 +78,6 @@
       <small class="btn sup-edit editor">
         <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
           <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-        <% end %>
-      </small>
-      <small class="btn sup-edit editor">
-        <%= link_to new_forest_path(project_id: project.id), class: 'btn add-del-edit' do %>
-          <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
         <% end %>
       </small>
       <small class="btn sup-edit editor">
