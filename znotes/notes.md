@@ -42,7 +42,7 @@ Tables —
 4. Nodes (Show, Create, Update, Destroy) ——self-referential
     1. Allow user to highlight important nodes
     2. Allow user to view only highlighted nodes
-5. Teams
+5. Projects
 6. Members
 7. Permissions
 8. Tags
