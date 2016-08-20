@@ -9,17 +9,31 @@ class MembersController < ApplicationController
     redirect_to project_path(member.project)
   end
 
-  def destroy
+  def boot
+    member = Member.find_by(id: params[:id])
+    project = member.project
+    if member.destroy
+      flash[:alert] = "You booted #{member.user.name}."
+      member = project.members.first
+      project.user_id = member.user_id
+      project.save
+      redirect_to project
+    else
+      flash[:alert] = "You cannot leave."
+    end
+  end
+
+  def leave
     project = Project.find(params[:id])
     member = project.members.find_by(user_id: current_user.id)
     if member.destroy
-      flash[:alert] = "You left the project"
+      flash[:alert] = "You left the project."
       member = project.members.first
       project.user_id = member.user_id
       project.save
       redirect_to projects_path
     else
-      flash[:alert] = "You cannot leave"
+      flash[:alert] = "You cannot leave."
     end
   end
 

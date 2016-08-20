@@ -18,7 +18,7 @@ class TreesController < ApplicationController
   end
 
   def new
-    render locals: {tree: Tree.new}
+    render locals: { tree: Tree.new }
   end
 
   def create

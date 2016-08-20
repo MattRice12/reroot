@@ -10,7 +10,15 @@ Rails.application.routes.draw do
   end
 
 
-  resources :members, as: 'members'
+  resources :members, as: 'members' do
+    member do
+      delete 'boot'
+    end
+    member do
+      delete 'leave'
+    end
+  end
+
   resources :projects, as: 'projects' do
     member do
       put 'captain'
