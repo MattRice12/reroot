@@ -38,7 +38,7 @@ class TreesController < ApplicationController
   def update
     tree = Tree.find(params.fetch(:id))
     if tree.update(tree_params)
-      redirect_to root_path
+      redirect_to tree_path
     else
       render template: 'trees/edit.html.erb', locals: { tree: tree }
     end

@@ -18,10 +18,10 @@ class ForestsController < ApplicationController
     forest  = Forest.find(params[:id])
     project = forest.project
     if forest.destroy
-      flash[:alert] = "This forest was as ancient as time... and you destroyed it..."
+      flash[:alert] = "This tree was as ancient as time... and you destroyed it..."
       redirect_to project
     else
-      flash[:alert] = "The fairies protect this forest. You fail to destroy it."
+      flash[:alert] = "The fairies protect this tree. You failed to destroy it."
     end
   end
 

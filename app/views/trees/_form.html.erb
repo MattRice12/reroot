@@ -1,6 +1,9 @@
 <%= form_for(tree) do |f| %>
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <% if tree.persisted? %>
+  <% else %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  <% end %>
 
   <div class="field">
     <%= f.label "Tree Name" %>

@@ -23,4 +23,5 @@ class Project < ApplicationRecord
   def non_forests
     (Tree.where.not(id: trees)).order("LOWER(name)")
   end
+
 end

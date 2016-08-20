@@ -67,11 +67,21 @@
 
 <div class="row trees">
 
-  <div class="new-tree">
-    <%= link_to new_forest_path(project_id: project.id), class: 'btn add-del-edit' do %>
-      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
-    <% end %>
-  </div>
+  <% if current_user.trees.empty? %>
+    <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
+  <% elsif user_trees == project_trees %>
+    <div class="new-tree">
+      <%= link_to new_tree_path, class: 'btn add-del-edit' do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="new-tree">
+      <%= link_to new_forest_path(project_id: project.id), class: 'btn add-del-edit' do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
+      <% end %>
+    </div>
+  <% end %>
 
   <% project.trees.order(:created_at).each do |tree| %>
     <h2> <%= link_to tree.name, tree %>
