@@ -1,4 +1,4 @@
-<h1 class="headinger"> Your Teams </h1>
+<h1 class="headinger"> Your Projects </h1>
 <ol>
   <h3 class="indent">
     <% current_user.projects.order("LOWER(name)").each do |project| %>
@@ -6,7 +6,7 @@
         <li>
           <span class="create-tab leader-badge">
           <%= link_to project.name, project_path(project), title: project.name %>
-          <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="You're the Team Captain on this Team!" />
+          <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="You're the Project Captain on this Project!" />
           <span class="small-text"></span>
           <span class="small-text"><i><%= "#{project.users.count} members" %></i></span>
       <% else %>
@@ -17,4 +17,4 @@
   </h3>
 </ol>
 
-<%= link_to "New Team", new_project_path %>
+<%= link_to "New Project", new_project_path %>

@@ -8,10 +8,10 @@
     </ul>
   </div>
 
-  <%= f.hidden_field :team_id, value: params[:team_id] %>
+  <%= f.hidden_field :project_id, value: params[:project_id] %>
 
   <label for="user_id">Select User: </label>
-  <div class="select-user"><%= f.select :user_id, options_from_collection_for_select(Team.find(params[:team_id]).non_members, :id, :name) %></div>
+  <div class="select-user"><%= f.select :user_id, options_from_collection_for_select(Project.find(params[:project_id]).non_members, :id, :name) %></div>
 
   <div class="button-primary">
     <%= f.submit class: "button-primary"%>

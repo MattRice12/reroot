@@ -1,22 +1,22 @@
 <h1 class="headinger"> <%=  "#{user.name.capitalize}'s profile:"  %>
 
-<h2> Teams: </h2>
-<% if user.teams.any? %>
+<h2> Projects: </h2>
+<% if user.projects.any? %>
   <ol>
     <h4 class="indent">
-      <% user.teams.each do |team| %>
-        <% if current_user.id == team.user_id %>
+      <% user.projects.each do |project| %>
+        <% if current_user.id == project.user_id %>
           <li>
             <span class="create-tab leader-badge">
-            <%= link_to team.name, team_path(team), title: team.name %>
-            <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="Team Captain" />
+            <%= link_to project.name, project_path(project), title: project.name %>
+            <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="Project Captain" />
             <span class="small-text"></span>
-            <span class="small-text"><i><%= "#{team.users.count} members" %></i></span>
+            <span class="small-text"><i><%= "#{project.users.count} members" %></i></span>
           </li>
         <% else %>
           <li>
-            <%= link_to team.name, team_path(team), title: team.name %>
-            <span class="small-text"><i><%= "#{team.users.count} members" %></i></span>
+            <%= link_to project.name, project_path(project), title: project.name %>
+            <span class="small-text"><i><%= "#{project.users.count} members" %></i></span>
           </li>
         <% end %>
       <% end %>

@@ -17,11 +17,19 @@ ActiveRecord::Schema.define(version: 20160818003508) do
 
   create_table "members", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "team_id"
+    t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_members_on_team_id", using: :btree
+    t.index ["project_id"], name: "index_members_on_project_id", using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "tabs", force: :cascade do |t|
@@ -34,14 +42,6 @@ ActiveRecord::Schema.define(version: 20160818003508) do
     t.text     "url"
     t.index ["tree_id"], name: "index_tabs_on_tree_id", using: :btree
     t.index ["user_id"], name: "index_tabs_on_user_id", using: :btree
-  end
-
-  create_table "teams", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_teams_on_user_id", using: :btree
   end
 
   create_table "trees", force: :cascade do |t|
@@ -64,10 +64,10 @@ ActiveRecord::Schema.define(version: 20160818003508) do
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
-  add_foreign_key "members", "teams"
+  add_foreign_key "members", "projects"
   add_foreign_key "members", "users"
+  add_foreign_key "projects", "users"
   add_foreign_key "tabs", "trees"
   add_foreign_key "tabs", "users"
-  add_foreign_key "teams", "users"
   add_foreign_key "trees", "users"
 end

@@ -23,7 +23,7 @@
 ##Limit visible tree to 10-20 vertical tabs (maybe have this as an option)
 ##Allow users to scroll left and right
 
-##Search by user, team
+##Search by user, project
 
 ##Add node to "Research collection"
 
@@ -51,6 +51,6 @@ Tables —
 11. User States
     1. Most frequently visited sites
     2. Number of saved trees
-    3. Member of <team(s)>
-12. Users on a team have different colors when they expand on a branch
+    3. Member of <project(s)>
+12. Users on a project have different colors when they expand on a branch
 13. Research Collection

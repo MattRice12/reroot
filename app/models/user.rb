@@ -5,14 +5,14 @@ class User < ApplicationRecord
   has_many :tabs
 
   has_many :members, dependent: :destroy
-  has_many :teams, through: :members
+  has_many :projects, through: :members
 
   validates :name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
 
-  def team_member?(team)
-    members.find_by(team_id: team.id)
+  def project_member?(project)
+    members.find_by(project_id: project.id)
   end
 
 end

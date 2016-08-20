@@ -59,6 +59,6 @@ tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
   tree = tree2
 end
 
-Team.create!(name: "Dragon Army", user_id: 1)
+Project.create!(name: "Dragon Army", user_id: 1)
 
-Member.create!(user_id: 1, team_id: 1)
+Member.create!(user_id: 1, project_id: 1)
