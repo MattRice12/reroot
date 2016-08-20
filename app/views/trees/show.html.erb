@@ -4,12 +4,12 @@
 
   <h1> <%= tree.name %>
     <small class="btn sup-edit editor">
-      <%= link_to edit_tree_path(tree), class: 'btn add-del-edit' do %>
+      <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
       <% end %>
     </small>
     <small class="btn sup-edit editor">
-      <%= link_to tree_path(tree), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit' do %>
+      <%= link_to tree_path(tree), remote: true, method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
       <% end %>
     </small>

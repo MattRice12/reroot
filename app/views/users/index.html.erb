@@ -3,7 +3,7 @@
 <ol>
   <h3 class="indent">
     <% users.each do |user| %>
-      <li><%= link_to user.name, user_path(user) %></li>
+      <li><%= link_to user.name, user_path(user), title: "#{user.name}" %></li>
     <% end %>
   </h3>
 </ol>
