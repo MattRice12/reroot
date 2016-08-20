@@ -1,3 +1,4 @@
+
 class TreesController < ApplicationController
   def index
     if params[:search]
@@ -23,18 +24,24 @@ class TreesController < ApplicationController
   end
 
   def create
-    tree = Tree.create!(tree_params)
-    if tree.save
-      forest = Forest.new(forest_params)
-      forest.tree_id = tree.id
-      if forest.save
-        redirect_to root_path
+    project = Project.find_by(id: params[:tree][:project_id])
+    if project.members.any? { |m| m.user_id == current_user.id }
+      tree = Tree.create!(tree_params)
+      if tree.save
+        forest = Forest.new(forest_params)
+        forest.tree_id = tree.id
+        if forest.save
+          redirect_to root_path
+        else
+          redirect_to root_path
+        end
       else
-        redirect_to root_path
+        flash[:alert] = tree.errors
+        render template: 'trees/new.html.erb', locals: { tree: tree}
       end
     else
-      flash[:alert] = tree.errors
-      render template: 'trees/new.html.erb', locals: { tree: tree}
+      flash[:alert] = "You must be invited to a project before you can add trees to it."
+      redirect_to projects_path
     end
   end
 
