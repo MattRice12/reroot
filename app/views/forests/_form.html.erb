@@ -10,8 +10,8 @@
 
   <%= f.hidden_field :project_id, value: params[:project_id] %>
 
-  <label for="user_id">Select User: </label>
-  <div class="select-user"><%= f.select :tree_id, options_from_collection_for_select(Tree.find(params[:tree_id]).non_forests, :id, :name) %></div>
+  <label for="user_id">Select Tree: </label>
+  <div class="select-user"><%= f.select :tree_id, options_from_collection_for_select(Project.find(params[:project_id]).non_forests, :id, :name) %></div>
 
   <div class="button-primary">
     <%= f.submit class: "button-primary"%>
