@@ -71,7 +71,7 @@
     <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
   <% elsif user_trees == project_trees %>
     <div class="new-tree">
-      <%= link_to new_tree_path, class: 'btn add-del-edit' do %>
+      <%= link_to new_tree_path(project_id: project.id), class: 'btn add-del-edit' do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
       <% end %>
     </div>

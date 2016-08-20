@@ -5,6 +5,10 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
   <% end %>
 
+  <% if params[:project_id] %>
+    <%= f.hidden_field :project_id, value: params[:project_id] %>
+  <% end %>
+
   <div class="field">
     <%= f.label "Tree Name" %>
     <%= f.text_field :name %>

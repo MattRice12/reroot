@@ -18,13 +18,20 @@ class TreesController < ApplicationController
   end
 
   def new
-    render locals: { tree: Tree.new }
+    project = Project.find_by(id: params[:project_id])
+    render locals: { tree: Tree.new, project: project}
   end
 
   def create
-    tree = Tree.new(tree_params)
+    tree = Tree.create!(tree_params)
     if tree.save
-      redirect_to root_path
+      forest = Forest.new(forest_params)
+      forest.tree_id = tree.id
+      if forest.save
+        redirect_to root_path
+      else
+        redirect_to root_path
+      end
     else
       flash[:alert] = tree.errors
       render template: 'trees/new.html.erb', locals: { tree: tree}
@@ -58,5 +65,9 @@ class TreesController < ApplicationController
 
   def tree_params
     params.require(:tree).permit(:user_id, :name)
+  end
+
+  def forest_params
+    params.require(:tree).permit(:project_id)
   end
 end
