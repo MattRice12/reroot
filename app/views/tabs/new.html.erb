@@ -1,9 +1,18 @@
-<h1 class="headinger"> New Connection Under <%= "'#{taboo.name.capitalize}'" %> </h1>
 
-<div class="row new-tree">
-  <div class="creation-field">
-    <%= render 'form', tab: tab %>
+<% if tree.nil? %>
+  <h1 class="headinger"> Create The First Tab!" </h1>
+  <div class="row new-tree">
+    <div class="creation-field">
+      <%= render 'form', tab: tab %>
+    </div>
   </div>
+<% elsif taboo %>
+  <h1 class="headinger"> New Connection Under <%= "'#{taboo.name.capitalize}'" %> </h1>
+
+  <div class="row new-tree">
+    <div class="creation-field">
+      <%= render 'form', tab: tab %>
+    </div>
 
   <div class="back-block">
   <%= link_to "back", :back %>
@@ -41,5 +50,6 @@
       </div>
     </div>
   </div>
+  <% end %>
 
 </div>

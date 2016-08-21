@@ -8,9 +8,12 @@ class TabsController < ApplicationController
   end
 
   def new
-    tab = find_tab_params(:parent_tab_id)
-    return render locals: { tab: Tab.new, taboo: tab } if tab
-    return render locals: { tab: Tab.new, taboo: tab } if find_tree_params(:tree_id)
+    if tab = find_tab_params(:parent_tab_id)
+      tree = tab.tab_root
+      render locals: { tab: Tab.new, taboo: tab, tree: tree }
+    elsif tree = find_tree_params(:tree_id)
+      render locals: { tab: Tab.new, tree: tree }
+    end
 
     # tab = find_tab_params(:parent_tab_id)
     # return redirect(root_path, TAB_NOT_EXIST) if !tab
@@ -21,7 +24,11 @@ class TabsController < ApplicationController
   def create
     tab = Tab.new(tab_params)
     tab.user = current_user
-    return redirect(:back, TAB_CREATED) if tab.save
+    tree = tab.tab_root
+    if tab.save
+      return redirect(new_tab_path(id: tab.id), TAB_CREATED) if !tab.parent
+      return redirect(:back, TAB_CREATED) if tab.parent
+    end
     flash[:alert] = tree.errors
     render template: 'tabs/new.html.erb', locals: { tab: tab}
   end
@@ -41,8 +48,14 @@ class TabsController < ApplicationController
 
   def destroy
     tab = find_tab_params(:id)
-    tab_adoption(tab)
-    return redirect(:back, TAB_DESTROYED) if tab.destroy
+    if tab.children.any?
+      tab_adoption(tab)
+      tab.destroy
+      return redirect(:back, TAB_DESTROYED)
+    else
+      tab.destroy
+      return redirect(trees_path, TAB_DESTROYED)
+    end
     render message: TAB_NOT_EXIST
   end
 

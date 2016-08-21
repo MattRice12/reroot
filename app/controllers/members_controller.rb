@@ -28,6 +28,8 @@ class MembersController < ApplicationController
         member = project.members.first
         project.user_id = member.user_id
         project.save
+      else
+        project.destroy
       end
       return redirect(projects_path, "You left the project.")
     end
