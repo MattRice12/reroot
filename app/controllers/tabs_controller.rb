@@ -44,9 +44,9 @@ class TabsController < ApplicationController
     tab = find_tab_params(:id)
 
     if tab.parent
-      tabchild = Tab.where(parent_tab_id: tab.parent.id)
+      tabchild = Tab.where(parent_tab_id: tab.id)
       tabchild.each do |tc|
-        tc.parent_tab_id = tab.parent.parent_tab_id
+        tc.parent_tab_id = tab.parent.id
         tc.save
       end
     end
