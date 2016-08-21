@@ -1,5 +1,13 @@
 <%= form_for(tree) do |f| %>
 
+  <div class="errors">
+    <ul>
+      <% tree.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <% if tree.persisted? %>
   <% else %>
     <%= f.hidden_field :user_id, value: current_user.id %>

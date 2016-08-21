@@ -65,23 +65,15 @@ class TreesController < ApplicationController
   end
 
   def edit
-    if project = find_proj_param_obj(:project_id)
-      if project_permission?(project)
-        if find_tree_params
-          if tree_permission?
-            render locals: { tree: find_tree_params }
-          else
-            redirect(projects_path, TREE_UNAUTH)
-          end
-        else
-          redirect(projects_path, TREE_NOT_EXIST)
-        end
-      else
-        redirect(projects_path, PROJ_UNAUTH)
-      end
-    else
-      redirect(projects_path, PROJ_NOT_EXIST)
+    if params[:project_id]
+      project = find_proj_param_obj(:project_id)
+      return redirect(projects_path, PROJ_NOT_EXIST) if !project
+      return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
     end
+    tree = find_tree_params
+    return redirect(trees_path, TREE_NOT_EXIST) if !tree
+    return redirect(trees_path, TREE_UNAUTH) if !tree_permission?
+    return render locals: { tree: tree }
   end
 
   def update
