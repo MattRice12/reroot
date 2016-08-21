@@ -1,0 +1,21 @@
+<%= form_for(tree, url: create_forest_tree_path) do |f| %>
+
+  <% if tree.persisted? %>
+  <% else %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  <% end %>
+
+  <% if params[:project_id] %>
+    <%= f.hidden_field :project_id, value: params[:project_id] %>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Tree Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="waves-effect waves-light btn">
+    <%= f.submit class: "button-primary"%>
+  </div>
+
+<% end %>

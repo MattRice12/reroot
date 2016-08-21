@@ -19,25 +19,39 @@ class TreesController < ApplicationController
   end
 
   def new
-    project = Project.find_by(id: params[:project_id])
-    render locals: { tree: Tree.new, project: project}
+    render template: 'trees/new', locals: { tree: Tree.new }
   end
 
   def create
+    tree = Tree.create!(tree_params)
+    if tree.save
+      redirect_to root_path
+    else
+      flash[:alert] = tree.errors
+      render template: 'trees/new.html.erb', locals: { tree: tree}
+    end
+  end
+
+  def new_forest
+    render template: 'trees/new_forest', locals: { tree: Tree.new }
+  end
+
+  def create_forest
     project = Project.find_by(id: params[:tree][:project_id])
-    if project.members.any? { |m| m.user_id == current_user.id }
-      tree = Tree.create!(tree_params)
+    if project_permission?
+      tree = Tree.new(forest_tree_params)
       if tree.save
         forest = Forest.new(forest_params)
         forest.tree_id = tree.id
         if forest.save
-          redirect_to root_path
+          redirect_to project
         else
-          redirect_to root_path
+          flash[:alert] = tree.errors
+          redirect_to :back
         end
       else
         flash[:alert] = tree.errors
-        render template: 'trees/new.html.erb', locals: { tree: tree}
+        redirect_to :back
       end
     else
       flash[:alert] = "You must be invited to a project before you can add trees to it."
@@ -71,6 +85,10 @@ class TreesController < ApplicationController
   private
 
   def tree_params
+    params.require(:tree).permit(:user_id, :name)
+  end
+
+  def forest_tree_params
     params.require(:tree).permit(:user_id, :name)
   end
 

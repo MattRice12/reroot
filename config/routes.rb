@@ -22,6 +22,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :trees, as: 'trees' do
+    member do
+      get 'new_forest'
+      post 'create_forest'
+
+    end
+  end
+
   resources :forests
   resources :tabs, as: 'tabs'
   resources :trees, as: 'trees'
