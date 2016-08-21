@@ -1,11 +1,12 @@
-<h2>New Leaf</h2>
+<h1 class="headinger"> New Connection Under <%= "'#{taboo.name.capitalize}'" %> </h1>
 
 <div class="row new-tree">
   <div class="creation-field">
     <%= render 'form', tab: tab %>
   </div>
 
-
+  <div class="back-block">
+  <%= link_to "back", :back %>
   <div class="trunk" id="root">
     <h3 class="btn leaf"><%= link_to truncate(taboo.name, length: 12), url_with_protocol(taboo.url) %>
       <div class="editor">
@@ -39,3 +40,6 @@
 
       </div>
     </div>
+  </div>
+
+</div>

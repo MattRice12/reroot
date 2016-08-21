@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
 
   def redirect(loc, alert)
     flash[:alert] = alert
-    redirect_back(fallback_location: loc)
+    redirect_to loc
   end
 
   def find_tab_params(obj)
