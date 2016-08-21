@@ -9,7 +9,7 @@ class TabsController < ApplicationController
   end
 
   def show
-    tab = Tab.find(params.fetch(:id))
+    tab = find_by_tab_params
     if tab
       render locals: { tab: tab }
     else
@@ -33,23 +33,23 @@ class TabsController < ApplicationController
   end
 
   def edit
-    render locals: { tab: Tab.find(params.fetch(:id)) }
+    render locals: { tab: find_by_tab_params }
   end
 
   def update
-    tab = Tab.find(params.fetch(:id))
+    tab = find_by_tab_params
     if tab.update(tab_params)
-      redirect_to root_path
+      redirect_to tab.tab_root
     else
       render template: 'tabs/edit.html.erb', locals: { tab: tab }
     end
   end
 
   def destroy
-    tab = Tab.find(params.fetch(:id))
+    tab = find_by_tab_params
 
     if tab.parent
-      tabchild = Tab.where(parent_tab_id: params.fetch(:id))
+      tabchild = where_tab_params
       tabchild.each do |tc|
         tc.parent_tab_id = tab.parent.id
         tc.save

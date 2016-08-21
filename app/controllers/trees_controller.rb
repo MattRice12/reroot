@@ -79,17 +79,17 @@ class TreesController < ApplicationController
   end
 
   def update
-    if project = find_proj_param_obj(:project_id)
+    if params[:tree][:project_id]
       tree = find_tree_params
       if tree.update(tree_params)
-        redirect_to project
+        redirect_to find_proj_by_param_obj_proj(:tree)
       else
         render template: 'trees/edit.html.erb', locals: { tree: tree }
       end
     else
       tree = find_tree_params
       if tree.update(tree_params)
-        redirect_to trees_path
+        redirect_to tree
       else
         render template: 'trees/edit.html.erb', locals: { tree: tree }
       end
