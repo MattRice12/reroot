@@ -8,7 +8,7 @@
         </div>
       </div>
     </h3> <%# first set of branches %>
-    <%= render( partial: 'rechild', locals: { children: child.children.includes(:children) }) if child.children %>
+    <%= render( partial: 'shared/rechild', locals: { children: child.children.includes(:children) }) if child.children %>
   </div>
 
 <% end %>

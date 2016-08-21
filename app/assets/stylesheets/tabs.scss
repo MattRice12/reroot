@@ -88,3 +88,13 @@
     font-size: small;
   }
 }
+
+.row.new-tree {
+  display: flex;
+  .creation-field {
+    margin-right: 200px;
+  }
+}
+.small-tree {
+  margin-left: 40px;
+}

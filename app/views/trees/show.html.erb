@@ -50,7 +50,7 @@
 
                   <% ########### Recursion! ##### %>
 
-                  <%= render( partial: 'rechild', locals: { children: child.children }) if child %>
+                  <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
 
                   <% ########### /Recursion! ##### %>
               </div>

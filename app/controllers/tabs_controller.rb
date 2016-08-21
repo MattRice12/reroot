@@ -8,8 +8,9 @@ class TabsController < ApplicationController
   end
 
   def new
-    return render locals: { tab: Tab.new } if find_tree_params(:tree_id)
-    return render locals: { tab: Tab.new } if find_tab_params(:parent_tab_id)
+    tab = Tab.find_by(id: params[:parent_tab_id])
+    return render locals: { tab: Tab.new, taboo: tab } if find_tree_params(:tree_id)
+    return render locals: { tab: Tab.new, taboo: tab } if find_tab_params(:parent_tab_id)
 
 
     # tab = find_tab_params(:parent_tab_id)

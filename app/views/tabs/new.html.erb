@@ -1,3 +1,41 @@
 <h2>New Leaf</h2>
 
-<%= render 'form', tab: tab %>
+<div class="row new-tree">
+  <div class="creation-field">
+    <%= render 'form', tab: tab %>
+  </div>
+
+
+  <div class="trunk" id="root">
+    <h3 class="btn leaf"><%= link_to truncate(taboo.name, length: 12), url_with_protocol(taboo.url) %>
+      <div class="editor">
+        <%= render "shared/buttons_tabs.html.erb", obj: taboo %>
+        <div class="creation">
+          <%= render "shared/create_tab.html.erb", obj: taboo %>
+        </div>
+      </div>
+    </h3>
+
+      <div class="big-block">
+
+        <% taboo.children.each do |child| %>
+            <div class="branch">
+              <h3 class="btn leaf"><%= link_to truncate(child.name, length: 14), url_with_protocol(child.url) %>
+                <div class="editor">
+                  <%= render "shared/buttons_tabs.html.erb", obj: child %>
+                  <div class="creation">
+                    <%= render "shared/create_tab.html.erb", obj: child %>
+                  </div>
+                </div>
+              </h3>
+
+                <% ########### Recursion! ##### %>
+
+                <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
+
+                <% ########### /Recursion! ##### %>
+            </div>
+        <% end %>
+
+      </div>
+    </div>
