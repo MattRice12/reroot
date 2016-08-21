@@ -27,7 +27,7 @@ class TabsController < ApplicationController
     if tab.save
       redirect_to tab.tab_root
     else
-      flash[:alert] = "The tab could not be created"
+      flash[:alert] = tree.errors
       render template: 'tabs/new.html.erb', locals: { tab: tab}
     end
   end
@@ -41,6 +41,7 @@ class TabsController < ApplicationController
     if tab.update(tab_params)
       redirect_to tab.tab_root
     else
+      flash[:alert] = tree.errors
       render template: 'tabs/edit.html.erb', locals: { tab: tab }
     end
   end

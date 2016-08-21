@@ -11,15 +11,13 @@ class TreesController < ApplicationController
 
   def show
     if tree = find_tree_params
-      if tree_permission?(tree)
+      if tree_permission?
         render locals: { tree: tree }
       else
-        flash[:alert] = "You are not authorized to see this tree"
-        redirect_to root_path
+        redirect(root_path, TREE_UNAUTH)
       end
     else
-      flash[:alert] = "That tree doesn't exist..."
-      redirect_to root_path
+      redirect(root_path, TREE_NOT_EXIST)
     end
   end
 
@@ -30,10 +28,10 @@ class TreesController < ApplicationController
   def create
     tree = Tree.new(tree_params)
     if tree.save
-      redirect_to root_path
+      redirect(root_path, TREE_CREATED)
     else
       flash[:alert] = tree.errors
-      render template: 'trees/new.html.erb', locals: { tree: tree}
+      render template: 'trees/new', locals: { tree: tree}
     end
   end
 
@@ -42,67 +40,71 @@ class TreesController < ApplicationController
       if project_permission?(project)
         render template: 'trees/new_forest', locals: { tree: Tree.new }
       else
-        flash[:alert] = "You are not authorized to access this project."
-        redirect_to projects_path
+        redirect(projects_path, PROJ_UNAUTH)
       end
     else
-      flash[:alert] = "This project does not exist."
-      redirect_to projects_path
+      redirect(projects_path, PROJ_NOT_EXIST)
     end
   end
 
   def create_forest
     project = find_proj_by_param_obj_proj(:tree)
-    if project_permission?(find_proj_by_param_obj_proj(:tree))
-      tree = Tree.new(forest_tree_params)
-      if tree.save
-        forest = Forest.new(forest_params)
-        forest.tree_id = tree.id
-        if forest.save
-          redirect_to project
-        else
-          flash[:alert] = tree.errors
-          redirect_to root_path
-        end
+    tree = Tree.new(forest_tree_params)
+    if tree.save
+      forest = Forest.new(forest_params)
+      forest.tree_id = tree.id
+      if forest.save
+        redirect(project, FOREST_CREATED)
       else
-        flash[:alert] = tree.errors
-        redirect_to :back
+        redirect(root_path, forest.errors)
       end
     else
-      flash[:alert] = "You are not authorized to access this project."
-      redirect_to projects_path
+      flash[:alert] = tree.errors
+      render template: 'trees/new_forest', locals: { tree: tree }
     end
   end
 
   def edit
-    render locals: { tree: find_tree_params }
+    if project = find_proj_param_obj(:project_id)
+      if project_permission?(project)
+        if find_tree_params
+          if tree_permission?
+            render locals: { tree: find_tree_params }
+          else
+            redirect(projects_path, TREE_UNAUTH)
+          end
+        else
+          redirect(projects_path, TREE_NOT_EXIST)
+        end
+      else
+        redirect(projects_path, PROJ_UNAUTH)
+      end
+    else
+      redirect(projects_path, PROJ_NOT_EXIST)
+    end
   end
 
   def update
-    if params[:tree][:project_id]
-      tree = find_tree_params
-      if tree.update(tree_params)
-        redirect_to find_proj_by_param_obj_proj(:tree)
+    tree = find_tree_params
+    if tree.update(tree_params)
+      if project = find_proj_by_param_obj_proj(:tree)
+        redirect(project, TREE_UPDATED)
       else
-        render template: 'trees/edit.html.erb', locals: { tree: tree }
+        redirect(tree, TREE_UPDATED)
       end
     else
-      tree = find_tree_params
-      if tree.update(tree_params)
-        redirect_to tree
-      else
-        render template: 'trees/edit.html.erb', locals: { tree: tree }
-      end
+      flash[:alert] = tree.errors
+      render template: 'trees/edit.html.erb', locals: { tree: tree }
     end
   end
 
   def destroy
     tree = find_tree_params
-    if tree.destroy
-      flash[:alert] = "Take that, Greenpeace!"
-      redirect_to :back
+    tree.destroy
+    if params[:id]
+      redirect(root_path, TREE_DESTROYED)
     else
-      render message: "Tree not found."
+      redirect(:back)
     end
   end
 
