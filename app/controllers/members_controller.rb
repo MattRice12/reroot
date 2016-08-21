@@ -2,15 +2,13 @@ class MembersController < ApplicationController
 
   def new
     project = find_proj_param_obj(:project_id)
-    return redirect(projects_path, PROJ_NOT_EXIST) if !project
-    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return proj_validations(project) if !project || !project_permission?(project)
     render locals: { member: Member.new } if project
   end
 
   def create
     project = find_proj_by_param_obj_proj(:member)
-    return redirect(projects_path, PROJ_NOT_EXIST) if !project
-    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return proj_validations(project) if !project || !project_permission?(project)
     member = Member.find_or_create_by(member_params)
     redirect(project_path(member.project), "#{member.user.name.capitalize} has been added to the project!")
   end

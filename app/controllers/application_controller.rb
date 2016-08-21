@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
   TREE_UNAUTH = "You are not authorized to access that tree."
   PROJ_UNAUTH = "You are not authorized to access that project."
 
-
   def search_params
     tabs = Tab.search(params[:search]).where(user_id: current_user.id)
     users = User.search(params[:search]).order("LOWER(name)")
@@ -48,6 +47,7 @@ class ApplicationController < ActionController::Base
     redirect_to loc
   end
 
+################## FINDERS #################
   def find_tab_params(obj)
     Tab.find_by(id: params[obj])
   end
@@ -56,20 +56,8 @@ class ApplicationController < ActionController::Base
     Tab.where(parent_tab_id: params[:id])
   end
 
-  def tab_permission?(obj)
-    current_user.trees.any? { |tr| tr == obj.tab_root }
-  end
-
   def find_tree_params(obj)
     Tree.find_by(id: params[obj])
-  end
-
-  def tree_permission?(obj)
-    tree = obj
-    [
-      current_user.id == tree.user_id,
-      current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id } } == params[:id]
-    ].any?
   end
 
   def find_forest_params
@@ -83,10 +71,42 @@ class ApplicationController < ActionController::Base
   def find_proj_by_param_obj_proj(obj)
     Project.find_by(id: params[obj][:project_id])
   end
+################## GRABBERS #################
+
+################## PERMISSIONS #################
+  def tab_permission?(obj)
+    current_user.trees.any? { |tr| tr == obj.tab_root }
+  end
+
+  def tree_permission?(obj)
+    tree = obj
+    [
+      current_user.id == tree.user_id,
+      current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id } } == params[:id]
+    ].any?
+  end
 
   def project_permission?(obj)
     project = obj
     project.members.any? { |m| m.user_id == current_user.id }
   end
+################## PERMISSIONS #################
+
+################## VALIDATIONS #################
+  def tab_validations(obj)
+    return redirect(trees_path, TAB_NOT_EXIST) if !obj
+    return redirect(trees_path, TAB_UNAUTH) if !tab_permission?(obj)
+  end
+
+  def tree_validations(obj)
+    return redirect(trees_path, TREE_NOT_EXIST) if !obj
+    return redirect(trees_path, TREE_UNAUTH) if !tree_permission?(obj)
+  end
+
+  def proj_validations(obj)
+    return redirect(projects_path, PROJ_NOT_EXIST) if !obj
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(obj)
+  end
+################## VALIDATIONS #################
 
 end

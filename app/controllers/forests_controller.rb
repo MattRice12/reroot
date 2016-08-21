@@ -1,15 +1,14 @@
 class ForestsController < ApplicationController
   def new
     project = find_proj_param_obj(:project_id)
-    return redirect(projects_path, PROJ_NOT_EXIST) if !project
-    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return proj_validations(project) if !project || !project_permission?(project)
     render locals: { forest: Forest.new }
   end
 
   def create
     project = find_proj_by_param_obj_proj(:forest)
-    return redirect(projects_path, PROJ_NOT_EXIST) if !project
-    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return proj_validations(project) if !project || !project_permission?(project)
+
     Forest.find_or_create_by(forest_params)
     redirect(project, FOREST_CREATED)
   end

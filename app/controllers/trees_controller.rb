@@ -8,8 +8,7 @@ class TreesController < ApplicationController
 
   def show
     tree = find_tree_params(:id)
-    return redirect(root_path, TREE_NOT_EXIST) if !tree
-    return redirect(root_path, TREE_UNAUTH) if !tree_permission?(tree)
+    return tree_validations(tree) if !tree || !tree_permission?(tree)
     render locals: { tree: tree }
   end
 
@@ -25,11 +24,9 @@ class TreesController < ApplicationController
   end
 
   def new_forest
-    if project = find_proj_param_obj(:project_id)
-      return render template: 'trees/new_forest', locals: { tree: Tree.new } if project_permission?(project)
-      return redirect(projects_path, PROJ_UNAUTH)
-    end
-    redirect(projects_path, PROJ_NOT_EXIST)
+    project = find_proj_param_obj(:project_id)
+    return proj_validations(project) if !project || !project_permission?(project)
+    render template: 'trees/new_forest', locals: { tree: Tree.new } if project_permission?(project)
   end
 
   def create_forest
@@ -48,22 +45,19 @@ class TreesController < ApplicationController
   def edit
     if params[:project_id]
       project = find_proj_param_obj(:project_id)
-      return redirect(projects_path, PROJ_NOT_EXIST) if !project
-      return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+      return proj_validations(project) if !project || !project_permission?(project)
+
     end
     tree = find_tree_params(:id)
-    return redirect(trees_path, TREE_NOT_EXIST) if !tree
-    return redirect(trees_path, TREE_UNAUTH) if !tree_permission?(tree)
+    return tree_validations(tree) if !tree || !tree_permission?(tree)
     render locals: { tree: tree }
   end
 
   def update
     tree = find_tree_params(:id)
     project = find_proj_by_param_obj_proj(:tree)
-    if tree.update(tree_params)
-      return redirect(project, TREE_UPDATED) if project
-      return redirect(tree, TREE_UPDATED) if !project
-    end
+    return redirect(project, TREE_UPDATED) if project && tree.update(tree_params)
+    return redirect(tree, TREE_UPDATED) if !project && tree.update(tree_params)
     flash[:alert] = tree.errors
     render template: 'trees/edit.html.erb', locals: { tree: tree }
   end

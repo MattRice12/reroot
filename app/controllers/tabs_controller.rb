@@ -28,8 +28,7 @@ class TabsController < ApplicationController
 
   def edit
     tab = find_tab_params(:id)
-    return redirect(root_path, TAB_NOT_EXIST) if !tab
-    return redirect(root_path, TAB_UNAUTH) if !tab_permission?(tab)
+    return tab_validations(tab) if !tab || !tab_permission?(tab)
     render locals: { tab: tab }
   end
 
