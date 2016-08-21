@@ -10,9 +10,8 @@ class TreesController < ApplicationController
   end
 
   def show
-    tree = Tree.find_by(id: params[:id])
-    if tree
-      if tree_permission?(params[:tree][:project_id])
+    if tree = find_tree_params
+      if tree_permission?(tree)
         render locals: { tree: tree }
       else
         flash[:alert] = "You are not authorized to see this tree"
@@ -76,19 +75,19 @@ class TreesController < ApplicationController
   end
 
   def edit
-    render locals: { tree: Tree.find(params.fetch(:id)) }
+    render locals: { tree: find_tree_params }
   end
 
   def update
     if project = find_proj_param_obj(:project_id)
-      tree = Tree.find(params.fetch(:id))
+      tree = find_tree_params
       if tree.update(tree_params)
         redirect_to project
       else
         render template: 'trees/edit.html.erb', locals: { tree: tree }
       end
     else
-      tree = Tree.find(params.fetch(:id))
+      tree = find_tree_params
       if tree.update(tree_params)
         redirect_to trees_path
       else
@@ -98,7 +97,7 @@ class TreesController < ApplicationController
   end
 
   def destroy
-    tree = Tree.find_by(id: params.fetch(:id))
+    tree = find_tree_params
     if tree.destroy
       flash[:alert] = "Take that, Greenpeace!"
       redirect_to :back
