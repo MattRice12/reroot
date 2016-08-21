@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   TREE_UPDATED    = "Tree Name Updated."
   PROJECT_UPDATED = "Project Name Updated."
 
+  TAB_DESTROYED = "Tree Destroyed. Take that, Greenpeace!"
   TREE_DESTROYED    = "Tree Destroyed. Take that, Greenpeace!"
   FOREST_DESTROYED  = "That piece of the forest was as ancient as time... and you destroyed it..."
   PROJECT_DESTROYED = "The project disbanded. Thanks, Obama."
@@ -31,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def search_params
-    tabs = Tab.search(params[:search])
+    tabs = Tab.search(params[:search]).where(user_id: current_user.id)
     users = User.search(params[:search]).order("LOWER(name)")
     render template: 'trees/search.html.erb', locals: { tabs: tabs, users: users }
   end
@@ -45,15 +46,15 @@ class ApplicationController < ActionController::Base
   end
 
   def tab_permission?(obj)
-    current_user.id == obj.tab_root.id
+    current_user.trees.any? { |tr| tr == obj.tab_root }
   end
 
   def find_tree_params(obj)
     Tree.find_by(id: params[obj])
   end
 
-  def tree_permission?
-    tree = find_tree_params(:id)
+  def tree_permission?(obj)
+    tree = obj
     [
       current_user.id == tree.user_id,
       current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id } } == params[:id]

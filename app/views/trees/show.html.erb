@@ -10,6 +10,16 @@
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
       <% end %>
     </small>
+    <% unless tree.tabs.any? %>
+    <div class="trunk-empty" id="root">
+      <small class="btn leaf-new">
+        <%= link_to "New Tab", new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small' %>
+        <%= link_to new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small', title: "Begin Your Tree!" do %>
+          <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
+        <% end %>
+      </small>
+    </div>
+    <% end %>
   </h1>
 
   <% tree.tabs.each do |tab| %>
@@ -31,7 +41,7 @@
               <div class="branch">
                 <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
                   <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: tab, child: child %>
+                    <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
                       <%= render "shared/create_tab.html.erb", obj: child %>
                     </div>

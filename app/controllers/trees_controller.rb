@@ -8,7 +8,7 @@ class TreesController < ApplicationController
 
   def show
     if tree = find_tree_params(:id)
-      return render locals: { tree: tree } if tree_permission?
+      return render locals: { tree: tree } if tree_permission?(tree)
       return redirect(root_path, TREE_UNAUTH)
     end
     return redirect(root_path, TREE_NOT_EXIST)
@@ -54,7 +54,7 @@ class TreesController < ApplicationController
     end
     tree = find_tree_params(:id)
     return redirect(trees_path, TREE_NOT_EXIST) if !tree
-    return redirect(trees_path, TREE_UNAUTH) if !tree_permission?
+    return redirect(trees_path, TREE_UNAUTH) if !tree_permission?(tree)
     return render locals: { tree: tree }
   end
 
