@@ -21,11 +21,13 @@ class TabsController < ApplicationController
     tab = Tab.new(tab_params)
     tab.user = current_user
     tree = tab.tab_root
-    # pry.rails
-
+    tab2 = Tab.find_by(parent_tab_id: params[:parent_tab_id])
     if tab.save
-      return redirect(new_tab_path(parent_tab_id: tab.id), TAB_CREATED)
-      # return redirect(:back, TAB_CREATED) if tab.parent
+      if tab == tab2
+        return redirect(new_tab_path(parent_tab_id: tab.parent_tab_id), TAB_CREATED)
+      else
+        return redirect(:back, TAB_CREATED) if tab.parent
+      end
     end
     flash[:alert] = tree.errors
     render template: 'tabs/new.html.erb', locals: { tab: tab}
