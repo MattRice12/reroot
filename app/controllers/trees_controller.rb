@@ -27,14 +27,10 @@ class TreesController < ApplicationController
 
   def new_forest
     if project = find_proj_param_obj(:project_id)
-      if project_permission?(project)
-        render template: 'trees/new_forest', locals: { tree: Tree.new }
-      else
-        redirect(projects_path, PROJ_UNAUTH)
-      end
-    else
-      redirect(projects_path, PROJ_NOT_EXIST)
+      return render template: 'trees/new_forest', locals: { tree: Tree.new } if project_permission?(project)
+      return redirect(projects_path, PROJ_UNAUTH)
     end
+    return redirect(projects_path, PROJ_NOT_EXIST)
   end
 
   def create_forest
@@ -45,10 +41,9 @@ class TreesController < ApplicationController
       forest.tree_id = tree.id
       return redirect(project, FOREST_CREATED) if forest.save
       return redirect(root_path, forest.errors)
-    else
-      flash[:alert] = tree.errors
-      render template: 'trees/new_forest', locals: { tree: tree }
     end
+    flash[:alert] = tree.errors
+    render template: 'trees/new_forest', locals: { tree: tree }
   end
 
   def edit
@@ -69,10 +64,9 @@ class TreesController < ApplicationController
     if tree.update(tree_params)
       return redirect(project, TREE_UPDATED) if project
       return redirect(tree, TREE_UPDATED) if !project
-    else
-      flash[:alert] = tree.errors
-      render template: 'trees/edit.html.erb', locals: { tree: tree }
     end
+    flash[:alert] = tree.errors
+    render template: 'trees/edit.html.erb', locals: { tree: tree }
   end
 
   def destroy
