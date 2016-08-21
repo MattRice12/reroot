@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     render template: 'trees/search.html.erb', locals: { tabs: tabs, users: users }
   end
 
-  def find_by_tab_params(obj)
+  def find_tab_params(obj)
     Tab.find_by(id: params[obj])
   end
 
@@ -48,12 +48,12 @@ class ApplicationController < ActionController::Base
     current_user.id == obj.tab_root.id
   end
 
-  def find_tree_params
-    Tree.find_by(id: params[:id])
+  def find_tree_params(obj)
+    Tree.find_by(id: params[obj])
   end
 
   def tree_permission?
-    tree = find_tree_params
+    tree = find_tree_params(:id)
     [
       current_user.id == tree.user_id,
       current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id } } == params[:id]

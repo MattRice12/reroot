@@ -1,62 +1,55 @@
 class TabsController < ApplicationController
   def index
-    return search_params.includes(:trees) if params[:search]
-    tabs = Tab.all.includes(:trees)
-    render locals: { tabs: tabs }
+    if params[:search]
+      search_params.includes(:trees)
+    else
+      tabs = Tab.all.includes(:trees)
+      render locals: { tabs: tabs }
+    end
   end
 
   def show
-    tab = find_by_tab_params(:id)
+    tab = Tab.find(params.fetch(:id))
     if tab
       render locals: { tab: tab }
     else
-      redirect(tabs_path, TAB_NOT_EXIST)
+      redirect_to tabs
     end
   end
 
   def new
-    if find_tree_params(:tree_id)
-      if tree_permission?(tree)
-        render locals: { tab: Tab.new }
-      else
-        redirect(root_path, TREE_UNAUTH)
-      end
-    else
-      redirect(root_path, TREE_NOT_EXIST)
-    end
+    render locals: { tab: Tab.new }
   end
-
 
   def create
     tab = Tab.new(tab_params)
     tab.user = current_user
     if tab.save
-      redirect(tab.tab_root, TAB_CREATED)
+      redirect_to tab.tab_root
     else
-      flash[:alert] = tree.errors
+      flash[:alert] = "The tab could not be created"
       render template: 'tabs/new.html.erb', locals: { tab: tab}
     end
   end
 
   def edit
-    render locals: { tab: find_tab_params(:id) }
+    render locals: { tab: Tab.find(params.fetch(:id)) }
   end
 
   def update
-    tab = find_tab_params(:id)
+    tab = Tab.find(params.fetch(:id))
     if tab.update(tab_params)
-      redirect_to tab.tab_root
+      redirect_to root_path
     else
-      flash[:alert] = tree.errors
       render template: 'tabs/edit.html.erb', locals: { tab: tab }
     end
   end
 
   def destroy
-    tab = find_by_tab_params(:id)
+    tab = Tab.find(params.fetch(:id))
 
     if tab.parent
-      tabchild = where_tab_params
+      tabchild = Tab.where(parent_tab_id: params.fetch(:id))
       tabchild.each do |tc|
         tc.parent_tab_id = tab.parent.id
         tc.save
@@ -67,7 +60,7 @@ class TabsController < ApplicationController
       flash[:alert] = "Take that, Greenpeace!"
       redirect_to root_path
     else
-      render message: TREE_NOT_EXIST
+      render message: "Tab not found."
     end
   end
 
