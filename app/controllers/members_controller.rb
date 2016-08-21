@@ -1,40 +1,36 @@
 class MembersController < ApplicationController
 
   def new
-    render locals: { member: Member.new }
+    project = find_proj_param_obj(:project_id)
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return render locals: { member: Member.new } if project
   end
 
   def create
     member = Member.find_or_create_by(member_params)
-    redirect_to project_path(member.project)
+    redirect(project_path(member.project), "#{member.user.name.capitalize} has been added to the project!")
   end
 
   def boot
     member  = Member.find(params[:id])
     project = member.project
-    if member.destroy
-      flash[:alert] = "You booted #{member.user.name}."
-      member = project.members.first
-      project.user_id = member.user_id
-      project.save
-      redirect_to project
-    else
-      flash[:alert] = "You cannot leave."
-    end
+    return redirect(project, "#{member.user.name.capitalize} has been booted!") if member.destroy
+    flash[:alert] = "You cannot leave."
   end
 
   def leave
     project = find_proj_param_obj(:id)
     member = project.members.find_by(user_id: current_user.id)
     if member.destroy
-      flash[:alert] = "You left the project."
-      member = project.members.first
-      project.user_id = member.user_id
-      project.save
-      redirect_to projects_path
-    else
-      flash[:alert] = "You cannot leave."
+      if project.members.any?
+        member = project.members.first
+        project.user_id = member.user_id
+        project.save
+      end
+      return redirect(projects_path, "You left the project.")
     end
+    return redirect(project, "You cannot leave.")
   end
 
   private

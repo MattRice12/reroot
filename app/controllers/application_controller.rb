@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   TREE_UNAUTH = "You are not authorized to access that tree."
   PROJ_UNAUTH = "You are not authorized to access that project."
 
+
   def search_params
     tabs = Tab.search(params[:search]).where(user_id: current_user.id)
     users = User.search(params[:search]).order("LOWER(name)")
