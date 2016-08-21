@@ -1,14 +1,20 @@
 class ProjectsController < ApplicationController
   def index
-    projects = Project.all.includes(:members, :users)
+    projects = Project.where(user_id: current_user.id).includes(:members, :users)
     render locals: { projects: projects }
   end
 
   def show
-    project = Project.find(params[:id])
+    project = find_proj_param_obj(:id)
     if project
-      render locals: { project: project }
+      if project_permission?(project)
+        render locals: { project: project }
+      else
+        flash[:alert] = "You are not authorized to view this project."
+        redirect_to projects_path
+      end
     else
+      flash[:alert] = "This project does not exist."
       redirect_to projects_path
     end
   end
@@ -29,11 +35,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    render locals: { project: Project.find(params.fetch(:id)) }
+    render locals: { project: find_proj_param_obj(:id) }
   end
 
   def update
-    project = Project.find(params.fetch(:id))
+    project = find_proj_param_obj(:id)
     if project.update(project_params)
       flash[:alert] = "You changed the project name to #{project.name}."
       redirect_to project_path
@@ -43,7 +49,7 @@ class ProjectsController < ApplicationController
   end
 
   def captain
-    project = Project.find(params.fetch(:id))
+    project = find_proj_param_obj(:id)
     project.name = params[:name] if params[:name].present?
     project.user_id = params[:user_id]
     user = project.users.find_by(id: params[:user_id])
@@ -56,7 +62,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    project = Project.find(params.fetch(:id))
+    project = find_proj_param_obj(:id)
     if project.destroy
       flash[:alert] = "This project disbanded. Thanks, Obama."
       redirect_to projects_path

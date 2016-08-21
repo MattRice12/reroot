@@ -12,7 +12,7 @@ class TreesController < ApplicationController
   def show
     tree = Tree.find_by(id: params[:id])
     if tree
-      if tree_permission?
+      if tree_permission?(params[:tree][:project_id])
         render locals: { tree: tree }
       else
         flash[:alert] = "You are not authorized to see this tree"
@@ -39,8 +39,8 @@ class TreesController < ApplicationController
   end
 
   def new_forest
-    if project = Project.find_by(id: params[:project_id])
-      if project.members.any? { |m| m.user_id == current_user.id }
+    if project = find_proj_param_obj(:project_id)
+      if project_permission?(project)
         render template: 'trees/new_forest', locals: { tree: Tree.new }
       else
         flash[:alert] = "You are not authorized to access this project."
@@ -53,8 +53,8 @@ class TreesController < ApplicationController
   end
 
   def create_forest
-    project = Project.find_by(id: params[:tree][:project_id])
-    if project_permission?(:tree)
+    project = find_proj_by_param_obj_proj(:tree)
+    if project_permission?(find_proj_by_param_obj_proj(:tree))
       tree = Tree.new(forest_tree_params)
       if tree.save
         forest = Forest.new(forest_params)
@@ -80,7 +80,7 @@ class TreesController < ApplicationController
   end
 
   def update
-    if project = Project.find_by(id: params[:tree][:project_id])
+    if project = find_proj_param_obj(:project_id)
       tree = Tree.find(params.fetch(:id))
       if tree.update(tree_params)
         redirect_to project

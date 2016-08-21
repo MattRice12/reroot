@@ -24,7 +24,7 @@ class MembersController < ApplicationController
   end
 
   def leave
-    project = Project.find(params[:id])
+    project = find_proj_param_obj(:id)
     member = project.members.find_by(user_id: current_user.id)
     if member.destroy
       flash[:alert] = "You left the project."
