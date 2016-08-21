@@ -87,7 +87,7 @@
     <h2> <%= link_to tree.name, tree %>
 
       <small class="btn sup-edit editor">
-        <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
+        <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', title: "Edit Tree" do %>
           <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
         <% end %>
       </small>

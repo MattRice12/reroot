@@ -7,104 +7,44 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 url = "http://rubyonrails.org/"
+name = %w(ender bean petra alai dink)
+tab_name = ["Main Branch", "Main Branch", "Child", "Child", "Grandchild", "Grandchild", "Great Grandchild", "Great Grandchild"]
+proj_name = ["Dragon Army", "Rabbit Army", "Salamander Army", "Phoenix Army", "Rat Army"]
 
-user = User.create!(name: "Ender",
-                    email: "Ender@example.com",
-                    password: "password")
+t = 1
+5.times do
+  User.create!(name: name[t - 1].capitalize, email: "#{name[t - 1]}@example.com", password: "password")
+  Project.create!(name: proj_name[t - 1], user_id: t)
+  Member.create!(user_id: t, project_id: t)
+  t += 1
+end
+Member.create!(user_id: 1, project_id: 2)
+Member.create!(user_id: 2, project_id: 1)
 
-User.create!(name: "Bean", email: "bean@example.com", password: "password")
-User.create!(name: "Petra", email: "petra@example.com", password: "password")
-User.create!(name: "Alai", email: "alai@example.com", password: "password")
-User.create!(name: "Dink", email: "dink@example.com", password: "password")
-
-tree = Tree.create!(user_id: user.id, name: "Tree: 1")
-tree2 = Tree.create!(user_id: user.id, name: "Tree: 2")
-
+user = User.first
+t = 1
 2.times do
-  tab = Tab.create(user_id: user.id,
-                   tree_id: tree.id,
-                   url: url,
-                   name: "Main Branch") #only 1 tab can have a nil parent_tab_id per tree
+  Tree.create!(user_id: user.id, name: "Tree: #{t.to_s}")
+  Forest.create!(tree_id: t, project_id: 1)
 
-  2.times do
-    tab2 = Tab.create!(user_id: user.id,
-                       tree_id: tree.id,
-                       parent_tab_id: tab.id,
-                       url: url,
-                       name: "Child")
-
-    tab3 = Tab.create!(user_id: user.id,
-                       tree_id: tree.id,
-                       parent_tab_id: tab2.id,
-                       url: url,
-                       name: "Grandchild")
-
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: tab3.id,
-                url: url,
-                name: "Great Grandchild")
-  end
-
+  Tab.create(user_id: user.id,
+             tree_id: t,
+             url: url,
+             name: tab_name[t - 1]) #only 1 tab can have a nil parent_tab_id per tree
   3.times do
     Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(2..7),
+                parent_tab_id: t,
                 url: url,
-                name: "#{rand(1..100)}")
+                name: tab_name[t - 1])
+    t += 2
   end
-
-  3.times do
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(7..10),
-                url: url,
-                name: "#{rand(1..100)}")
-  end
-
-  3.times do
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(11..14),
-                url: url,
-                name: "#{rand(1..100)}")
-  end
-  3.times do
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(15..18),
-                url: url,
-                name: "#{rand(1..100)}")
-  end
-  3.times do
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(19..22),
-                url: url,
-                name: "#{rand(1..100)}")
-  end
-  3.times do
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: rand(23..26),
-                url: url,
-                name: "#{rand(1..100)}")
-  end
-  tree = tree2
+  t = 2
 end
 
-Project.create!(name: "Dragon Army", user_id: 1)
-Project.create!(name: "Rabbit Army", user_id: 2)
-Project.create!(name: "Salamander Army", user_id: 3)
-Project.create!(name: "Phoenix Army", user_id: 4)
-Project.create!(name: "Rat Army", user_id: 5)
-
-
-Member.create!(user_id: 1, project_id: 1)
-Member.create!(user_id: 2, project_id: 1)
-Member.create!(user_id: 2, project_id: 2)
-Member.create!(user_id: 3, project_id: 3)
-Member.create!(user_id: 4, project_id: 4)
-Member.create!(user_id: 5, project_id: 5)
-
-Forest.create!(tree_id: 1, project_id: 1)
+50.times do
+  t = Tab.all.count
+  Tab.create!(user_id: user.id,
+              parent_tab_id: rand(((t - 4) / 2)..t),
+              url: url,
+              name: "#{rand(1..100)}")
+end

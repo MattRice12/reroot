@@ -10,11 +10,16 @@ class TreesController < ApplicationController
   end
 
   def show
-    tree = Tree.find(params.fetch(:id))
+    tree = Tree.find_by(id: params[:id])
     if tree
-      render locals: { tree: tree }
+      if tree_permission?
+        render locals: { tree: tree }
+      else
+        "You are not authorized to see this tree"
+      end
     else
-      redirect_to trees
+      flash[:alert] = "That tree doesn't exist..."
+      redirect_to root_path
     end
   end
 
@@ -23,7 +28,7 @@ class TreesController < ApplicationController
   end
 
   def create
-    tree = Tree.create!(tree_params)
+    tree = Tree.new(tree_params)
     if tree.save
       redirect_to root_path
     else
@@ -33,7 +38,17 @@ class TreesController < ApplicationController
   end
 
   def new_forest
-    render template: 'trees/new_forest', locals: { tree: Tree.new }
+    if project = Project.find_by(id: params[:project_id])
+      if project.members.any? { |m| m.user_id == current_user.id }
+        render template: 'trees/new_forest', locals: { tree: Tree.new }
+      else
+        flash[:alert] = "You are not authorized to access this project."
+        redirect_to projects_path
+      end
+    else
+      flash[:alert] = "This project does not exist."
+      redirect_to projects_path
+    end
   end
 
   def create_forest
@@ -47,14 +62,14 @@ class TreesController < ApplicationController
           redirect_to project
         else
           flash[:alert] = tree.errors
-          redirect_to :back
+          redirect_to root_path
         end
       else
         flash[:alert] = tree.errors
         redirect_to :back
       end
     else
-      flash[:alert] = "You must be invited to a project before you can add trees to it."
+      flash[:alert] = "You are not authorized to access this project."
       redirect_to projects_path
     end
   end
@@ -64,11 +79,20 @@ class TreesController < ApplicationController
   end
 
   def update
-    tree = Tree.find(params.fetch(:id))
-    if tree.update(tree_params)
-      redirect_to tree_path
+    if project = Project.find_by(id: params[:tree][:project_id])
+      tree = Tree.find(params.fetch(:id))
+      if tree.update(tree_params)
+        redirect_to project
+      else
+        render template: 'trees/edit.html.erb', locals: { tree: tree }
+      end
     else
-      render template: 'trees/edit.html.erb', locals: { tree: tree }
+      tree = Tree.find(params.fetch(:id))
+      if tree.update(tree_params)
+        redirect_to trees_path
+      else
+        render template: 'trees/edit.html.erb', locals: { tree: tree }
+      end
     end
   end
 
