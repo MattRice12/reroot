@@ -7,11 +7,10 @@ class TreesController < ApplicationController
   end
 
   def show
-    if tree = find_tree_params(:id)
-      return render locals: { tree: tree } if tree_permission?(tree)
-      return redirect(root_path, TREE_UNAUTH)
-    end
-    return redirect(root_path, TREE_NOT_EXIST)
+    tree = find_tree_params(:id)
+    return redirect(root_path, TREE_NOT_EXIST) if !tree
+    return redirect(root_path, TREE_UNAUTH) if !tree_permission?(tree)
+    render locals: { tree: tree }
   end
 
   def new
@@ -30,7 +29,7 @@ class TreesController < ApplicationController
       return render template: 'trees/new_forest', locals: { tree: Tree.new } if project_permission?(project)
       return redirect(projects_path, PROJ_UNAUTH)
     end
-    return redirect(projects_path, PROJ_NOT_EXIST)
+    redirect(projects_path, PROJ_NOT_EXIST)
   end
 
   def create_forest
@@ -55,7 +54,7 @@ class TreesController < ApplicationController
     tree = find_tree_params(:id)
     return redirect(trees_path, TREE_NOT_EXIST) if !tree
     return redirect(trees_path, TREE_UNAUTH) if !tree_permission?(tree)
-    return render locals: { tree: tree }
+    render locals: { tree: tree }
   end
 
   def update
@@ -72,7 +71,7 @@ class TreesController < ApplicationController
   def destroy
     tree = find_tree_params(:id)
     return redirect(root_path, TREE_DESTROYED) if tree.destroy
-    return render message: TREE_NOT_EXIST
+    render message: TREE_NOT_EXIST
   end
 
   private

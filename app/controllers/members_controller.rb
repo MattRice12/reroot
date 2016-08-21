@@ -4,10 +4,13 @@ class MembersController < ApplicationController
     project = find_proj_param_obj(:project_id)
     return redirect(projects_path, PROJ_NOT_EXIST) if !project
     return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
-    return render locals: { member: Member.new } if project
+    render locals: { member: Member.new } if project
   end
 
   def create
+    project = find_proj_by_param_obj_proj(:member)
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
     member = Member.find_or_create_by(member_params)
     redirect(project_path(member.project), "#{member.user.name.capitalize} has been added to the project!")
   end
@@ -30,7 +33,7 @@ class MembersController < ApplicationController
       end
       return redirect(projects_path, "You left the project.")
     end
-    return redirect(project, "You cannot leave.")
+    redirect(project, "You cannot leave.")
   end
 
   private

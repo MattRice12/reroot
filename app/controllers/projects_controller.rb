@@ -6,17 +6,9 @@ class ProjectsController < ApplicationController
 
   def show
     project = find_proj_param_obj(:id)
-    if project
-      if project_permission?(project)
-        render locals: { project: project }
-      else
-        flash[:alert] = "You are not authorized to view this project."
-        redirect_to projects_path
-      end
-    else
-      flash[:alert] = "This project does not exist."
-      redirect_to projects_path
-    end
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    render locals: { project: project }
   end
 
   def new
@@ -27,7 +19,7 @@ class ProjectsController < ApplicationController
     project = Project.new(project_params)
     if project.save
       Member.create!(user_id: current_user.id, project_id: project.id)
-      redirect_to projects_path
+      redirect(project, PROJECT_CREATED)
     else
       flash[:alert] = "Project could not be created"
       render template: 'projects/new.html.erb', locals: { project: project }
@@ -35,40 +27,35 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    render locals: { project: find_proj_param_obj(:id) }
+    project = find_proj_param_obj(:id)
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    render locals: { project: project }
   end
 
   def update
     project = find_proj_param_obj(:id)
-    if project.update(project_params)
-      flash[:alert] = "You changed the project name to #{project.name}."
-      redirect_to project_path
-    else
-      render template: 'projects/edit.html.erb', locals: { project: project }
-    end
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return redirect(project, PROJECT_UPDATED) if project.update(project_params)
+    render template: 'projects/edit.html.erb', locals: { project: project }
   end
 
   def captain
     project = find_proj_param_obj(:id)
-    project.name = params[:name] if params[:name].present?
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
     project.user_id = params[:user_id]
-    user = project.users.find_by(id: params[:user_id])
-    if project.save
-      flash[:alert] = "You made #{user.name} the Project Captain."
-      redirect_to project_path
-    else
-      render template: 'projects/edit.html.erb', locals: { project: project }
-    end
+    return redirect(project, "You made #{project.user.name} the Project Captain.") if project.save
+    render template: 'projects/edit.html.erb', locals: { project: project }
   end
 
   def destroy
     project = find_proj_param_obj(:id)
-    if project.destroy
-      flash[:alert] = "This project disbanded. Thanks, Obama."
-      redirect_to projects_path
-    else
-      flash[:alert] = "This project cannot be deleted"
-    end
+    return redirect(projects_path, PROJ_NOT_EXIST) if !project
+    return redirect(projects_path, PROJ_UNAUTH) if !project_permission?(project)
+    return redirect(projects_path, "This project disbanded. Thanks, Obama.") if project.destroy
+    redirect(project, "This project cannot be deleted")
   end
 
   private
