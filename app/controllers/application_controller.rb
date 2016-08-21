@@ -15,15 +15,16 @@ class ApplicationController < ActionController::Base
   end
 
   def tree_permission?
-    tree = Tree.find(params[:id])
+    tree = Tree.find_by(id: params[:id])
     [
       current_user.id == tree.user_id,
       current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id } } == params[:id]
     ].any?
   end
 
-  def project_permission?
-    project = Project.find_by(id: params[:tree][:project_id])
+  def project_permission?(obj)
+    project = Project.find_by(id: params[obj][:project_id])
     project.members.any? { |m| m.user_id == current_user.id }
   end
+
 end

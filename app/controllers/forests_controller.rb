@@ -1,17 +1,26 @@
 class ForestsController < ApplicationController
   def new
-    # forests = Forest.where(project_id: params[:project_id])
-    # trees = Tree.where(user_id: current_user.id)
-    # if (forests - trees ) == forests
-    #   render locals: { forests: forests, trees: trees }
-    # else
-      render locals: { forest: Forest.new }
-    # end
+    if project = Project.find_by(id: params[:project_id])
+      if project.members.any? { |m| m.user_id == current_user.id }
+        render locals: { forest: Forest.new }
+      else
+        flash[:alert] = "You are not authorized to access this project."
+        redirect_to projects_path
+      end
+    else
+      flash[:alert] = "This project does not exist."
+      redirect_to projects_path
+    end
   end
 
   def create
-    forest = Forest.find_or_create_by(forest_params)
-    redirect_to project_path(forest.project)
+    if project_permission?(:forest)
+      forest = Forest.find_or_create_by(forest_params)
+      redirect_to project_path(forest.project)
+    else
+      flash[:alert] = "You are not authorized to access this project."
+      redirect_to projects_path
+    end
   end
 
   def destroy

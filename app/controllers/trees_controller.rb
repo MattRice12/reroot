@@ -15,7 +15,8 @@ class TreesController < ApplicationController
       if tree_permission?
         render locals: { tree: tree }
       else
-        "You are not authorized to see this tree"
+        flash[:alert] = "You are not authorized to see this tree"
+        redirect_to root_path
       end
     else
       flash[:alert] = "That tree doesn't exist..."
@@ -53,7 +54,7 @@ class TreesController < ApplicationController
 
   def create_forest
     project = Project.find_by(id: params[:tree][:project_id])
-    if project_permission?
+    if project_permission?(:tree)
       tree = Tree.new(forest_tree_params)
       if tree.save
         forest = Forest.new(forest_params)
