@@ -12,6 +12,7 @@ class TabsController < ApplicationController
       tree = tab.tab_root
       render locals: { tab: Tab.new, taboo: tab, tree: tree }
     elsif tree = find_tree_params(:tree_id)
+      tab = tree.tab.tab_root
       render locals: { tab: Tab.new, tree: tree }
     end
 
@@ -48,15 +49,17 @@ class TabsController < ApplicationController
 
   def destroy
     tab = find_tab_params(:id)
-    if tab.children.any?
-      tab_adoption(tab)
+    tree = tab.tab_root
+    tab_adoption(tab)
+    tab2 = Tab.where(parent_tab_id: params[:parent_tab_id])
+    if tab2.any? { |t| t == tab }
       tab.destroy
-      return redirect(:back, TAB_DESTROYED)
+      return redirect(tree, TAB_DESTROYED)
     else
       tab.destroy
-      return redirect(trees_path, TAB_DESTROYED)
+      return redirect(:back, TAB_DESTROYED)
     end
-    render message: TAB_NOT_EXIST
+    # render message: TAB_NOT_EXIST
   end
 
   private
