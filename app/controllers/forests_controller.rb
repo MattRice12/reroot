@@ -8,7 +8,6 @@ class ForestsController < ApplicationController
   def create
     project = find_proj_by_param_obj_proj(:forest)
     return proj_validations(project) if !project || !project_permission?(project)
-
     Forest.find_or_create_by(forest_params)
     redirect(project, FOREST_CREATED)
   end
