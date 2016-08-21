@@ -21,7 +21,9 @@ class TabsController < ApplicationController
   def create
     tab = Tab.new(tab_params)
     tab.user = current_user
-    return redirect(tab.tab_root, TAB_CREATED) if tab.save
+    if tab.save
+      return redirect(:back, TAB_CREATED)
+    end
     flash[:alert] = tree.errors
     render template: 'tabs/new.html.erb', locals: { tab: tab}
   end
@@ -29,32 +31,22 @@ class TabsController < ApplicationController
   def edit
     tab = find_tab_params(:id)
     return redirect(root_path, TAB_NOT_EXIST) if !tab
-    return redirect(root_path, TAB_UNAUTH) if !tab_permissions?(tab)
+    return redirect(root_path, TAB_UNAUTH) if !tab_permission?(tab)
     render locals: { tab: tab }
   end
 
   def update
-    tab = find_tab_params(:parent_tab_id)
-    return redirect_to tab.tab_root if tab.update(tab_params)
+    tab = find_tab_params(:id)
+    return redirect(tab.tab_root, TAB_UPDATED) if tab.update(tab_params)
     flash[:alert] = tree.errors
     render template: 'tabs/edit.html.erb', locals: { tab: tab }
   end
 
   def destroy
     tab = find_tab_params(:id)
-
-    if tab.parent
-      tabchild = Tab.where(parent_tab_id: tab.id)
-      tabchild.each do |tc|
-        tc.parent_tab_id = tab.parent.id
-        tc.save
-      end
-    end
-
-    if tab.destroy
-      return redirect(root_path, TAB_DESTROYED)
-    end
-    render message: TREE_NOT_EXIST
+    tab_adoption(tab)
+    return redirect(root_path, TAB_DESTROYED) if tab.destroy
+    render message: TAB_NOT_EXIST
   end
 
   private

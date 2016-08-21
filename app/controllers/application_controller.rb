@@ -26,15 +26,25 @@ class ApplicationController < ActionController::Base
   TREE_UNAUTH = "You are not authorized to access that tree."
   PROJ_UNAUTH = "You are not authorized to access that project."
 
-  def redirect(loc, alert)
-    flash[:alert] = alert
-    redirect_to loc
-  end
-
   def search_params
     tabs = Tab.search(params[:search]).where(user_id: current_user.id)
     users = User.search(params[:search]).order("LOWER(name)")
     render template: 'trees/search.html.erb', locals: { tabs: tabs, users: users }
+  end
+
+  def tab_adoption(tab)
+    if tab.parent
+      tabchild = Tab.where(parent_tab_id: tab.id)
+      tabchild.each do |tc|
+        tc.parent_tab_id = tab.parent.id
+        tc.save
+      end
+    end
+  end
+
+  def redirect(loc, alert)
+    flash[:alert] = alert
+    redirect_back(fallback_location: loc)
   end
 
   def find_tab_params(obj)
