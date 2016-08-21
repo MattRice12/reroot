@@ -11,9 +11,7 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="field tab-tree">
-    <% if tab.persisted? %>
-
-    <% else %>
+    <% unless tab.persisted? %>
       <%= f.hidden_field :tree_id, value: params.fetch(:tree_id, tab.tree_id) %>
       <%= f.hidden_field :parent_tab_id, value: params.fetch(:parent_tab_id, tab.parent_tab_id) %>
     <% end %>

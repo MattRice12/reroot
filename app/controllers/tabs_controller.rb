@@ -8,27 +8,24 @@ class TabsController < ApplicationController
   end
 
   def new
-    if tab = find_tab_params(:parent_tab_id)
-      tree = tab.tab_root
+    if tab = find_tab_params(:parent_tab_id) ## if there is a root tab
+      tree = nil
       render locals: { tab: Tab.new, taboo: tab, tree: tree }
-    elsif tree = find_tree_params(:tree_id)
-      tab = tree.tab.tab_root
+    elsif tree = find_tree_params(:tree_id) ## if there is no root tab
+      # tab = tree.tab.tab_root
       render locals: { tab: Tab.new, tree: tree }
     end
-
-    # tab = find_tab_params(:parent_tab_id)
-    # return redirect(root_path, TAB_NOT_EXIST) if !tab
-    # return redirect(root_path, TAB_UNAUTH) if !tab_permission?(tab)
-    # render locals: { tab: Tab.new }
   end
 
   def create
     tab = Tab.new(tab_params)
     tab.user = current_user
     tree = tab.tab_root
+    # pry.rails
+
     if tab.save
-      return redirect(new_tab_path(id: tab.id), TAB_CREATED) if !tab.parent
-      return redirect(:back, TAB_CREATED) if tab.parent
+      return redirect(new_tab_path(parent_tab_id: tab.id), TAB_CREATED)
+      # return redirect(:back, TAB_CREATED) if tab.parent
     end
     flash[:alert] = tree.errors
     render template: 'tabs/new.html.erb', locals: { tab: tab}
@@ -59,7 +56,7 @@ class TabsController < ApplicationController
       tab.destroy
       return redirect(:back, TAB_DESTROYED)
     end
-    # render message: TAB_NOT_EXIST
+    render message: TAB_NOT_EXIST
   end
 
   private
