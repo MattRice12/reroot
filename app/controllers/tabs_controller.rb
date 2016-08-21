@@ -70,7 +70,7 @@ class TabsController < ApplicationController
       flash[:alert] = "Take that, Greenpeace!"
       redirect_to root_path
     else
-      render message: "Tab not found."
+      render message: TREE_NOT_EXIST
     end
   end
 

@@ -1,24 +1,17 @@
 
 class TreesController < ApplicationController
   def index
-    if params[:search]
-      search_params
-    else
-      trees = Tree.all.includes(tabs: [:children]).order(:created_at)
-      render locals: { trees: trees }
-    end
+    return search_params if params[:search]
+    trees = Tree.all.includes(tabs: [:children]).order(:created_at)
+    render locals: { trees: trees }
   end
 
   def show
     if tree = find_tree_params
-      if tree_permission?
-        render locals: { tree: tree }
-      else
-        redirect(root_path, TREE_UNAUTH)
-      end
-    else
-      redirect(root_path, TREE_NOT_EXIST)
+      return render locals: { tree: tree } if tree_permission?
+      return redirect(root_path, TREE_UNAUTH)
     end
+    return redirect(root_path, TREE_NOT_EXIST)
   end
 
   def new
@@ -27,12 +20,9 @@ class TreesController < ApplicationController
 
   def create
     tree = Tree.new(tree_params)
-    if tree.save
-      redirect(root_path, TREE_CREATED)
-    else
-      flash[:alert] = tree.errors
-      render template: 'trees/new', locals: { tree: tree}
-    end
+    return redirect(root_path, TREE_CREATED) if tree.save
+    flash[:alert] = tree.errors
+    render template: 'trees/new', locals: { tree: tree}
   end
 
   def new_forest
@@ -53,11 +43,8 @@ class TreesController < ApplicationController
     if tree.save
       forest = Forest.new(forest_params)
       forest.tree_id = tree.id
-      if forest.save
-        redirect(project, FOREST_CREATED)
-      else
-        redirect(root_path, forest.errors)
-      end
+      return redirect(project, FOREST_CREATED) if forest.save
+      return redirect(root_path, forest.errors)
     else
       flash[:alert] = tree.errors
       render template: 'trees/new_forest', locals: { tree: tree }
@@ -78,12 +65,10 @@ class TreesController < ApplicationController
 
   def update
     tree = find_tree_params
+    project = find_proj_by_param_obj_proj(:tree)
     if tree.update(tree_params)
-      if project = find_proj_by_param_obj_proj(:tree)
-        redirect(project, TREE_UPDATED)
-      else
-        redirect(tree, TREE_UPDATED)
-      end
+      return redirect(project, TREE_UPDATED) if project
+      return redirect(tree, TREE_UPDATED) if !project
     else
       flash[:alert] = tree.errors
       render template: 'trees/edit.html.erb', locals: { tree: tree }
@@ -92,12 +77,8 @@ class TreesController < ApplicationController
 
   def destroy
     tree = find_tree_params
-    tree.destroy
-    if params[:id]
-      redirect(root_path, TREE_DESTROYED)
-    else
-      redirect(:back)
-    end
+    return redirect(root_path, TREE_DESTROYED) if tree.destroy
+    return render message: TREE_NOT_EXIST
   end
 
   private
