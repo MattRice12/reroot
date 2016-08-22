@@ -1,0 +1,8 @@
+<div class="trunk-empty" id="root">
+  <small class="btn leaf-new">
+    <%= link_to "Add a New Tab", new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small' %>
+    <%= link_to new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small', title: "Begin Your Tree!" do %>
+      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
+    <% end %>
+  </small>
+</div>

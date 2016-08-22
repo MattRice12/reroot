@@ -17,64 +17,24 @@
                 <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
               <% end %>
             </small>
-            <% unless tree.tabs.any? %>
-            <div class="trunk-empty" id="root">
-              <small class="btn leaf-new">
-                <%= link_to "Add a New Tab", new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small' %>
-                <%= link_to new_tab_path(tree_id: tree.id), class: 'btn add-del-edit new-small', title: "Begin Your Tree!" do %>
-                  <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
-                <% end %>
-              </small>
-            </div>
-            <% end %>
           </h1>
-        <div class="grove">
-          <% tree.tabs.each do |tab| %>
-            <% if tab.parent.nil? %>
-              <div class="trunk" id="root">
-                <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 14), url_with_protocol(tab.url) %>
-                  <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: tab %>
-                    <div class="creation">
-                      <%= render "shared/create_tab.html.erb", obj: tab %>
-                    </div>
-                  </div>
-                </h3>
 
-                <div class="big-block">
-
-                  <% tab.children.each do |child| %>
-                      <div class="branch">
-                        <h3 class="btn leaf"><%= link_to truncate(child.name, length: 14), url_with_protocol(child.url) %>
-                          <div class="editor">
-                            <%= render "shared/buttons_tabs.html.erb", obj: child %>
-                            <div class="creation">
-                              <%= render "shared/create_tab.html.erb", obj: child %>
-                            </div>
-                          </div>
-                        </h3>
-
-                          <% ########### Recursion! ##### %>
-
-                          <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
-
-                          <% ########### /Recursion! ##### %>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
+          <% if tree.tabs.any? %>
+            <%= render "tree_leaves.html.erb", tree: tree %>
+          <% else %>
+            <%= render "empty_tree.html.erb", tree: tree %>
           <% end %>
-        </div>
-
         <% end %>
       </div>
+
       <div class="new-tree">
         <%= link_to "New Tree", new_tree_path, class: 'btn add-del-edit new'%>
       </div>
+
     <% else %>
       <h3> You have no trees </h3>
-        <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
+      <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
     <% end %>
+
   </div>
 </div>
