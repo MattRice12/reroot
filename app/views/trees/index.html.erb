@@ -28,7 +28,7 @@
             </div>
             <% end %>
           </h1>
-
+        <div class="grove">
           <% tree.tabs.each do |tab| %>
             <% if tab.parent.nil? %>
               <div class="trunk" id="root">
@@ -61,11 +61,11 @@
                           <% ########### /Recursion! ##### %>
                       </div>
                   <% end %>
-
                 </div>
               </div>
             <% end %>
           <% end %>
+        </div>
 
         <% end %>
       </div>

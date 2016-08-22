@@ -22,43 +22,44 @@
     <% end %>
   </h1>
 
-  <% tree.tabs.each do |tab| %>
+  <div class="grove">
+    <% tree.tabs.each do |tab| %>
 
-    <% if tab.parent.nil? %>
-      <div class="trunk" id="root">
-        <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
-          <div class="editor">
-            <%= render "shared/buttons_tabs.html.erb", obj: tab %>
-            <div class="creation">
-              <%= render "shared/create_tab.html.erb", obj: tab %>
-            </div>
-          </div>
-        </h3>
-
-        <div class="big-block">
-
-          <% tab.children.each do |child| %>
-              <div class="branch">
-                <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
-                  <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: child %>
-                    <div class="creation">
-                      <%= render "shared/create_tab.html.erb", obj: child %>
-                    </div>
-                  </div>
-                </h3>
-
-                  <% ########### Recursion! ##### %>
-
-                  <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
-
-                  <% ########### /Recursion! ##### %>
+      <% if tab.parent.nil? %>
+        <div class="trunk" id="root">
+          <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 12), url_with_protocol(tab.url) %>
+            <div class="editor">
+              <%= render "shared/buttons_tabs.html.erb", obj: tab %>
+              <div class="creation">
+                <%= render "shared/create_tab.html.erb", obj: tab %>
               </div>
-          <% end %>
+            </div>
+          </h3>
 
+          <div class="big-block">
+
+            <% tab.children.each do |child| %>
+                <div class="branch">
+                  <h3 class="btn leaf"><%= link_to truncate(child.name, length: 12), url_with_protocol(child.url) %>
+                    <div class="editor">
+                      <%= render "shared/buttons_tabs.html.erb", obj: child %>
+                      <div class="creation">
+                        <%= render "shared/create_tab.html.erb", obj: child %>
+                      </div>
+                    </div>
+                  </h3>
+
+                    <% ########### Recursion! ##### %>
+
+                    <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
+
+                    <% ########### /Recursion! ##### %>
+                </div>
+            <% end %>
+
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
   </div>
 </div>

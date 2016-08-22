@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   TREE_DESTROYED    = "Tree Destroyed. Take that, Greenpeace!"
   FOREST_DESTROYED  = "That piece of the forest was as ancient as time... and you destroyed it..."
   PROJECT_DESTROYED = "The project disbanded. Thanks, Obama."
+  NOT_DELETE = "Error: You cannot delete a "
 
   TAB_NOT_EXIST  = "That tab does not exist."
   TREE_NOT_EXIST = "That tree does not exist."
@@ -37,6 +38,17 @@ class ApplicationController < ActionController::Base
       tabchild = Tab.where(parent_tab_id: tab.id)
       tabchild.each do |tc|
         tc.parent_tab_id = tab.parent.id
+        tc.save
+      end
+    end
+  end
+
+  def tree_adoption(tab)
+    if tab.tree
+      tabchild = Tab.where(parent_tab_id: tab.id)
+      tabchild.each do |tc|
+        tc.tree_id = tab.tree.id
+        tc.parent_tab_id = nil
         tc.save
       end
     end

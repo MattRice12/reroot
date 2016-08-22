@@ -54,7 +54,8 @@ class TabsController < ApplicationController
     tab = find_tab_params(:id)
     # tree = tab.tab_root
     tab_adoption(tab)
-    tab2 = Tab.where(parent_tab_id: params[:parent_tab_id])
+    tree_adoption(tab)
+    tab2 = Tab.where(parent_tab_id: params[:parent_tab_id]) && Tab.where(id: params[:parent_tab_id])
     if tab2.any? { |t| t != tab }
       tab.destroy
       return redirect(:back, TAB_DESTROYED)
