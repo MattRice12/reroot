@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   TREE_UPDATED    = "Tree Name Updated."
   PROJECT_UPDATED = "Project Name Updated."
 
-  TAB_DESTROYED = "Tree Destroyed. Take that, Greenpeace!"
+  TAB_DESTROYED = "Tab Destroyed."
   TREE_DESTROYED    = "Tree Destroyed. Take that, Greenpeace!"
   FOREST_DESTROYED  = "That piece of the forest was as ancient as time... and you destroyed it..."
   PROJECT_DESTROYED = "The project disbanded. Thanks, Obama."
