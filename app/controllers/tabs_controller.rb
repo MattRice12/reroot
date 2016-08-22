@@ -30,7 +30,7 @@ class TabsController < ApplicationController
       end
     end
     flash[:alert] = tree.errors
-    render template: 'tabs/new.html.erb', locals: { tab: tab}
+    render template: 'tabs/new.html.erb', locals: { tab: tab }
   end
 
   def edit
@@ -51,12 +51,12 @@ class TabsController < ApplicationController
     tree = tab.tab_root
     tab_adoption(tab)
     tab2 = Tab.where(parent_tab_id: params[:parent_tab_id])
-    if tab2.any? { |t| t == tab }
-      tab.destroy
-      return redirect(tree, TAB_DESTROYED)
-    else
+    if tab2.any? { |t| t != tab }
       tab.destroy
       return redirect(:back, TAB_DESTROYED)
+    else
+      tab.destroy
+      return redirect(root_path, TAB_DESTROYED)
     end
     render message: TAB_NOT_EXIST
   end
