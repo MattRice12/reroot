@@ -11,8 +11,11 @@ class TabsController < ApplicationController
     if tab = find_tab_params(:parent_tab_id) ## if there is a root tab
       tree = nil
       render locals: { tab: Tab.new, taboo: tab, tree: tree }
+    # elsif tab = find_tab_params(:id)
+    #   tree = nil
+    #   render locals: { tab: Tab.new, taboo: tab, tree: tree }
     elsif tree = find_tree_params(:tree_id) ## if there is no root tab
-      # tab = tree.tab.tab_root
+      # tab = tab.tab_root
       render locals: { tab: Tab.new, tree: tree }
     end
   end
@@ -21,12 +24,13 @@ class TabsController < ApplicationController
     tab = Tab.new(tab_params)
     tab.user = current_user
     tree = tab.tab_root
-    tab2 = Tab.find_by(parent_tab_id: params[:parent_tab_id])
+    # tab2 = Tab.find_by(parent_tab_id: params[:id])
     if tab.save
-      if tab == tab2
-        return redirect(new_tab_path(parent_tab_id: tab.parent_tab_id), TAB_CREATED)
+      if tab.tree_id
+        return redirect(new_tab_path(parent_tab_id: tab.id), TAB_CREATED)
       else
-        return redirect(:back, TAB_CREATED) if tab.parent
+        # pry.rails
+        return redirect(:back, TAB_CREATED)
       end
     end
     flash[:alert] = tree.errors
@@ -48,7 +52,7 @@ class TabsController < ApplicationController
 
   def destroy
     tab = find_tab_params(:id)
-    tree = tab.tab_root
+    # tree = tab.tab_root
     tab_adoption(tab)
     tab2 = Tab.where(parent_tab_id: params[:parent_tab_id])
     if tab2.any? { |t| t != tab }
