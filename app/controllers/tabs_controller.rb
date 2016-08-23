@@ -24,12 +24,10 @@ class TabsController < ApplicationController
     tab = Tab.new(tab_params)
     tab.user = current_user
     tree = tab.tab_root
-    # tab2 = Tab.find_by(parent_tab_id: params[:id])
     if tab.save
-      if tab.tree_id
+      if !tab.parent_tab_id
         return redirect(new_tab_path(parent_tab_id: tab.id), TAB_CREATED)
       else
-        # pry.rails
         return redirect(:back, TAB_CREATED)
       end
     end

@@ -14,6 +14,12 @@
 
   <% if tree.tabs.any? %>
     <%= render "tree_leaves.html.erb", tree: tree %>
+    <ul class="tree-stats"><%= "Tree stats:" %>
+      <li class="stat-item"><%= "#{tree.name} is used in #{pluralize(tree.project_count, 'project')}." %></li>
+      <li class="stat-item"><%= "#{tree.name} has #{tree.branch_count} branches."%></li>
+      <li class="stat-item"><%= "#{tree.name} has #{tree.tab_count} tabs." %></li>
+      <li class="stat-item"><%= "You have contributed #{tree.user_tab_count(current_user)} tabs." %></li>
+    </ul>
   <% else %>
     <%= render "empty_tree.html.erb", tree: tree %>
   <% end %>

@@ -4,7 +4,6 @@
 
 @import 'variables';
 
-
 .trunk-empty {
   text-align: center;
   display: table;
@@ -12,9 +11,12 @@
   padding-top: 10px;
   margin: 10px;
   border-radius: 5px;
-  box-shadow: 5px 5px 5px gray;
+  transition: all .1s;
+  &:hover {
+    box-shadow: 5px 5px 5px gray;
+    transition: all .1s;
+  }
 }
-
 
 // THIS CHANGES THE DISPLAY OF THE TREE BLOCKS TO BE MORE VERTICAL AND COOL
 // .grove {
@@ -34,9 +36,13 @@
 .grove {
   border: 2px solid $secondary-color;
   display: inline-flex;
-  box-shadow: 5px 5px 5px gray;
   border-radius: 5px;
   margin: 10px;
+  transition: all .1s;
+  &:hover {
+    box-shadow: 5px 5px 5px gray;
+    transition: all .1s;
+  }
   .trunk {
     text-align: center;
     display: inline-block;
@@ -50,5 +56,12 @@
         text-align: center;
       }
     }
+  }
+}
+
+.tree-stats {
+  margin-left: 10px;
+  .stat-item {
+    margin: 5px 0 5px 20px;
   }
 }

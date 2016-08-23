@@ -1,5 +1,4 @@
 class MembersController < ApplicationController
-
   def new
     project = find_proj_param_obj(:project_id)
     return proj_validations(project) if !project || !project_permission?(project)

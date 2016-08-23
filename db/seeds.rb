@@ -65,7 +65,7 @@ websites.keys.count.times do
      ### array set
 
     tab = Tab.create!(user_id: matt.id,
-                tree_id: nil,
+                tree_id: tree.id,
                 parent_tab_id: 1,
                 url:  k2[1],
                 name: k2[0])
@@ -75,6 +75,7 @@ websites.keys.count.times do
       arr_set = websites[k1][k2]
       arr_set.count.times do
         Tab.create!(user_id: matt.id,
+                    tree_id: tree.id,
                     parent_tab_id: tab.id,
                     url:  arr_set[t][1],
                     name: arr_set[t][0])

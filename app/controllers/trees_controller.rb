@@ -1,4 +1,3 @@
-
 class TreesController < ApplicationController
   def index
     return search_params if params[:search]
@@ -43,13 +42,13 @@ class TreesController < ApplicationController
   end
 
   def edit
+    tree = find_tree_params(:id)
     if params[:project_id]
       project = find_proj_param_obj(:project_id)
       return proj_validations(project) if !project || !project_permission?(project)
-
+    else
+      return tree_validations(tree) if !tree || !tree_permission?(tree)
     end
-    tree = find_tree_params(:id)
-    return tree_validations(tree) if !tree || !tree_permission?(tree)
     render locals: { tree: tree }
   end
 

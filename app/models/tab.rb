@@ -1,5 +1,6 @@
 class Tab < ApplicationRecord
-  before_save :method_name
+  before_save :default_tab_name
+  before_save :set_tree_id_to_tabs
 
   has_many   :children, -> { order :id }, class_name: "Tab", foreign_key: :parent_tab_id
 
@@ -15,10 +16,13 @@ class Tab < ApplicationRecord
     tab.tree
   end
 
-  def method_name
+  def default_tab_name
     if self.name == ""
       self.name = self.url
     end
   end
 
+  def set_tree_id_to_tabs
+    self.tree_id = self.tab_root.id
+  end
 end

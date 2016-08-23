@@ -4,7 +4,6 @@
   <div class="tree-set">
     <% if current_user.trees.any? %>
       <div class="tree-block">
-
         <% current_user.trees.each do |tree| %>
           <h1> <%= link_to tree.name, tree_path(tree) %>
             <small class="btn sup-edit editor">
