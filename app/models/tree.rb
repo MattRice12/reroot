@@ -7,6 +7,9 @@ class Tree < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
 
+  def as_json(_ = nil)
+    super(include: [:tree])
+  end
 
   def self.all_branches_for(tree)
 

@@ -13,4 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+//= require react
+//= require react_ujs
+//= require components
+
 //= require_tree .
+
+
+$(document).ready(function () {
+  $(".leaf").on("click", function (event) {
+    console.log('start');
+    $buttons = $(this).children();
+    $(this).toggleClass('active');
+    $buttons.toggleClass('active');
+  });
+});

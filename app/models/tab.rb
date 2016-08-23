@@ -8,6 +8,10 @@ class Tab < ApplicationRecord
   belongs_to :tree,   optional:   true
   belongs_to :user
 
+  # def as_json(_ = nil)
+  #   super(include: [:tab])
+  # end
+
   def tab_root
     tab = self
     while tab.parent

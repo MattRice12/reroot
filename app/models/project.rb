@@ -9,7 +9,9 @@ class Project < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 125 }, uniqueness: true
 
-  # default_scope order: 'projects.name'
+  def as_json(_ = nil)
+    super(include: [:project])
+  end
 
   def project_members
     users.where.not(users: { id: user.id })

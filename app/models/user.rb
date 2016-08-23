@@ -11,6 +11,10 @@ class User < ApplicationRecord
   validates :email,    presence:  true, uniqueness: true
   validates :password, presence:  true
 
+  def as_json(_ = nil)
+    super(include: [:user])
+  end
+
   def project_member?(project)
     members.find_by(project_id: project.id)
   end
