@@ -2,26 +2,28 @@
   <% tree.tabs.each do |tab| %>
     <% if  tab.parent.nil? %>
       <div class="trunk" id="root">
-        <h3 class="btn leaf"><%= link_to truncate(tab.name, length: 14), url_with_protocol(tab.url) %>
+        <div class="leaf">
+          <p class="clicker" id="content"> <%= highlight(truncate(tab.name, length: 9), params[:search]) %></p>
           <div class="editor">
             <%= render "shared/buttons_tabs.html.erb", obj: tab %>
             <div class="creation">
               <%= render "shared/create_tab.html.erb", obj: tab %>
             </div>
           </div>
-        </h3>
+        </div>
 
         <div class="big-block">
           <% tab.children.each do |child| %>
               <div class="branch">
-                <h3 class="btn leaf"><%= link_to truncate(child.name, length: 14), url_with_protocol(child.url) %>
+                <div class="leaf">
+                  <p class="clicker" id="content"> <%= highlight(truncate(child.name, length: 9), params[:search]) %></p>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
                       <%= render "shared/create_tab.html.erb", obj: child %>
                     </div>
                   </div>
-                </h3>
+                </div>
                   <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
               </div>
           <% end %>

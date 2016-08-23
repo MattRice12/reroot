@@ -7,7 +7,7 @@
             <form>
               <div class="search-box">
                 <%= form_tag(search_path, id: "search-form") do %>
-                  <%= search_field_tag("search", params[:search], placeholder: "Search Tabs") %>
+                  <%= text_field_tag("search", params[:search], placeholder: "Search Tabs") %>
                   <%= submit_tag("Search", id: "submit", name: nil, class: "button-primary") %>
                 <% end %>
               </div>

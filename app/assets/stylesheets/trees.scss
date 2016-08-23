@@ -33,6 +33,14 @@
   font-size: 1em;
 }
 
+.clicker {
+  margin: 0;
+  height: 25px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .grove {
   border: 2px solid $secondary-color;
   display: inline-flex;
@@ -46,8 +54,7 @@
   .trunk {
     text-align: center;
     display: inline-block;
-    border-left: 1px solid $secondary-color;
-    border-right: 1px solid $secondary-color;
+    border: 2px solid $secondary-color;
     padding-top: 10px;
     .big-block {
       .branch {

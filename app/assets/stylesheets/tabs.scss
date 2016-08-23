@@ -23,34 +23,33 @@
   border-radius: 5px;
   text-align: center;
   font-size: small;
+  height: 20px;
   width: 100px;
   word-wrap: break-word;
   padding: 5px;
   margin: 5px;
   vertical-align: top;
   &.active {
-    width: 200px;
-    background: #F0F3FC;
+    width: 220px;
+    height: auto;
+    padding: 5px 0 0 0;
+    overflow: hidden;
   }
   .editor {
     display: none;
-    transition: all .2s;
+    padding: 5px;
     &.active {
-      width: 200px;
+      width: 210px;
+      border-top: 1px solid lightgray;
       background: #F0F3FC;
+      overflow: hidden;
       display: block;
       .creation {
-        width: 200px;
+        width: 210px;
+        overflow: hidden;
         display: block;
       }
     }
-  // }
-  // &:hover {
-  //   background: #F0F3FC;
-  //   .editor {
-  //     display: block;
-  //     transition: all .2s;
-  //   }
   }
   a {
     color: $secondary-color;
@@ -78,25 +77,21 @@
   }
 }
 
-.leaf {
-  .creation {
-    width: 200px;
-    display: block;
+.url-link {
+  margin-bottom: 0;
+  a {
+    color: $link-color;
+    text-decoration: underline;
   }
-  // &:hover {
-  //   width: 200px;
-  //   .creation {
-  //     display: block;
-  //   }
-  // }
 }
 
 .creation {
+  height: 220px;
   #tab_name, #tab_url {
-    width: 198px;
+    width: 208px;
   }
   .button-primary {
-    width: 198px;
+    width: 208px;
     padding-left: 10px;
     padding-right: 10px;
     font-size: small;

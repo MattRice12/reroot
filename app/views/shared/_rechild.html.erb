@@ -1,13 +1,15 @@
 <% children.each do |child| %>
   <div class="branch">
-    <h3 class="btn leaf"><%= link_to truncate(child.name, length: 15), url_with_protocol(child.url) %>
+    <div class="leaf">
+      <p class="clicker" id="srch"> <%= highlight(truncate(child.name, length: 9), params[:search]) %></p>
       <div class="editor">
+        <%= truncate(child.name, length: 14) %>
         <%= render "shared/buttons_tabs.html.erb", obj: child %>
         <div class="creation">
           <%= render "shared/create_tab.html.erb", obj: child %>
         </div>
       </div>
-    </h3> <%# first set of branches %>
+    </div>
     <%= render( partial: 'shared/rechild', locals: { children: child.children.includes(:children) }) if child.children %>
   </div>
 

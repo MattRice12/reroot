@@ -33,6 +33,11 @@ body {
     clear: both;
     padding-bottom: 270px;
   }
+
+.highlight {
+  border: 2px solid red; 
+}
+
   h2, h3, h4, ol {
     font-family: $display-font;
     font-weight: lighter;

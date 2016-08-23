@@ -18,27 +18,29 @@
   <div class="back-block">
     <div class="grove">
       <div class="trunk" id="root">
-        <h3 class="btn leaf"><%= link_to truncate(taboo.name, length: 12), url_with_protocol(taboo.url) %>
+        <div class="leaf">
+          <p class="clicker" id="srch"> <%= highlight(truncate(taboo.name, length: 9), params[:parent_tab_id]) %></p>
           <div class="editor">
             <%= render "shared/buttons_tabs.html.erb", obj: taboo %>
             <div class="creation">
               <%= render "shared/create_tab.html.erb", obj: taboo %>
             </div>
           </div>
-        </h3>
+        </div>
 
         <div class="big-block">
 
           <% taboo.children.each do |child| %>
               <div class="branch">
-                <h3 class="btn leaf"><%= link_to truncate(child.name, length: 14), url_with_protocol(child.url) %>
+                <div class="leaf">
+                  <p class="clicker" id="srch"> <%= highlight(truncate(child.name, length: 9), params[:parent_tab_id]) %></p>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
                       <%= render "shared/create_tab.html.erb", obj: child %>
                     </div>
                   </div>
-                </h3>
+                </div>
 
                   <% ########### Recursion! ##### %>
 

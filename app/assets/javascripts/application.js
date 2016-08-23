@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 
 //= require react
 //= require react_ujs
@@ -22,10 +21,20 @@
 
 
 $(document).ready(function () {
-  $(".leaf").on("click", function (event) {
+  $(".clicker").on("click", function (event) {
     console.log('start');
-    $buttons = $(this).children();
-    $(this).toggleClass('active');
-    $buttons.toggleClass('active');
+    var showMe = $(this).parent().find(".editor");
+    $(this).parent().toggleClass('active');
+    $(showMe).toggleClass('active');
   });
 });
+
+var src_str = $("#test").text();
+var term = "my text";
+term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+var pattern = new RegExp("("+term+")", "gi");
+
+src_str = src_str.replace(pattern, "<mark>$1</mark>");
+src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+
+$("#test").html(src_str);

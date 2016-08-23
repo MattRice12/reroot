@@ -11,11 +11,11 @@ class TabsController < ApplicationController
     if tab = find_tab_params(:parent_tab_id) ## if there is a root tab
       tree = nil
       render locals: { tab: Tab.new, taboo: tab, tree: tree }
-    # elsif tab = find_tab_params(:id)
-    #   tree = nil
-    #   render locals: { tab: Tab.new, taboo: tab, tree: tree }
+    elsif params[:search]
+      tab = Tab.find_by("name ~* '.*#{params[:search]}.*'")
+      tree = nil
+      render locals: { tab: Tab.new, taboo: tab, tree: tree }
     elsif tree = find_tree_params(:tree_id) ## if there is no root tab
-      # tab = tab.tab_root
       render locals: { tab: Tab.new, tree: tree }
     end
   end
