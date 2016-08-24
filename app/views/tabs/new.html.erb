@@ -19,7 +19,7 @@
     <div class="grove">
       <div class="trunk" id="root">
         <div class="leaf">
-          <p class="clicker" id="srch"> <%= highlight(truncate(taboo.name, length: 9), params[:parent_tab_id]) %></p>
+          <p class="clicker" id="tabTitle"> <%= highlight(truncate(taboo.name, length: 9), params[:parent_tab_id]) %></p>
           <div class="editor">
             <%= render "shared/buttons_tabs.html.erb", obj: taboo %>
             <div class="creation">
@@ -33,7 +33,7 @@
           <% taboo.children.each do |child| %>
               <div class="branch">
                 <div class="leaf">
-                  <p class="clicker" id="srch"> <%= highlight(truncate(child.name, length: 9), params[:parent_tab_id]) %></p>
+                  <p class="clicker" id="tabTitle"> <%= highlight(truncate(child.name, length: 9), params[:parent_tab_id]) %></p>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
@@ -41,12 +41,7 @@
                     </div>
                   </div>
                 </div>
-
-                  <% ########### Recursion! ##### %>
-
                   <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
-
-                  <% ########### /Recursion! ##### %>
               </div>
           <% end %>
 

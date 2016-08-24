@@ -29,12 +29,30 @@ $(document).ready(function () {
   });
 });
 
-var src_str = $("#test").text();
-var term = "my text";
-term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
-var pattern = new RegExp("("+term+")", "gi");
+// $(document).ready(function () {
+//   $("#content").on("keypress", function (event) {
+//
+//     var src_str = $("#tabTitle").text();
+//     var term = "Tab";
+//     term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+//     var pattern = new RegExp("("+term+")", "gi");
+//
+//     src_str = src_str.replace(pattern, "<mark>$1</mark>");
+//     src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+//
+//     $("#tabTitle").html(src_str);
+//
+//   });
+// });
 
-src_str = src_str.replace(pattern, "<mark>$1</mark>");
-src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
-
-$("#test").html(src_str);
+$(document).ready(function () {
+  $("#search").on("keyup", function(event) {
+    var src_str = $(this).val();
+    if (src_str.length >= 1) {
+      $("p:contains(" + src_str + ")").parent(".leaf").css( "border", "3px solid red" );
+      $("p:not(:contains(" + src_str + "))").parent(".leaf").css( "border", "1px solid #1C2528" );
+    } else {
+      $("p").parent(".leaf").css( "border", "1px solid #1C2528" );
+    }
+  });
+});

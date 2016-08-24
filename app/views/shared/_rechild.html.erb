@@ -1,7 +1,7 @@
 <% children.each do |child| %>
   <div class="branch">
     <div class="leaf">
-      <p class="clicker" id="srch"> <%= highlight(truncate(child.name, length: 9), params[:search]) %></p>
+      <p class="clicker" id="tabTitle"> <%= highlight(truncate(child.name, length: 9), params[:search]) %></p>
       <div class="editor">
         <%= truncate(child.name, length: 14) %>
         <%= render "shared/buttons_tabs.html.erb", obj: child %>
