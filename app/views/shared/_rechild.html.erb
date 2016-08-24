@@ -3,14 +3,13 @@
     <div class="leaf">
       <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
       <div class="editor">
-        <%= truncate(child.name, length: 14) %>
         <%= render "shared/buttons_tabs.html.erb", obj: child %>
         <div class="creation">
           <%= render "shared/create_tab.html.erb", obj: child %>
         </div>
       </div>
     </div>
-    <%= render( partial: 'shared/rechild', locals: { children: child.children.includes(:children) }) if child.children %>
+    <%= render 'shared/rechild', children: child.children.includes(:children) if child.children %>
   </div>
 
 <% end %>

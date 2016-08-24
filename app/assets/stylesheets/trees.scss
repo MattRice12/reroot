@@ -7,7 +7,7 @@
 .trunk-empty {
   text-align: center;
   display: table;
-  border: 2px solid $secondary-color;
+  border: 3px solid $secondary-color;
   padding-top: 10px;
   margin: 10px;
   border-radius: 5px;
@@ -71,4 +71,9 @@
   .stat-item {
     margin: 5px 0 5px 20px;
   }
+}
+
+.empty-message {
+  padding: 10px 10px 0 10px;
+  margin: 0;
 }

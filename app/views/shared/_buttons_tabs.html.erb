@@ -14,7 +14,13 @@
 </span>
 
 <span>
-  <%= link_to tab_path(obj, parent_tab_id: params[:parent_tab_id]), method: :delete, data: { confirm: 'Clicking OK will delete this tab! Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del', title: "Delete Tab" do %>
-    <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+  <% if request.path.include?("project") %>
+    <%= link_to tab_path(obj, parent_tab_id: params[:parent_tab_id], project: request.path, anchor: obj.tree.name.parameterize), method: :delete, data: { confirm: 'Clicking OK will delete this tab! Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del', title: "Delete Tab" do %>
+      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+    <% end %>
+  <% else %>
+    <%= link_to tab_path(obj, parent_tab_id: params[:parent_tab_id], anchor: obj.tree.name.parameterize), method: :delete, data: { confirm: 'Clicking OK will delete this tab! Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del', title: "Delete Tab" do %>
+      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+    <% end %>
   <% end %>
 </span>

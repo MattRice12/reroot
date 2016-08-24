@@ -3,8 +3,8 @@ class Tab < ApplicationRecord
   before_save :set_tree_id_to_tabs
 
   has_many   :children, -> { order :id }, class_name: "Tab", foreign_key: :parent_tab_id
-
   belongs_to :parent, class_name: "Tab", foreign_key: :parent_tab_id, optional: true
+
   belongs_to :tree,   optional:   true
   belongs_to :user
 
