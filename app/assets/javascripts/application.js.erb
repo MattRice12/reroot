@@ -29,20 +29,29 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  $('#search').keyup(function(e) {
+$(document).ready(function (e) {
+  $('#search').keyup(function (e) {
     var original = $(this).val();
     var src_str = new RegExp($.map($(this).val().trim().split(' '), function(v) {
             return '(?=.*?' + v + ')';
         }).join(''), 'i');
-    console.log(original)
+    var grove = $('.clicker').parents(".tree");
 
     if (original.length >= 1) {
-      $('p').parent(".leaf").css( "border", "1px solid #1C2528").filter(function() {
+      $('.clicker').parent(".leaf").css( "border", "1px solid #1C2528").filter(function() {
           return src_str.exec($(this).text());
       }).css( "border", "3px solid red");
+
+      $(grove).hide().filter(function() {
+          return src_str.exec($(this).text());
+      }).show();
+
     } else {
-      $('p').parent(".leaf").css( "border", "1px solid #1C2528")
+      $('.clicker').parent(".leaf").css( "border", "1px solid #1C2528");
+      $(grove).show();
     }
   });
 });
+
+//.tree-name
+//.grove

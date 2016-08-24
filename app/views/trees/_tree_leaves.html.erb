@@ -3,7 +3,7 @@
     <% if  tab.parent.nil? %>
       <div class="trunk" id="root">
         <div class="leaf">
-          <p class="clicker" id="tabTitle"> <%= highlight(truncate(tab.name, length: 9), params[:search]) %></p>
+          <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
           <div class="editor">
             <%= render "shared/buttons_tabs.html.erb", obj: tab %>
             <div class="creation">
@@ -16,7 +16,7 @@
           <% tab.children.each do |child| %>
               <div class="branch">
                 <div class="leaf">
-                  <p class="clicker" id="tabTitle"> <%= highlight(truncate(child.name, length: 9), params[:search]) %></p>
+                  <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">

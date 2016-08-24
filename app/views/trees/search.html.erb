@@ -2,7 +2,7 @@
 
 <% tabs.each do |tab| %>
   <div class="leaf">
-  <p class="clicker" id="srch"> <%= highlight(tab.name, params[:search]) %></p>
+  <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
     <div class="editor">
       <%= render "shared/buttons_tabs.html.erb", obj: tab %>
       <div class="creation">

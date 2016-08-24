@@ -8,11 +8,9 @@ class TabsController < ApplicationController
   end
 
   def new
-    if tab = find_tab_params(:parent_tab_id) ## if there is a root tab
-      tree = nil
-      render locals: { tab: Tab.new, taboo: tab, tree: tree }
-    elsif params[:search]
-      tab = Tab.find_by("name ~* '.*#{params[:search]}.*'")
+    if params[:search]
+      return search_params
+    elsif tab = find_tab_params(:parent_tab_id) ## if there is a root tab
       tree = nil
       render locals: { tab: Tab.new, taboo: tab, tree: tree }
     elsif tree = find_tree_params(:tree_id) ## if there is no root tab

@@ -28,9 +28,8 @@ class ApplicationController < ActionController::Base
   PROJ_UNAUTH = "You are not authorized to access that project."
 
   def search_params
-    Tab.search(params[:search]).where(user_id: current_user.id)
-    # redirect_to(root_path)
-    render template: 'trees/index.html.erb', locals: { tabs: tabs }
+    tabs = Tab.search(params[:search]).where(user_id: current_user.id)
+    render template: 'trees/search.html.erb', locals: { tabs: tabs }
   end
 
   def tab_adoption(tab)

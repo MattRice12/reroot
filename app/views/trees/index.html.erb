@@ -5,7 +5,8 @@
     <% if current_user.trees.any? %>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
-          <h1> <%= link_to tree.name, tree_path(tree) %>
+        <div class="tree">
+          <h1 class="tree-name"> <%= link_to tree.name, tree_path(tree) %>
             <small class="btn sup-edit editor">
               <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
                 <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
@@ -23,8 +24,9 @@
           <% else %>
             <%= render "empty_tree.html.erb", tree: tree %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+    </div>
 
       <div class="new-tree">
         <%= link_to "New Tree", new_tree_path, class: 'btn add-del-edit new'%>

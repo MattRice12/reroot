@@ -1,5 +1,6 @@
 class TreesController < ApplicationController
   def index
+    return search_params if params[:search]
     trees = Tree.all.includes(tabs: [:children]).order(:created_at)
     render locals: { trees: trees }
   end
