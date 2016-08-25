@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require js/jsPlumb-2.1.5-min.js
 
 //= require react
 //= require react_ujs
@@ -53,5 +55,17 @@ $(document).ready(function (e) {
   });
 });
 
-//.tree-name
-//.grove
+
+jsPlumb.bind("ready", function() {
+
+  			var e0 = jsPlumb.addEndpoint("srch"),
+  		    	e1 = jsPlumb.addEndpoint("srch");
+
+  			jsPlumb.importDefaults({
+  		  		Connector : [ "Bezier", { curviness: 150 } ],
+  		  		Anchors : [ "TopCenter", "BottomCenter" ]
+  			});
+
+  			jsPlumb.connect({ source:e0, target:e1 });
+
+});
