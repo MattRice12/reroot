@@ -1,24 +1,25 @@
 <div class="grove">
-  <% tree.tabs.each do |tab| %>
-    <% if tab.parent.nil? %>
-      <% cache tab do %>
-        <div class="trunk" id="root">
-          <div class="leaf">
-            <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
-            <div class="editor">
-              <%= render "shared/buttons_tabs.html.erb", obj: tab %>
-              <div class="creation">
-                <%= render "shared/create_tab.html.erb", obj: tab %>
-              </div>
+  <% tabs.each do |tab| %>
+    <% if tab.tree_id == tree.id %>
+      <div class="trunk" id="root">
+        <div class="leaf">
+
+          <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
+          <div class="editor">
+            <%= render "shared/buttons_tabs.html.erb", obj: tab %>
+            <div class="creation">
+              <%= render "shared/create_tab.html.erb", obj: tab %>
             </div>
           </div>
 
+        </div>
+
           <div class="big-block">
-            <% tab.descendents.each do |child| %>
-              <% cache child do %>
+            <% tab.children.each do |child| %>
 
                 <div class="branch">
                   <div class="leaf">
+
                     <p class="clicker" id="srch2"> <%= truncate(child.name, length: 9) %></p>
                     <div class="editor">
                       <%= render "shared/buttons_tabs.html.erb", obj: child %>
@@ -26,14 +27,13 @@
                         <%= render "shared/create_tab.html.erb", obj: child %>
                       </div>
                     </div>
+
                   </div>
-                  <%= render( partial: 'shared/rechild', locals: { children: child.descendents }) if child %>
+                  <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child.children %>
                 </div>
-              <% end %>
-            <% end %>
+          <% end %>
           </div>
         </div>
       <% end %>
-    <% end %>
   <% end %>
 </div>

@@ -5,8 +5,8 @@
     <% if current_user.trees.any? %>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
-          <% cache tree do %>
           <div class="tree">
+
             <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
               <small class="btn sup-edit editor">
                 <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
@@ -21,12 +21,11 @@
             </h1>
 
             <% if tree.tabs.any? %>
-              <%= render "tree_leaves.html.erb", tree: tree %>
+              <%= render "tree_leaves.html.erb", tree: tree, tabs: tabs %>
             <% else %>
               <%= render "empty_tree.html.erb", tree: tree %>
             <% end %>
           </div>
-        <% end %>
       <% end %>
     </div>
 
