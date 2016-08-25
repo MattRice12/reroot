@@ -6,7 +6,6 @@
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
           <% cache tree do %>
-
           <div class="tree">
             <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
               <small class="btn sup-edit editor">

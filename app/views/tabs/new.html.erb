@@ -21,9 +21,9 @@
         <div class="leaf">
           <p class="clicker" id="srch"> <%= truncate(taboo.name, length: 9) %></p>
           <div class="editor">
-            <%= render "shared/buttons_tabs.html.erb", obj: taboo, cached: true %>
+            <%= render "shared/buttons_tabs.html.erb", obj: taboo %>
             <div class="creation">
-              <%= render "shared/create_tab.html.erb", obj: taboo, cached: true %>
+              <%= render "shared/create_tab.html.erb", obj: taboo %>
             </div>
           </div>
         </div>
@@ -36,13 +36,13 @@
                 <div class="leaf">
                   <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
                   <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: child, cached: true %>
+                    <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
-                      <%= render "shared/create_tab.html.erb", obj: child, cached: true %>
+                      <%= render "shared/create_tab.html.erb", obj: child %>
                     </div>
                   </div>
                 </div>
-                  <%= render( partial: 'shared/rechild', collection: { children: child.children }, cached: true) if child %>
+                  <%= render( partial: 'shared/rechild', collection: { children: child.children }) if child %>
               </div>
             <% end %>
           <% end %>

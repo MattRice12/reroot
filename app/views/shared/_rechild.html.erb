@@ -1,5 +1,4 @@
 <% children.each do |child| %>
-  <% cache child do %>
 
     <div class="branch">
       <div class="leaf">
@@ -11,7 +10,6 @@
           </div>
         </div>
       </div>
-      <%= render( partial: 'shared/rechild', locals: { children: child.children }, cached: true) if child.children %>
+      <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child.children %>
     </div>
-  <% end %>
 <% end %>
