@@ -14,7 +14,7 @@
           </div>
 
           <div class="big-block">
-            <% tab.children.each do |child| %>
+            <% tab.descendents.each do |child| %>
               <% cache child do %>
 
                 <div class="branch">
@@ -27,7 +27,7 @@
                       </div>
                     </div>
                   </div>
-                  <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
+                  <%= render( partial: 'shared/rechild', locals: { children: child.descendents }) if child %>
                 </div>
               <% end %>
             <% end %>

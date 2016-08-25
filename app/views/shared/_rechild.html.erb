@@ -10,6 +10,6 @@
           </div>
         </div>
       </div>
-      <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child.children %>
+      <%= render( partial: 'shared/rechild', locals: { children: child.descendents }) if child.children %>
     </div>
 <% end %>
