@@ -160,6 +160,7 @@ t = 16
              name: tab_name[t - 16])
   3.times do
     Tab.create!(user_id: user.id,
+                tree_id: tree.id,
                 parent_tab_id: tab.id,
                 url: url,
                 name: tab_name[t - 16])
@@ -171,6 +172,7 @@ end
 50.times do
   t = Tab.all.count
   Tab.create!(user_id: user.id,
+              tree_id: tree.id,
               parent_tab_id: rand((t - 6)..t),
               url: url,
               name: "#{rand(1..100)}")

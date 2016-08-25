@@ -8,9 +8,9 @@ class Tab < ApplicationRecord
   belongs_to :tree, optional: true, touch: true
   belongs_to :user, touch: true
 
-  # def as_json(_ = nil)
-  #   super(include: [:tab])
-  # end
+  def as_json(_ = nil)
+    super(include: [:tab])
+  end
 
   def tab_root
     tab = self
