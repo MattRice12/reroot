@@ -1,4 +1,6 @@
 <% children.each do |child| %>
+  <% cache child do %>
+
     <div class="branch">
       <div class="leaf">
         <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
@@ -11,4 +13,5 @@
       </div>
       <%= render( partial: 'shared/rechild', locals: { children: child.children.includes(:children)}, cached: true) if child.children %>
     </div>
+  <% end %>
 <% end %>
