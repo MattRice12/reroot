@@ -16,7 +16,7 @@
           <% tab.children.each do |child| %>
               <div class="branch">
                 <div class="leaf">
-                  <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
+                  <p class="clicker" id="srch2"> <%= truncate(child.name, length: 9) %></p>
                   <div class="editor">
                     <%= render "shared/buttons_tabs.html.erb", obj: child %>
                     <div class="creation">
@@ -24,7 +24,7 @@
                     </div>
                   </div>
                 </div>
-                  <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
+                  <%= render( partial: 'shared/rechild', collection: { children: child.children }, cached: true) if child %>
               </div>
           <% end %>
         </div>

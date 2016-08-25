@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <%= render "shared/nav.html.erb" unless @disable_nav %>
+    <%= render "shared/nav.html.erb", cached: true unless @disable_nav %>
     <div id="flash">
       <% flash.each do |key, value| -%>
         <div id="flash_<%= key %>"><%= value %></div>

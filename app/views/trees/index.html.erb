@@ -20,9 +20,9 @@
           </h1>
 
           <% if tree.tabs.any? %>
-            <%= render "tree_leaves.html.erb", tree: tree %>
+            <%= render "tree_leaves.html.erb", tree: tree, cached: true %>
           <% else %>
-            <%= render "empty_tree.html.erb", tree: tree %>
+            <%= render "empty_tree.html.erb", tree: tree, cached: true %>
           <% end %>
         </div>
       <% end %>

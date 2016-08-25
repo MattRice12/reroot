@@ -55,17 +55,26 @@ $(document).ready(function (e) {
   });
 });
 
-
-jsPlumb.bind("ready", function() {
-
-  			var e0 = jsPlumb.addEndpoint("srch"),
-  		    	e1 = jsPlumb.addEndpoint("srch");
-
-  			jsPlumb.importDefaults({
-  		  		Connector : [ "Bezier", { curviness: 150 } ],
-  		  		Anchors : [ "TopCenter", "BottomCenter" ]
-  			});
-
-  			jsPlumb.connect({ source:e0, target:e1 });
-
-});
+// 
+// jsPlumb.bind("ready", function() {
+//     var common = {
+//     anchors:[ "BottomCenter", "TopCenter" ],
+//     endpoints:["Blank", "Blank" ],
+//     detachable:false,
+//     maxConnections:-1,
+//     connector:"Flowchart"};
+//
+//     var con = jsPlumb.connect({source:"srch", target:"srch2"}, common);
+//     var list=[];
+//     for(var i=0;i<con.length;i++)
+//     {
+//          list[i]=new Array(2);
+//          list[i][0]=con[i].SourceId;
+//          list[i][1]=con[i].TargetId;
+//     }
+//
+//     jsPlumb.connect({source:list[1][0], target:list[1][1]}, common);
+//     // jsPlumb.connect({ source:"srch", target:"srch2" }, common);
+//
+//
+// });

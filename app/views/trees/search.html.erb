@@ -4,9 +4,9 @@
   <div class="leaf">
   <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
     <div class="editor">
-      <%= render "shared/buttons_tabs.html.erb", obj: tab %>
+      <%= render "shared/buttons_tabs.html.erb", obj: tab, cached: true %>
       <div class="creation">
-        <%= render "shared/create_tab.html.erb", obj: tab %>
+        <%= render "shared/create_tab.html.erb", obj: tab, cached: true %>
       </div>
     </div>
   </div>

@@ -94,9 +94,9 @@
         </small>
       </h2>
       <% if tree.tabs.any? %>
-        <%= render "trees/tree_leaves.html.erb", tree: tree %>
+        <%= render "trees/tree_leaves.html.erb", tree: tree, cached: true %>
       <% else %>
-        <%= render "trees/empty_tree.html.erb", tree: tree %>
+        <%= render "trees/empty_tree.html.erb", tree: tree, cached: true %>
       <% end %>
     </div>
   <% end %>
