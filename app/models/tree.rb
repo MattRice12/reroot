@@ -3,7 +3,7 @@ class Tree < ApplicationRecord
   has_many   :forests,  dependent: :destroy
   has_many   :projects, through:   :forests
 
-  belongs_to :user
+  belongs_to :user, touch: true
 
   validates :name, presence: true, length: { maximum: 50 }
 

@@ -80,25 +80,27 @@
   <% end %>
 
   <% project.trees.order(:created_at).each do |tree| %>
-    <div class="tree">
-      <h2 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
-        <small class="btn sup-edit editor">
-          <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', title: "Edit Tree" do %>
-            <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-          <% end %>
-        </small>
-        <small class="btn sup-edit editor">
-          <%= link_to forest_path(tree.forests.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
-            <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
-          <% end %>
-        </small>
-      </h2>
-      <% if tree.tabs.any? %>
-        <%= render "trees/tree_leaves.html.erb", tree: tree, cached: true %>
-      <% else %>
-        <%= render "trees/empty_tree.html.erb", tree: tree, cached: true %>
-      <% end %>
-    </div>
+    <% cache tree do %>
+      <div class="tree">
+        <h2 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
+          <small class="btn sup-edit editor">
+            <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', title: "Edit Tree" do %>
+              <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+            <% end %>
+          </small>
+          <small class="btn sup-edit editor">
+            <%= link_to forest_path(tree.forests.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
+              <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+            <% end %>
+          </small>
+        </h2>
+        <% if tree.tabs.any? %>
+          <%= render "trees/tree_leaves.html.erb", tree: tree, cached: true %>
+        <% else %>
+          <%= render "trees/empty_tree.html.erb", tree: tree, cached: true %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
   </div>
 </div>

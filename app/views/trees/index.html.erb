@@ -5,26 +5,29 @@
     <% if current_user.trees.any? %>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
-        <div class="tree">
-          <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
-            <small class="btn sup-edit editor">
-              <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
-                <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-              <% end %>
-            </small>
-            <small class="btn sup-edit editor">
-              <%= link_to tree_path(tree), method: :delete, data: { confirm: 'Clicking OK will delete the tree! Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
-                <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
-              <% end %>
-            </small>
-          </h1>
+          <% cache tree do %>
 
-          <% if tree.tabs.any? %>
-            <%= render "tree_leaves.html.erb", tree: tree, cached: true %>
-          <% else %>
-            <%= render "empty_tree.html.erb", tree: tree, cached: true %>
-          <% end %>
-        </div>
+          <div class="tree">
+            <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
+              <small class="btn sup-edit editor">
+                <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
+                  <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+                <% end %>
+              </small>
+              <small class="btn sup-edit editor">
+                <%= link_to tree_path(tree), method: :delete, data: { confirm: 'Clicking OK will delete the tree! Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
+                  <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+                <% end %>
+              </small>
+            </h1>
+
+            <% if tree.tabs.any? %>
+              <%= render "tree_leaves.html.erb", tree: tree, cached: true %>
+            <% else %>
+              <%= render "empty_tree.html.erb", tree: tree, cached: true %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 

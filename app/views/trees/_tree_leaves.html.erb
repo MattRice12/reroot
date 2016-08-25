@@ -1,34 +1,38 @@
 <div class="grove">
   <% tree.tabs.each do |tab| %>
-    <% if  tab.parent.nil? %>
-      <div class="trunk" id="root">
-        <div class="leaf">
-          <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
-          <div class="editor">
-            <%= render "shared/buttons_tabs.html.erb", obj: tab %>
-            <div class="creation">
-              <%= render "shared/create_tab.html.erb", obj: tab %>
+    <% if tab.parent.nil? %>
+      <% cache tab do %>
+        <div class="trunk" id="root">
+          <div class="leaf">
+            <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
+            <div class="editor">
+              <%= render "shared/buttons_tabs.html.erb", obj: tab, cached: true %>
+              <div class="creation">
+                <%= render "shared/create_tab.html.erb", obj: tab, cached: true %>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="big-block">
-          <% tab.children.each do |child| %>
-              <div class="branch">
-                <div class="leaf">
-                  <p class="clicker" id="srch2"> <%= truncate(child.name, length: 9) %></p>
-                  <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: child %>
-                    <div class="creation">
-                      <%= render "shared/create_tab.html.erb", obj: child %>
+          <div class="big-block">
+            <% tab.children.each do |child| %>
+              <% cache child do %>
+                <div class="branch">
+                  <div class="leaf">
+                    <p class="clicker" id="srch2"> <%= truncate(child.name, length: 9) %></p>
+                    <div class="editor">
+                      <%= render "shared/buttons_tabs.html.erb", obj: child, cached: true %>
+                      <div class="creation">
+                        <%= render "shared/create_tab.html.erb", obj: child, cached: true %>
+                      </div>
                     </div>
                   </div>
+                    <%= render( partial: 'shared/rechild', collection: { children: child.children }, cached: true) if child %>
                 </div>
-                  <%= render( partial: 'shared/rechild', collection: { children: child.children }, cached: true) if child %>
-              </div>
-          <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

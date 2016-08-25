@@ -1,13 +1,15 @@
 <h1 class="headinger"> Search Results </h1>
 
 <% tabs.each do |tab| %>
-  <div class="leaf">
-  <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
-    <div class="editor">
-      <%= render "shared/buttons_tabs.html.erb", obj: tab, cached: true %>
-      <div class="creation">
-        <%= render "shared/create_tab.html.erb", obj: tab, cached: true %>
+  <% cache tab do %>
+    <div class="leaf">
+    <p class="clicker" id="srch"> <%= truncate(tab.name, length: 9) %></p>
+      <div class="editor">
+        <%= render "shared/buttons_tabs.html.erb", obj: tab, cached: true %>
+        <div class="creation">
+          <%= render "shared/create_tab.html.erb", obj: tab, cached: true %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
