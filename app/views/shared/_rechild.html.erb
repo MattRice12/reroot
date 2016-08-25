@@ -5,13 +5,13 @@
       <div class="leaf">
         <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
         <div class="editor">
-          <%= render "shared/buttons_tabs.html.erb", obj: child, cached: true %>
+          <%= render "shared/buttons_tabs.html.erb", obj: child %>
           <div class="creation">
-            <%= render "shared/create_tab.html.erb", obj: child, cached: true %>
+            <%= render "shared/create_tab.html.erb", obj: child %>
           </div>
         </div>
       </div>
-      <%= render( partial: 'shared/rechild', locals: { children: child.children.includes(:children)}, cached: true) if child.children %>
+      <%= render( partial: 'shared/rechild', locals: { children: child.children }, cached: true) if child.children %>
     </div>
   <% end %>
 <% end %>
