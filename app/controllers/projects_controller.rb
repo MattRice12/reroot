@@ -8,7 +8,8 @@ class ProjectsController < ApplicationController
     project = find_proj_param_obj(:id)
     tabs = Tab.where(parent_tab_id: nil)
     return proj_validations(project) if !project || !project_permission?(project)
-    render locals: { project: project, tabs: tabs.includes(children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]]) }
+    render locals: { project: project, tabs: tabs }
+    # render locals: { project: project, tabs: tabs.includes(children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]]) }
   end
 
   def new

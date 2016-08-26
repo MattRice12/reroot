@@ -29,7 +29,7 @@ class Tab < ApplicationRecord
     self_and_descendants - [self]
   end
 
-  def self_and_descandents
+  def self_and_descandants
     self.class.tree_for(self)
   end
 
