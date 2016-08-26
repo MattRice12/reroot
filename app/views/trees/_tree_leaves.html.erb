@@ -8,8 +8,6 @@
             <div class="editor">
               <%= render "shared/rechild_extra.html.erb", child: child %>
             </div>
-
-            </div>
           </div>
 
             <div class="big-block">
@@ -20,7 +18,6 @@
                       <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
                       <div class="editor">
                         <%= render( partial: 'shared/rechild_extra', locals: { child: child }) %>
-                        </div>
                       </div>
                     </div>
                     <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child.children %>

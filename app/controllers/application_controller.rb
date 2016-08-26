@@ -86,13 +86,16 @@ class ApplicationController < ActionController::Base
 
 ################## PERMISSIONS #################
   def tab_permission?(obj)
-    current_user.tabs.any? { |t| t.tree_id == obj.tree.id }
+    [
+    current_user.tabs.any? { |t| t.tree_id == obj.tree.id },
+    current_user.projects.any? { |proj| proj.trees.any? { |tree| tree.tabs.any? { |tab| tab.id == obj.id } } }
+    ].any?
   end
 
   def tree_permission?(obj)
     [
     current_user.id == obj.user_id,
-    current_user.projects.any? { |proj| proj.trees.any? { |tr| tr.id == obj.id } }
+    current_user.projects.any? { |proj| proj.trees.any? { |tree| tree.id == obj.id } }
     ].any?
   end
 

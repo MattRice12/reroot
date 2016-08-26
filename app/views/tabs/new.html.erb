@@ -21,10 +21,7 @@
         <div class="leaf">
           <p class="clicker" id="srch"> <%= truncate(taboo.name, length: 9) %></p>
           <div class="editor">
-            <%= render "shared/buttons_tabs.html.erb", obj: taboo %>
-            <div class="creation">
-              <%= render "shared/create_tab.html.erb", obj: taboo %>
-            </div>
+            <%= render( partial: 'shared/rechild_extra', locals: { child: taboo }) %>
           </div>
         </div>
 
@@ -35,10 +32,7 @@
                 <div class="leaf">
                   <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
                   <div class="editor">
-                    <%= render "shared/buttons_tabs.html.erb", obj: child %>
-                    <div class="creation">
-                      <%= render "shared/create_tab.html.erb", obj: child %>
-                    </div>
+                    <%= render( partial: 'shared/rechild_extra', locals: { child: child }) %>
                   </div>
                 </div>
                   <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child %>
