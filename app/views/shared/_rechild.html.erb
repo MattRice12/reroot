@@ -4,12 +4,9 @@
 
         <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
         <div class="editor">
-          <%= render "shared/buttons_tabs.html.erb", obj: child, cached: true  %>
-          <div class="creation">
-            <%= render "shared/create_tab.html.erb", obj: child, cached: true  %>
+          <%= render( partial: 'shared/rechild_extra', locals: { child: child }) %>
           </div>
         </div>
-
       </div>
       <%= render( partial: 'shared/rechild', locals: { children: child.children }) if child.children %>
     </div>
