@@ -3,15 +3,15 @@ class Tab < ApplicationRecord
   before_save :set_tree_id_to_tabs
 
   has_many   :children, -> { order :id }, class_name: "Tab", foreign_key: :parent_tab_id
-  belongs_to :parent, class_name: "Tab", foreign_key: :parent_tab_id, optional: true, touch: true
+  belongs_to :parent, class_name: "Tab", foreign_key: :parent_tab_id, optional: true
 
-  belongs_to :tree, optional: true, touch: true
-  belongs_to :user, touch: true
+  belongs_to :tree, optional: true
+  belongs_to :user
 
   scope :top_level, -> { where(parent_tab_id: nil) }
 
   def as_json(_ = nil)
-    super(include: [:tab])
+    super(include: [:obj])
   end
 
   def tab_root
@@ -22,7 +22,7 @@ class Tab < ApplicationRecord
     tab.tree
   end
 
-# 
+#
 # ## These guys grab allllllllll tabs from the root tab down
 # ## This does not grab the tab from any particular position that you call the method
 #   def descendants
