@@ -22,11 +22,14 @@ class Tab < ApplicationRecord
     tab.tree
   end
 
-  def descendents
-    self_and_descendents - [self]
+
+## These guys grab allllllllll tabs from the root tab down
+## This does not grab the tab from any particular position that you call the method
+  def descendants
+    self_and_descendants - [self]
   end
 
-  def self_and_descendents
+  def self_and_descandents
     self.class.tree_for(self)
   end
 

@@ -3,7 +3,7 @@ class TreesController < ApplicationController
     return search_params if params[:search]
     trees = Tree.all.includes(tabs: [:self_and_descendents]).includes(tabs: [:children])
     tabs = Tab.where(parent_tab_id: nil)
-    render locals: { trees: trees, tabs: tabs.includes(children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]]]]) }
+    render locals: { trees: trees, tabs: tabs.includes(children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]]) }
   end
 
   def show
