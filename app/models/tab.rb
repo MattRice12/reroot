@@ -37,6 +37,7 @@ class Tab < ApplicationRecord
     where("\"tabs\".id IN (#{tree_sql_for(instance)})") #.order("tabs.id")
   end
 
+##This is a recursive search from the root tab to all the rest; it can only start where parent_tab_id = null
   def self.tree_sql_for(instance)
    <<-SQL
      WITH RECURSIVE search_tab(id, path) AS (
@@ -53,7 +54,6 @@ class Tab < ApplicationRecord
      SELECT id FROM search_tab ORDER BY path
    SQL
   end
-
 
   def default_tab_name
     if self.name == ""

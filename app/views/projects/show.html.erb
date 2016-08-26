@@ -80,7 +80,6 @@
   <% end %>
 
   <% project.trees.order(:created_at).each do |tree| %>
-    <% cache tree do %>
       <div class="tree">
         <h2 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
           <small class="btn sup-edit editor">
@@ -95,12 +94,11 @@
           </small>
         </h2>
         <% if tree.tabs.any? %>
-          <%= render "trees/tree_leaves.html.erb", tree: tree %>
+          <%= render "trees/tree_leaves.html.erb", tree: tree, tabs: tabs %>
         <% else %>
           <%= render "trees/empty_tree.html.erb", tree: tree %>
         <% end %>
       </div>
-    <% end %>
   <% end %>
   </div>
 </div>
