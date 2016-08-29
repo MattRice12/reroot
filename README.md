@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+[![Build Status](https://semaphoreci.com/api/v1/amattrice/reroot/branches/master/badge.svg)](https://semaphoreci.com/amattrice/reroot)
