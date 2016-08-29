@@ -12,9 +12,11 @@
   display: flex;
   .title-search {
     display: flex;
+    min-width: 450px;
   }
   .nav-title {
     min-width: 164px;
+    max-width: 164px;
   }
   a {
     padding: 10px;
@@ -119,25 +121,26 @@
 @media (max-width: 850px) {
   .nav-wrapper {
     display: block;
-
     .title-search {
+      min-width: 450px;
     }
     .heading-block {
+      text-align: left;
+      .home {
+        border-left: none;
+      }
       .in {
+        text-align: left;
         // visibility: hidden;
       }
     }
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 550px) {
   .nav-wrapper {
     .title-search {
-    }
-    .heading-block {
-      .out {
-        // visibility: hidden;
-      }
+      min-width: 350px;
     }
   }
 }
