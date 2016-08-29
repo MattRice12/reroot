@@ -40,10 +40,6 @@ body {
     }
   }
 
-  .highlight {
-    border: 2px solid red;
-  }
-
   h1, h2, h3, h4, a {
     font-family: $font-title;
     font-weight: lighter;
@@ -70,6 +66,10 @@ body {
     }
   }
 }
+
+// .highlight {
+//   border: 2px solid $highlight-color;
+// }
 
 a {
   color: black;

@@ -45,7 +45,7 @@
     &.active {
       width: 210px;
       border-top: 1px solid lightgray;
-      background: #F0F3FC;
+      background: $tree-name-background;
       overflow: hidden;
       display: block;
       .creation {
