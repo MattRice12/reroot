@@ -6,12 +6,15 @@
 
 .nav-wrapper {
   z-index: 1;
-  display: flex;
   position: fixed;
   margin-bottom: 20px;
   background-color: $primary-color;
+  display: flex;
+  .title-search {
+    display: flex;
+  }
   .nav-title {
-    min-width: 160px;
+    min-width: 164px;
   }
   a {
     padding: 10px;
@@ -59,7 +62,7 @@
         padding: 15px 0 10px 0;
         margin: 0 10px;
         min-width: 60px;
-        text-align: right;
+        // text-align: right;
       }
       .in.sign {
         min-width: 80px;
@@ -115,9 +118,13 @@
 
 @media (max-width: 850px) {
   .nav-wrapper {
+    display: block;
+
+    .title-search {
+    }
     .heading-block {
       .in {
-        visibility: hidden;
+        // visibility: hidden;
       }
     }
   }
@@ -125,16 +132,18 @@
 
 @media (max-width: 650px) {
   .nav-wrapper {
+    .title-search {
+    }
     .heading-block {
       .out {
-        visibility: hidden;
+        // visibility: hidden;
       }
     }
   }
 }
 
 //////////////// SEARCH ////////////////
-.five.columns.input-field {
+.input-field {
   margin: 0;
   form {
     margin: 0;

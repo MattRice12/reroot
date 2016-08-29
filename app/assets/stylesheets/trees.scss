@@ -79,13 +79,14 @@
 }
 
 .grove {
-  display: inline-flex;
   margin: 0;
+  text-align: center;
+  display: block;
   .trunk {
-    text-align: center;
-    display: inline-block;
     padding: 10px 0;
+    display: inline-block;
     .big-block {
+      display: block;
       .branch {
         border: 1px dotted lightgray;
         display: table-cell;

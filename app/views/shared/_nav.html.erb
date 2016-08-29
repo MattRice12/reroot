@@ -1,9 +1,10 @@
 <nav>
   <div class="row nav-row">
     <div class="twelve columns nav-wrapper">
-
-      <div class="two columns nav-title"><a href="/" class="brand-logo">Tab Tree</a></div>
-      <div class="five columns input-field ">
+      <div class="seven columns title-search">
+        <div class="two columns nav-title"><a href="/" class="brand-logo">Tab Tree</a>
+        </div>
+        <div class="nine columns input-field ">
             <form>
               <div class="search-box">
                 <%= form_tag(search_path, id: "search-form") do %>
@@ -12,7 +13,8 @@
                 <% end %>
               </div>
             </form>
-      </div>
+          </div>
+        </div>
       <div class="five columns heading-block">
             <% if signed_in? %>
               <div class="two columns heading in user"><%= link_to "#{current_user.name}", user_path(current_user) %></div>
@@ -26,7 +28,6 @@
               <div class="three columns heading out sign"><%= link_to "Sign In", sign_in_path %></div>
             <% end %>
       </div>
-
     </div>
   </div>
 </nav>
