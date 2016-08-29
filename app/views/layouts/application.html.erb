@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TabTree</title>
+    <title>ReRoot</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <%= render "shared/nav.html.erb", cached: true unless @disable_nav %>
+    <%= render "shared/nav.html.erb" unless @disable_nav %>
     <div id="flash">
       <% flash.each do |key, value| -%>
         <div id="flash_<%= key %>"><%= value %></div>
@@ -22,7 +22,7 @@
       </section>
     </div>
     <footer>
-      <small>Tabasaurus Rex © Matt Rice Studios</small>
+      <small>ReRoot © Matt Rice Studios</small>
     </footer>
   </body>
 </html>

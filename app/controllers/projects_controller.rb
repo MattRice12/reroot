@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
   def index
+    return search_params if params[:search]
     projects = Project.where(user_id: current_user.id).includes(:members, :users)
     render locals: { projects: projects }
   end
 
   def show
+    return search_params if params[:search]
     project = find_proj_param_obj(:id)
     tabs = Tab.where(parent_tab_id: nil)
     return proj_validations(project) if !project || !project_permission?(project)

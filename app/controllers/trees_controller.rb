@@ -8,6 +8,7 @@ class TreesController < ApplicationController
   end
 
   def show
+    return search_params if params[:search]
     tree = find_tree_params(:id)
     tabs = Tab.where(parent_tab_id: nil)
     return tree_validations(tree) if !tree || !tree_permission?(tree)
