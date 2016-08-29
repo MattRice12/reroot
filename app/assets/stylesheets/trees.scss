@@ -4,6 +4,25 @@
 
 @import 'variables';
 
+.tree {
+  border: 3px solid $secondary-color;
+  border-radius: 5px;
+  margin: 10px;
+  width: auto;
+  display: inline-table;
+  transition: all .1s;
+  &:hover {
+    box-shadow: 5px 5px 5px gray;
+    transition: all .1s;
+  }
+  .tree-name {
+    padding-left: 5px;
+    margin: 0;
+    background: #F0F3FC;
+    border-bottom: 2px solid $secondary-color;
+  }
+}
+
 .trunk-empty {
   text-align: center;
   display: table;
@@ -43,20 +62,12 @@
 }
 
 .grove {
-  border: 2px solid $secondary-color;
   display: inline-flex;
-  border-radius: 5px;
-  margin: 10px;
-  transition: all .1s;
-  &:hover {
-    box-shadow: 5px 5px 5px gray;
-    transition: all .1s;
-  }
+  margin: 0;
   .trunk {
     text-align: center;
     display: inline-block;
-    border: 2px solid $secondary-color;
-    padding-top: 10px;
+    padding: 10px 0;
     .big-block {
       .branch {
         border: 1px dotted lightgray;
