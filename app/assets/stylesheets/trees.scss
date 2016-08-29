@@ -21,7 +21,7 @@
   .tree-name {
     padding-left: 5px;
     margin: 0;
-    background: #F0F3FC;
+    background: $tree-name-background;
     border-bottom: 2px solid $secondary-color;
   }
 }
@@ -57,6 +57,16 @@
 .mini-tree {
   text-align: center;
   font-size: 1em;
+  height: 100%;
+  border: 3px solid $secondary-color;
+  h4 {
+    background: $tree-name-background;
+    padding: 0 5px;
+  }
+  .back-block {
+    display: block;
+    border-top: 2px solid $secondary-color;
+  }
 }
 
 .clicker {
