@@ -2,22 +2,29 @@
 
 <div class="row">
   <div class="tree-set">
+
+
     <% if current_user.trees.any? %>
+    <div class="new-tree">
+      <%= link_to new_tree_path, class: 'btn add-del-edit' do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
+      <% end %>
+    </div>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
           <div class="tree">
 
             <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
-              <small class="btn sup-edit editor">
+              <sup class="btn sup-edit editor">
                 <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', title: "Edit Tree" do %>
                   <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
                 <% end %>
-              </small>
-              <small class="btn sup-edit editor">
+              </sup>
+              <sup class="btn sup-edit editor">
                 <%= link_to tree_path(tree), method: :delete, data: { confirm: 'Clicking OK will delete the tree! Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
                   <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
                 <% end %>
-              </small>
+              </sup>
             </h1>
 
             <% if tree.tabs.any? %>
@@ -29,13 +36,13 @@
       <% end %>
     </div>
 
-      <div class="new-tree">
-        <%= link_to "New Tree", new_tree_path, class: 'btn add-del-edit new'%>
-      </div>
-
     <% else %>
-      <h3> You have no trees </h3>
-      <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
+      <h3 class="empty-tree"> You have no trees </h3>
+      <div class="new-tree empty-tree-button">
+        <%= link_to new_tree_path, class: 'btn add-del-edit' do %>
+          <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
+        <% end %>
+      </div>
     <% end %>
 
   </div>

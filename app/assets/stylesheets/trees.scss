@@ -9,11 +9,14 @@
   border-radius: 5px;
   margin: 10px;
   width: auto;
-  display: inline-table;
+  display: table;
   transition: all .1s;
   &:hover {
     box-shadow: 5px 5px 5px gray;
     transition: all .1s;
+  }
+  a {
+    font-size: xx-large;
   }
   .tree-name {
     padding-left: 5px;
@@ -21,6 +24,10 @@
     background: #F0F3FC;
     border-bottom: 2px solid $secondary-color;
   }
+}
+
+.add-del-edit.new-small {
+  font-size: small;
 }
 
 .trunk-empty {
@@ -82,6 +89,17 @@
   margin-left: 10px;
   .stat-item {
     margin: 5px 0 5px 20px;
+  }
+}
+
+.empty-tree {
+  margin: 20px 0 0 10px;
+}
+
+.empty-tree-button {
+  margin: 0 10px;
+  a img {
+    padding: 10px 0;
   }
 }
 

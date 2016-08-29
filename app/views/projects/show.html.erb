@@ -1,16 +1,16 @@
 <h1 class="headinger"> <%= "#{project.name}" %>
   <% if current_user.id == project.user_id %>
-    <span>
+    <sup>
       <%= link_to edit_project_path(project), class: 'btn add-del-edit edit', title: "Edit Project Name" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
       <% end %>
-    </span>
+    </sup>
 
-    <span>
+    <sup>
       <%= link_to project_path(project), method: :delete, data: { confirm: 'Going forward will delete this project. Are you sure you want continue?'}, class: 'project-btn', title: "Delete Project" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
       <% end %>
-    </span>
+    </sup>
 
     <% if project.members.count >= 2 %>
       <span class="captainship">
@@ -64,8 +64,11 @@
 
 <div class="row trees">
   <% if current_user.trees.empty? %>
-    <%= link_to "Create your first tree!", new_tree_path, class: 'btn add-del-edit edit'%>
-  <% elsif (user_trees - project_trees).empty? %>
+    <div class="new-tree empty-tree-button">
+      <%= link_to new_tree_path, class: 'btn add-del-edit' do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
+      <% end %>
+    </div>  <% elsif (user_trees - project_trees).empty? %>
     <div class="new-tree">
       <%= link_to new_forest_tree_path(project_id: project.id), class: 'btn add-del-edit' do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
@@ -82,16 +85,16 @@
   <% project.trees.order(:created_at).each do |tree| %>
       <div class="tree">
         <h2 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
-          <small class="btn sup-edit editor">
+          <sup class="btn sup-edit editor">
             <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', title: "Edit Tree" do %>
               <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
             <% end %>
-          </small>
-          <small class="btn sup-edit editor">
+          </sup>
+          <sup class="btn sup-edit editor">
             <%= link_to forest_path(tree.forests.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree" do %>
               <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
             <% end %>
-          </small>
+          </sup>
         </h2>
         <% if tree.tabs.any? %>
           <%= render "trees/tree_leaves.html.erb", tree: tree, tabs: tabs %>
