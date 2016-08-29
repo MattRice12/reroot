@@ -12,7 +12,7 @@
   display: flex;
   .title-search {
     display: flex;
-    min-width: 450px;
+    width: 99%;
   }
   .nav-title {
     min-width: 164px;
@@ -120,8 +120,9 @@
 
 @media (max-width: 850px) {
   .nav-wrapper {
-    display: block;
+    display: inline-block;
     .title-search {
+      width: auto;
       min-width: 450px;
     }
     .heading-block {
@@ -131,9 +132,11 @@
       }
       .in {
         text-align: left;
-        // visibility: hidden;
       }
     }
+  }
+  body.container {
+    margin-top: 40px;
   }
 }
 
@@ -142,6 +145,18 @@
     .title-search {
       min-width: 350px;
     }
+  }
+}
+
+@media (max-width: 450px) {
+  .nav-wrapper {
+    #submit {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  #search {
+    min-width: 150px;
   }
 }
 
@@ -171,16 +186,5 @@
   min-width: 150px;
 }
 
-@media (max-width: 450px) {
-  .nav-wrapper {
-    #submit {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  }
-  #search {
-    min-width: 150px;
-  }
-}
 
 //////////////// SEARCH ////////////////

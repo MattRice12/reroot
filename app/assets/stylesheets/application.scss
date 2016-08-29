@@ -34,9 +34,15 @@ body {
     padding-bottom: 270px;
   }
 
-.highlight {
-  border: 2px solid red;
-}
+  @media (max-width: 750px) {
+    .container {
+      margin-top: 140px;
+    }
+  }
+
+  .highlight {
+    border: 2px solid red;
+  }
 
   h1, h2, h3, h4, a {
     font-family: $font-title;
