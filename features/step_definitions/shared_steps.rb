@@ -3,21 +3,6 @@ Given(/^I have existing trees$/) do
   Tree.create!(user_id: user.id, name: "Tree 1")
 end
 
-Given(/^I have a tree with tabs$/) do
-  user = User.create!(name: "User", email: "user@example.com", password: "password")
-  tree = Tree.create!(user_id: user.id, name: "Tree 1")
-  tab = Tab.create!(user_id: user.id, tree_id: tree.id, url: "www.google.com", parent_tab_id: nil, name: "Tab 1")
-  Tab.create!(user_id: user.id, tree_id: tree.id, url: "www.google.com", parent_tab_id: tab.id, name: "Tab 2")
-end
-
-Given(/^I have an existing project$/) do
-  User.create!(name: "User", email: "user@example.com", password: "password")
-  Tree.create!(user_id: user.id, name: "Tree 1")
-  Project.create!(name: "About Matt", user_id: matt.id)
-  Forest.create!(tree_id: tree.id, project_id: project.id)
-  Tab.create!(user_id: user.id, tree_id: tree.id, url: "www.google.com", parent_tab_id: nil, name: "Tab 1")
-end
-
 When(/^I visit "([^"]*)"$/) do |arg1|
   visit(path)
 end
@@ -28,9 +13,10 @@ end
 
 When(/^I click "([^"]*)"$/) do |link|
   click_link(link)
+  # print page.html
 end
 
-When(/^I find "([^"]*)"$/) do |id|
+When(/^I find id "([^"]*)"$/) do |id|
   # print page.html
   find_by_id(id)
 end
@@ -39,10 +25,14 @@ When(/^I press "([^"]*)"$/) do |button|
   click_button(button)
 end
 
+When(/^I click on "([^"]*)"$/) do |el|
+  find(el).click
+end
+
 When(/^I debug$/) do
-  puts page.html
+  # puts page.html
   save_and_open_page
-  binding.pry
+  # binding.pry
 end
 
 When(/^I upload the test photo$/) do
@@ -63,4 +53,12 @@ end
 
 When(/^I check "([^"]*)"$/) do |checkbox|
   page.find(checkbox).click
+end
+
+Then(/^Under "([^"]*)" I input "([^"]*)" with "([^"]*)"$/) do |arg1, arg2, arg3|
+  page.find(arg1).fill_in(arg2, with: arg3)
+end
+
+Then(/^I find "([^"]*)"$/) do |el|
+  page.find(el)
 end

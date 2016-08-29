@@ -7,6 +7,5 @@ Background: A User logs in
     And I fill in "Password" with "password"
     And I press "Submit"
     And I should see "Your Trees"
-
-Scenario: User sees trees and tabs
-  Then I should see "Tree 1"
+    Then I should see "Tree 1"
+    And I should see "ReRoot"
