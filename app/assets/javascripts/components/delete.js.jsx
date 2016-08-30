@@ -9,7 +9,6 @@ var Delete = React.createClass({
     });
   },
 
-
   render: function() {
     return (
       <div>
@@ -24,7 +23,7 @@ var Delete = React.createClass({
           </a>
         </span>
         <span>
-          <a onClick={this.handleDelete} className="btn add-del-edit del" id="delete-tab" title="Delete Tab">
+          <a onClick={this.handleDelete} className="btn add-del-edit del react-clear" id="delete-tab" title="Delete Tab">
             <img src="http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png" alt="Delete Tab" />
           </a>
         </span>
