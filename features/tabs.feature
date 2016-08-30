@@ -22,29 +22,3 @@ Background: A User logs in
     And I press "Create Tab"
     Then I should see "Tab Created."
     Then I should see "Tab 3"
-
-  Scenario: I create a second tree but don't put in information
-
-
-
-  Scenario: I edit a tab
-    And I click "edit-tab"
-    Then I should see "Edit Tab"
-    And I fill in "Name" with "Tab 1 Updated"
-    And I fill in "Url" with "www.facebook.com"
-    And I press "Update Tab"
-    Then I should see "Tab 1 Updated"
-
-  Scenario: I delete a tab
-    And I click "delete-tab"
-    Then I should see "Tab Destroyed."
-    And I should not see "Tab 1"
-    And I should see "This tree is empty!"
-
-  Scenario: I work with the mini-tree
-    And I click "add-tab"
-    Then I should see "New Tab Under 'Tab 1'"
-    And I should see "Mini-Tree for Tab 1"
-    And I click "delete-tab"
-    Then I should see "Tab Destroyed."
-    And I should see "Your Trees"

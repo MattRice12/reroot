@@ -13,9 +13,3 @@ Background: A User logs in
     And I fill in "search" with "tab"
     And I press "Search"
     Then I should see "Tab 1"
-
-  Scenario: I delete a Tab from the Search
-    And I fill in "search" with "tab"
-    And I press "Search"
-    And I click "delete-tab"
-    Then I should see "Tab Destroyed."
