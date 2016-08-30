@@ -105,41 +105,69 @@ coding_sites =
                     [
                      ["Lossless compression - Wikipedia", "https://en.wikipedia.org/wiki/Lossless_compression"],
                      ["Information Theory - Wikipedia", "https://en.wikipedia.org/wiki/Information_theory"]
-                   ],
+                    ],
+
 
                   ["Computer Programming - Wikipedia", "https://en.wikipedia.org/wiki/Computer_programming"] =>
                     { ["Algorithmic efficiency - Wikipeda", "https://en.wikipedia.org/wiki/Algorithmic_efficiency"] =>
                       { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache"] =>
-                        { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache#Cache_performance"] =>
-                          [
-                            ["Program counter - Wikipedia", "https://en.wikipedia.org/wiki/Program_counter"],
-                            { ["Cache algorithms - Wikipedia", "https://en.wikipedia.org/wiki/Cache_algorithms"] =>
-                              { ["Distributed cache - Wikipedia", "https://en.wikipedia.org/wiki/Distributed_cache"] =>
-                                {
-                                  ["Database caching", "https://en.wikipedia.org/wiki/Database_caching"] =>
-                                    [
-                                      { ["Database - Wikipedia", "https://en.wikipedia.org/wiki/Database"] =>
-                                        [
-                                          ["PostgreSQL - Wikipedia", "https://en.wikipedia.org/wiki/PostgreSQL"],
-                                          ["Oracle Database - Wikipedia", "https://en.wikipedia.org/wiki/Oracle_Database"],
-                                          ["MySQL - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"]
-                                        ]
-                                      },
-                                      ["Database schema - Wikipedia", "https://en.wikipedia.org/wiki/Database_schema"],
-                                      ["Table (database) - Wikipedia", "https://en.wikipedia.org/wiki/Table_(database)"],
-                                      ["Query language - Wikipedia", "https://en.wikipedia.org/wiki/Query_language"],
-                                      ["View (SQL) - Wikipedia", "https://en.wikipedia.org/wiki/View_(SQL)"]
-                                    ]
-                                } #9
-                              } #8
-                            } #7
+                        [
+                          { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache#Cache_performance"] =>
+                            [
+                              ["Program counter - Wikipedia", "https://en.wikipedia.org/wiki/Program_counter"],
+                              { ["Cache algorithms - Wikipedia", "https://en.wikipedia.org/wiki/Cache_algorithms"] =>
+                                { ["Distributed cache - Wikipedia", "https://en.wikipedia.org/wiki/Distributed_cache"] =>
+                                  {
+                                    ["Database caching", "https://en.wikipedia.org/wiki/Database_caching"] =>
+                                      [
+                                        { ["Database - Wikipedia", "https://en.wikipedia.org/wiki/Database"] =>
+                                          [
+                                            ["PostgreSQL - Wikipedia", "https://en.wikipedia.org/wiki/PostgreSQL"],
+                                            ["Oracle Database - Wikipedia", "https://en.wikipedia.org/wiki/Oracle_Database"],
+                                            ["MySQL - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"]
+                                          ]
+                                        },
+                                        ["Database schema - Wikipedia", "https://en.wikipedia.org/wiki/Database_schema"]#,
+                                        # ["Table (database) - Wikipedia", "https://en.wikipedia.org/wiki/Table_(database)"],
+                                        # ["Query language - Wikipedia", "https://en.wikipedia.org/wiki/Query_language"],
+                                        # ["View (SQL) - Wikipedia", "https://en.wikipedia.org/wiki/View_(SQL)"]
+                                      ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache#DCACHE"] =>
+                            { ["Memory management unit - Wikipedia", "https://en.wikipedia.org/wiki/Memory_management_unit"] =>
+                               { ["Server (computing) - Wikipedia", "https://en.wikipedia.org/wiki/Memory_management_unit"] =>
+                                 [
+                                   { ["Database server - Wikipedia", "https://en.wikipedia.org/wiki/Database_server"] =>
+                                     [
+                                       ["Front and back ends - Wikipedia", "https://en.wikipedia.org/wiki/Front_and_back_ends"],
+                                       { ["MySQL - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"] =>
+                                         [
+                                           ["Tortious interference - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"],
+                                           ["SQL - Wikipedia", "https://en.wikipedia.org/wiki/SQL"],
+                                           ["Cloud database - Wikipedia", "https://en.wikipedia.org/wiki/Cloud_database"]
+                                         ]
+                                       },
+                                       { ["CSVs", "https://en.wikipedia.org/wiki/Comma-separated_values"] =>
+                                           [["Data exchange - Wikipedia", "https://en.wikipedia.org/wiki/Data_exchange"]]
+                                       }
+                                     ]
+                                   },
+                                   ["Data structure diagram - Wikipedia", "https://en.wikipedia.org/wiki/Data_structure_diagram"],
+                                   ["Proxy server - Wikipedia", "https://en.wikipedia.org/wiki/Proxy_server"]
+                                 ]
+                               }
+                            }
+                          }
                           ]
-                        } #6
-                      } #5
-                    } #4
-                } #3
-              } #2
-            } #1c
+                      }
+                    }
+                  }
+                }
+              }
 
 def tab!(url:, name:, parent_id: nil)
   Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: parent_id, url: url, name: name)
@@ -208,88 +236,70 @@ end
 #                 ["Proxy server - Wikipedia", "https://en.wikipedia.org/wiki/Proxy_server"],                    #22 / 13     \ 35
 #              ]
 
-
-
-
-            #
-            # {[a] =>
-            #   {[b] =>
-            #     {[c] =>
-            #       [[d],[e]],
-            #       [f] =>
-            #         {[g] =>
-            #           {[h] =>
-            #             {[i] =>
-            #               [[j], {[k] =>
-            #                 {[l] =>
-            #                   {[m] =>
-            #                     [{[n] =>
-            #                       [[o], [q], [r]]},
-            #                       [[s], [t], [u], [v]]]}}}]}}}}}}
-
-def hash_loops(user, tree, p_id, key, value, count)
-
-    Tab.create!(user_id: user.id,
-                tree_id: tree.id,
-                parent_tab_id: p_id,
-                url:  key[1],
-                name: key[0])
-
-    if value.is_a?(Hash)
-      count = 0
-      p_id += 1
-      value.each do |k2, v2|
-        count += 1
-        hash_loops(user, tree, p_id, k2, v2, count)
-      end
-
-    elsif value.is_a?(Array)
-      p_id += 1
-      value.each do |val|
-        if val.is_a?(Array)
-          # val.each do |v|
-            Tab.create!(user_id: user.id,
-                        tree_id: tree.id,
-                        parent_tab_id: p_id,
-                        url:  v[1],
-                        name: v[0])
-          # end
-        count += 1
-        else
-          key = val.keys[0]
-          value = val.values[0]
-          p_id = p_id + count
-          hash_loops(user, tree, p_id, key, value, count)
-        end
-      end
-    end
-end
-
-
-def children
-
-end
-
-def parent
-
-end
-
-c = 0
-k1 = coding_sites.keys[0]
-v1 = coding_sites.values[0]
+# def hash_loops(user, tree, p_id, key, value, count)
+#
+#     Tab.create!(user_id: user.id,
+#                 tree_id: tree.id,
+#                 parent_tab_id: p_id,
+#                 url:  key[1],
+#                 name: key[0])
+#
+#     if value.is_a?(Hash)
+#       count = 0
+#       p_id += 1
+#       value.each do |k2, v2|
+#         count += 1
+#         hash_loops(user, tree, p_id, k2, v2, count)
+#       end
+#
+#     elsif value.is_a?(Array)
+#       p_id += 1
+#       value.each do |val|
+#         if val.is_a?(Array)
+#           # val.each do |v|
+#             Tab.create!(user_id: user.id,
+#                         tree_id: tree.id,
+#                         parent_tab_id: p_id,
+#                         url:  v[1],
+#                         name: v[0])
+#           # end
+#         count += 1
+#         else
+#           key = val.keys[0]
+#           value = val.values[0]
+#           p_id = p_id + count
+#           hash_loops(user, tree, p_id, key, value, count)
+#         end
+#       end
+#     end
+# end
+#
+#
+# def children
+#
+# end
+#
+# def parent
+#
+# end
+#
+# c = 0
+# k1 = coding_sites.keys[0]
+# v1 = coding_sites.values[0]
 
 tree2 = Tree.create!(user_id: matt.id, name: "Caching Websites")
 Forest.create!(tree_id: tree2.id, project_id: project.id)
+
+
 # tab = Tab.create!(user_id: matt.id,
 #             tree_id: tree2.id,
 #             parent_tab_id: nil,
 #             url:  k1[1],
 #             name: k1[0])
-
-
 # p_id = tab.id
-
 # hash_loops(matt, tree2, p_id, k1, v1, c)
+
+
 def user
   User.first
 end
@@ -299,58 +309,3 @@ def tree
 end
 
 parse(coding_sites)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-######################
-#
-# t = 1
-# 5.times do
-#   User.create!(name: name[t - 1].capitalize, email: "#{name[t - 1]}@example.com", password: "password")
-#   Project.create!(name: proj_name[t - 1], user_id: t)
-#   Member.create!(user_id: t, project_id: t)
-#   t += 1
-# end
-# Member.create!(user_id: 1, project_id: 2)
-# Member.create!(user_id: 2, project_id: 1)
-#
-# user = User.first
-# t = 16
-# 2.times do
-#   tree = Tree.create!(user_id: user.id, name: "Tree: #{(t - 14).to_s}")
-#   Forest.create!(tree_id: tree.id, project_id: 1)
-#
-#   tab = Tab.create(user_id: user.id,
-#              tree_id: tree.id,
-#              url: url,
-#              name: tab_name[t - 16])
-#   3.times do
-#     Tab.create!(user_id: user.id,
-#                 tree_id: tree.id,
-#                 parent_tab_id: tab.id,
-#                 url: url,
-#                 name: tab_name[t - 16])
-#     t += 2
-#   end
-#   t = 17
-# end
-#
-# 50.times do
-#   t = Tab.all.count
-#   Tab.create!(user_id: user.id,
-#               tree_id: tree.id,
-#               parent_tab_id: rand((t - 6)..t),
-#               url: url,
-#               name: "#{rand(1..100)}")
-# end
