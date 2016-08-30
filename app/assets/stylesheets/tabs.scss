@@ -80,8 +80,10 @@
 
 .url-link {
   margin-bottom: 0;
+  line-height: 1.0;
   a {
     color: $link-color;
+    font-size: medium;
     text-decoration: underline;
   }
 }

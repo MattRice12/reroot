@@ -4,7 +4,7 @@
 
         <div class="trunk" id="root">
           <div class="leaf">
-            <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
+            <p class="clicker" id="srch"> <%= truncate(child.name, length: 12) %></p>
             <div class="editor">
               <%= render "shared/rechild_extra.html.erb", child: child %>
             </div>
@@ -15,7 +15,7 @@
                   <div class="branch">
                     <div class="leaf">
 
-                      <p class="clicker" id="srch"> <%= truncate(child.name, length: 9) %></p>
+                      <p class="clicker" id="srch"> <%= truncate(child.name, length: 12) %></p>
                       <div class="editor">
                         <%= render( partial: 'shared/rechild_extra', locals: { child: child }) %>
                       </div>
