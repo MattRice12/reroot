@@ -14,7 +14,7 @@
   <div class="select-user"><%= f.select :tree_id, options_from_collection_for_select(Project.find(params[:project_id]).non_forests.where(user_id: current_user), :id, :name) %></div>
 
   <div class="button-primary">
-    <%= f.submit class: "button-primary"%>
+    <%= f.submit class: "button-primary", value: "Add Tree", id: "add-forest" %>
   </div>
 
 <% end %>

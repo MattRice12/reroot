@@ -53,8 +53,8 @@ class ProjectsController < ApplicationController
   def destroy
     project = find_proj_param_obj(:id)
     return proj_validations(project) if !project || !project_permission?(project)
-    return redirect(projects_path, "This project disbanded. Thanks, Obama.") if project.destroy
-    redirect(project, "This project cannot be deleted")
+    return redirect(projects_path, PROJECT_DESTROYED) if project.destroy
+    redirect(project, NOT_DELETE)
   end
 
   private

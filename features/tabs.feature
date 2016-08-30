@@ -23,7 +23,7 @@ Background: A User logs in
     Then I should see "Tab 3"
 
   Scenario: I edit a tab
-    And I click on ".edit-tab"
+    And I click "edit-tab"
     Then I should see "Edit Tab"
     And I fill in "Name" with "Tab 1 Updated"
     And I fill in "Url" with "www.facebook.com"
@@ -31,5 +31,5 @@ Background: A User logs in
     Then I should see "Tab 1 Updated"
 
   Scenario: I delete a tab
-    And I click on ".delete-tab"
+    And I click "delete-tab"
     Then I should not see "Tab 1"

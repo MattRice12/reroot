@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   PROJECT_UPDATED = "Project Name Updated."
 
   TAB_DESTROYED     = "Tab Destroyed."
-  TREE_DESTROYED    = "Tree Destroyed. Take that, Greenpeace!"
-  FOREST_DESTROYED  = "That piece of the forest was as ancient as time... and you destroyed it..."
-  PROJECT_DESTROYED = "The project disbanded. Thanks, Obama."
-  NOT_DELETE        = "Error: You cannot delete a "
+  TREE_DESTROYED    = "Tree Destroyed."
+  FOREST_DESTROYED  = "This tree was removed from the project"
+  PROJECT_DESTROYED = "The project disbanded."
+  NOT_DELETE        = "Error: You cannot delete this."
 
   TAB_NOT_EXIST  = "That tab does not exist."
   TREE_NOT_EXIST = "That tree does not exist."

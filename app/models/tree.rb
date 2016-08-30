@@ -1,5 +1,5 @@
 class Tree < ApplicationRecord
-  default_scope { order('created_at DESC') }
+  default_scope { order('trees.created_at DESC') }
 
   has_many   :tabs,     dependent: :destroy
   has_many   :forests,  dependent: :destroy

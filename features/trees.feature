@@ -13,7 +13,7 @@ Background: A User logs in
     And I should see "Tree 1"
 
   Scenario: I create a second tree
-    And I click on ".new-tree-button"
+    And I click "new-tree-button"
     Then I should see "Create Tree"
     And I should see "Tree name"
     And I fill in "tree[name]" with "Tree 2"
@@ -24,7 +24,7 @@ Background: A User logs in
     And I should see "Tree 2"
 
   Scenario: I edit a tree
-    And I click on ".edit-tree"
+    And I click "edit-tree"
     Then I should see "Edit Name"
     And I should see "Tree name"
     And I fill in "tree[name]" with "Tree 2"
@@ -35,5 +35,6 @@ Background: A User logs in
     And I should see "Tree 2"
 
   Scenario: I delete a tree
-    And I click on ".delete-tree"
+    And I click "delete-tree"
     Then I should not see "Tree 1"
+    Then I should see "You have no trees"

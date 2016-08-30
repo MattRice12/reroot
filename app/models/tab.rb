@@ -8,7 +8,7 @@ class Tab < ApplicationRecord
   belongs_to :tree, optional: true
   belongs_to :user
 
-  scope :top_level, -> { where(parent_tab_id: nil) }
+  # scope :top_level, -> { where(parent_tab_id: nil) }
 
   def as_json(_ = nil)
     super(include: [:obj])

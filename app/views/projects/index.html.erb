@@ -8,10 +8,10 @@
           <%= link_to project.name, project_path(project), title: project.name %>
           <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="You're the Project Captain on this Project!" />
           <span class="small-text"></span>
-          <span class="small-text"><i><%= "#{project.users.count} members" %></i></span>
+          <span class="small-text"><i><%= "#{pluralize(project.users.count, 'member')}" %></i></span>
       <% else %>
         <li><%= link_to project.name, project_path(project), title: project.name %>
-        <span class="small-text"><i><%= "#{project.users.count} members" %></i></span></li>
+        <span class="small-text"><i><%= "#{pluralize(project.users.count, 'member')}" %></i></span></li>
       <% end %>
     <% end %>
   </h3>
