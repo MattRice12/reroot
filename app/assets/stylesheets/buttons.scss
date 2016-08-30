@@ -25,13 +25,23 @@
   }
 }
 
-.sup-edit {
+.small-edit {
   img {
     padding: 0;
     padding-right: 5px;
     height: 18px;
     width: 18px;
   }
+}
+
+.tree-button {
+  float: right;
+  margin: 0 10px;
+}
+
+.proj-tree-button {
+  float: right;
+  margin: 5px 10px;
 }
 
 .new-small {
@@ -46,8 +56,8 @@
 .leader-badge {
   display: inline-table;
   img {
-    height: 18px;
-    width: 18px;
+    height: 23px;
+    width: 23px;
     padding-bottom: 15px;
   }
 }

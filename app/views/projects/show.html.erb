@@ -1,16 +1,16 @@
 <h1 class="headinger"> <%= "#{project.name}" %>
   <% if current_user.id == project.user_id %>
-    <sup>
+    <small>
       <%= link_to edit_project_path(project), class: 'btn add-del-edit edit', id: "project-edit-button", title: "Edit Project Name" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
       <% end %>
-    </sup>
+    </small>
 
-    <sup>
+    <small>
       <%= link_to project_path(project), method: :delete, data: { confirm: 'Going forward will delete this project. Are you sure you want continue?'}, class: 'btn add-del-edit edit', id: "project-delete-button", title: "Delete Project" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
       <% end %>
-    </sup>
+    </small>
 
     <% if project.members.count >= 2 %>
       <span class="captainship">
@@ -30,23 +30,22 @@
       <h3 class="indent">
         <li>
           <span class="create-tab leader-badge">
-            <%= link_to project.user.name, user_path(project.user) %>
             <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="Project Captain" />
-            <span class="small-text"><i><%= "#{pluralize(contributions(project.user).count, 'contribution')}" %></i></span>
+            <%= link_to project.user.name, user_path(project.user) %>
+            <span class="small-text"><i><%= " #{pluralize(contributions(project.user).count, 'contribution')}" %></i></span>
           </span>
         </li>
         <% project.project_members.order("LOWER(name)").each do |user| %>
-          <li>
+          <li class="indiv-member">
             <%= link_to user.name, user_path(user) %>
-
+            <span class="small-text"><i><%= "#{pluralize(contributions(user).count, 'contribution')}" %></i></span>
             <% if current_user.id == project.user_id %>
-              <sup>
-                <%= link_to boot_member_path(user.members.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'add-del-edit sup-edit', id: "delete-member" do %>
+              <small>
+                <%= link_to boot_member_path(user.members.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this member?'}, class: 'add-del-edit small-edit', id: "delete-member" do %>
                   <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png", title: "Delete Member") %>
                 <% end %>
-              </sup>
+              </small>
             <% end %>
-            <span class="small-text"><i><%= "#{pluralize(contributions(user).count, 'contribution')}" %></i></span>
           </li>
         <% end %>
         <div class="create-tab add-del-edit">
@@ -86,16 +85,16 @@
   <% project.trees.order(:created_at).each do |tree| %>
       <div class="tree">
         <h2 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
-          <sup class="btn sup-edit editor">
-            <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', id: "edit-tree", title: "Edit Tree" do %>
-              <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-            <% end %>
-          </sup>
-          <sup class="btn sup-edit editor">
+          <small class="btn proj-tree-button editor">
             <%= link_to forest_path(tree.forests.find_by(project_id: project.id)), method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', title: "Delete Tree", id: "delete-tree" do %>
               <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
             <% end %>
-          </sup>
+          </small>
+          <small class="btn proj-tree-button editor">
+            <%= link_to edit_tree_path(tree, project_id: project.id), class: 'btn add-del-edit', id: "edit-tree", title: "Edit Tree" do %>
+              <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+            <% end %>
+          </small>
         </h2>
         <% if tree.tabs.any? %>
           <%= render "trees/tree_leaves.html.erb", tree: tree, tabs: tabs %>
