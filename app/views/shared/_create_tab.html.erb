@@ -1,4 +1,13 @@
-<%= form_for(Tab.new) do |f| %>
+<%= form_for(tab) do |f| %>
+
+  <div class="errors">
+    <ul>
+      <% tab.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <%= f.hidden_field :parent_tab_id, value: obj.id %>
   <%= f.hidden_field :tree_id, value: params.fetch(:tree_id, nil) %>
 

@@ -32,3 +32,7 @@ Background: A User logs in
     And I should see "User2's stats"
     And I should see "Total Trees: 1"
     And I should see "Total Tabs: 0"
+
+  Scenario: I view my profile by clicking my name in the nav bar
+    When I click "User1"
+    Then I should see "User1's profile"

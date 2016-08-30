@@ -22,7 +22,6 @@ class TreesController < ApplicationController
   def create
     tree = Tree.new(tree_params)
     return redirect(root_path, TREE_CREATED) if tree.save
-    flash[:alert] = tree.errors
     render template: 'trees/new', locals: { tree: tree}
   end
 
@@ -41,7 +40,6 @@ class TreesController < ApplicationController
       return redirect(project, FOREST_CREATED) if forest.save
       return redirect(root_path, forest.errors)
     end
-    flash[:alert] = tree.errors
     render template: 'trees/new_forest', locals: { tree: tree }
   end
 

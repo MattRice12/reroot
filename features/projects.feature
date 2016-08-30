@@ -113,6 +113,13 @@ Background: A User logs in
     Then I should see "Tree Created and Added to Project."
     And I should see "Tree 2"
 
+  Scenario: A User creates a new tree for the project but doesn't include a name
+    When I click "Projects"
+    And I click "Project 1"
+    And I click "add-tree"
+    And I press "Create Tree"
+    Then I should see "Name can't be blank"
+
   Scenario: A User adds a personal tree to the project
     When I click "Projects"
     And I click "Project 1"

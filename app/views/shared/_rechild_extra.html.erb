@@ -1,4 +1,4 @@
-<h5 class="url-link"><%= link_to child.name, url_with_protocol(child.url) %></h5>
+<h5 class="url-link"><%= link_to truncate(child.name, length: 38), url_with_protocol(child.url) %></h5>
 
 <span>
   <%= link_to edit_tab_path(child), class: 'btn add-del-edit edit', id: 'edit-tab', title: "Edit Tab" do %>

@@ -21,7 +21,6 @@ class TabsController < ApplicationController
   def create
     tab = Tab.new(tab_params)
     tab.user = current_user
-    tree = tab.tab_root
     if tab.save
       if !tab.parent_tab_id
         return redirect(new_tab_path(parent_tab_id: tab.id), TAB_CREATED)
@@ -29,8 +28,7 @@ class TabsController < ApplicationController
         return redirect(:back, TAB_CREATED)
       end
     end
-    flash[:alert] = tree.errors
-    render template: 'tabs/new.html.erb', locals: { tab: tab }
+    redirect(:back, "New Tab must include a Url.")
   end
 
   def edit
@@ -58,7 +56,7 @@ class TabsController < ApplicationController
         return redirect(:back, TAB_DESTROYED)
       elsif project = params[:project] #for when current_user is on the projects page
         return redirect(project, TAB_DESTROYED)
-      else 
+      else
         return redirect(root_path, TAB_DESTROYED)
       end
     end

@@ -23,6 +23,10 @@ Background: A User logs in
     Then I should see "Tab Created."
     Then I should see "Tab 3"
 
+  Scenario: I create a second tree but don't put in information
+    
+
+
   Scenario: I edit a tab
     And I click "edit-tab"
     Then I should see "Edit Tab"
