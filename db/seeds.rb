@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-url = "http://rubyonrails.org/"
-name = %w(ender bean petra alai dink)
-tab_name = ["Main Branch", "Main Branch", "Child", "Child", "Grandchild", "Grandchild", "Great Grandchild", "Great Grandchild"]
-proj_name = ["Dragon Army", "Rabbit Army", "Salamander Army", "Phoenix Army", "Rat Army"]
+# url = "http://rubyonrails.org/"
+# name = %w(ender bean petra alai dink)
+# tab_name = ["Main Branch", "Main Branch", "Child", "Child", "Grandchild", "Grandchild", "Great Grandchild", "Great Grandchild"]
+# proj_name = ["Dragon Army", "Rabbit Army", "Salamander Army", "Phoenix Army", "Rat Army"]
 
 websites = { github:
               {
@@ -94,8 +94,55 @@ websites.keys.count.times do
 end
 
 
-# coding_sites = [
-#
+
+
+coding_sites =
+
+            { ["coding - Google Search", "https://www.google.com/#q=coding"] =>
+              { ["Coding - Wikipedia", "https://en.wikipedia.org/wiki/Coding"] =>
+                {
+                  ["Entropy encoding - Wikipedia", "https://en.wikipedia.org/wiki/Entropy_encoding"] =>
+                    [
+                     ["Lossless compression - Wikipedia", "https://en.wikipedia.org/wiki/Lossless_compression"],
+                     ["Information Theory - Wikipedia", "https://en.wikipedia.org/wiki/Information_theory"]
+                   ],
+
+                  ["Computer Programming - Wikipedia", "https://en.wikipedia.org/wiki/Computer_programming"] =>
+                    { ["Algorithmic efficiency - Wikipeda", "https://en.wikipedia.org/wiki/Algorithmic_efficiency"] =>
+                      { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache"] =>
+                        { ["CPU cache - Wikipeda", "https://en.wikipedia.org/wiki/CPU_cache#Cache_performance"] =>
+                          [
+                            ["Program counter - Wikipedia", "https://en.wikipedia.org/wiki/Program_counter"],
+                            { ["Cache algorithms - Wikipedia", "https://en.wikipedia.org/wiki/Cache_algorithms"] =>
+                              { ["Distributed cache - Wikipedia", "https://en.wikipedia.org/wiki/Distributed_cache"] =>
+                                {
+                                  ["Database caching", "https://en.wikipedia.org/wiki/Database_caching"] =>
+                                    [
+                                      { ["Database - Wikipedia", "https://en.wikipedia.org/wiki/Database"] =>
+                                        [
+                                          ["PostgreSQL - Wikipedia", "https://en.wikipedia.org/wiki/PostgreSQL"],
+                                          ["Oracle Database - Wikipedia", "https://en.wikipedia.org/wiki/Oracle_Database"],
+                                          ["MySQL - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"]
+                                        ]
+                                      },
+                                      [
+                                        ["Database schema - Wikipedia", "https://en.wikipedia.org/wiki/Database_schema"],
+                                        ["Table (database) - Wikipedia", "https://en.wikipedia.org/wiki/Table_(database)"],
+                                        ["Query language - Wikipedia", "https://en.wikipedia.org/wiki/Query_language"],
+                                        ["View (SQL) - Wikipedia", "https://en.wikipedia.org/wiki/View_(SQL)"]
+                                      ]
+                                    ]
+                                } #9
+                              } #8
+                            } #7
+                          ]
+                        } #6
+                      } #5
+                    } #4
+                } #3
+              } #2
+            } #1
+
 #    ["Google", "www.google.com"],                                                                  #0   \    \                 1
 #      ["coding - Google Search", "https://www.google.com/#q=coding"],                                #1  / 0   \               2
 #        ["Codng - Wikipedia", "https://en.wikipedia.org/wiki/Coding"],                                 #2  / 1 \               3
@@ -137,43 +184,135 @@ end
 #              ]
 
 
-#
-t = 1
-5.times do
-  User.create!(name: name[t - 1].capitalize, email: "#{name[t - 1]}@example.com", password: "password")
-  Project.create!(name: proj_name[t - 1], user_id: t)
-  Member.create!(user_id: t, project_id: t)
-  t += 1
-end
-Member.create!(user_id: 1, project_id: 2)
-Member.create!(user_id: 2, project_id: 1)
 
-user = User.first
-t = 16
-2.times do
-  tree = Tree.create!(user_id: user.id, name: "Tree: #{(t - 14).to_s}")
-  Forest.create!(tree_id: tree.id, project_id: 1)
 
-  tab = Tab.create(user_id: user.id,
-             tree_id: tree.id,
-             url: url,
-             name: tab_name[t - 16])
-  3.times do
+            #
+            # {[a] =>
+            #   {[b] =>
+            #     {[c] =>
+            #       [[d],[e]],
+            #       [f] =>
+            #         {[g] =>
+            #           {[h] =>
+            #             {[i] =>
+            #               [[j], {[k] =>
+            #                 {[l] =>
+            #                   {[m] =>
+            #                     [{[n] =>
+            #                       [[o], [q], [r]]},
+            #                       [[s], [t], [u], [v]]]}}}]}}}}}}
+
+def hash_loops(user, tree, p_id, key, value)
     Tab.create!(user_id: user.id,
                 tree_id: tree.id,
-                parent_tab_id: tab.id,
-                url: url,
-                name: tab_name[t - 16])
-    t += 2
-  end
-  t = 17
+                parent_tab_id: p_id,
+                url:  key[1],
+                name: key[0])
+
+    if value.is_a?(Hash)
+
+      key = value.keys[0]
+      value = value.values[0]
+      p_id = p_id + 1
+      hash_loops(user, tree, p_id, key, value)
+
+    elsif value.is_a?(Array)
+      val_num = value.count
+      par_id = p_id + 1
+      val_num.times do
+        arr_position = 0
+        if value[arr_position].is_a?(Array)
+          Tab.create!(user_id: user.id,
+                      tree_id: tree.id,
+                      parent_tab_id: par_id,
+                      url:  value[arr_position][1],
+                      name: value[arr_position][0])
+
+          arr_position += 1
+        elsif value[arr_position].is_a?(Hash)
+          par_id += 1
+          hash_loops(user, tree, par_id, key, value)
+        end
+      end
+    end
 end
 
-50.times do
-  t = Tab.all.count
-  Tab.create!(user_id: user.id,
-              tree_id: tree.id,
-              parent_tab_id: rand((t - 6)..t),
-              url: url,
-              name: "#{rand(1..100)}")
+def children
+
 end
+
+def parent
+  
+end
+
+k1 = coding_sites.keys[0]
+v1 = coding_sites.values[0]
+
+tree2 = Tree.create!(user_id: matt.id, name: "Caching Websites")
+Forest.create!(tree_id: tree2.id, project_id: project.id)
+tab = Tab.create!(user_id: matt.id,
+            tree_id: tree2.id,
+            parent_tab_id: nil,
+            url:  k1[1],
+            name: k1[0])
+
+p_id = tab.id
+
+hash_loops(matt, tree2, p_id, k1, v1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################
+#
+# t = 1
+# 5.times do
+#   User.create!(name: name[t - 1].capitalize, email: "#{name[t - 1]}@example.com", password: "password")
+#   Project.create!(name: proj_name[t - 1], user_id: t)
+#   Member.create!(user_id: t, project_id: t)
+#   t += 1
+# end
+# Member.create!(user_id: 1, project_id: 2)
+# Member.create!(user_id: 2, project_id: 1)
+#
+# user = User.first
+# t = 16
+# 2.times do
+#   tree = Tree.create!(user_id: user.id, name: "Tree: #{(t - 14).to_s}")
+#   Forest.create!(tree_id: tree.id, project_id: 1)
+#
+#   tab = Tab.create(user_id: user.id,
+#              tree_id: tree.id,
+#              url: url,
+#              name: tab_name[t - 16])
+#   3.times do
+#     Tab.create!(user_id: user.id,
+#                 tree_id: tree.id,
+#                 parent_tab_id: tab.id,
+#                 url: url,
+#                 name: tab_name[t - 16])
+#     t += 2
+#   end
+#   t = 17
+# end
+#
+# 50.times do
+#   t = Tab.all.count
+#   Tab.create!(user_id: user.id,
+#               tree_id: tree.id,
+#               parent_tab_id: rand((t - 6)..t),
+#               url: url,
+#               name: "#{rand(1..100)}")
+# end

@@ -7,14 +7,14 @@
 .tree {
   border: 3px solid $secondary-color;
   border-radius: 5px;
-  margin: 10px;
+  margin: 30px 10px;
   width: auto;
   display: table;
-  transition: all .1s;
-  &:hover {
-    box-shadow: 5px 5px 5px gray;
-    transition: all .1s;
-  }
+  // transition: all .1s;
+  // &:hover {
+  //   box-shadow: 5px 5px 5px gray;
+  //   transition: all .1s;
+  // }
   a {
     font-size: xx-large;
   }
@@ -89,6 +89,10 @@
       display: block;
       .branch {
         border: 1px dotted lightgray;
+        // border-top: 1px solid black;
+        // border-bottom: 1px solid black;
+        // border-left: 1px solid lightgray;
+        // border-right: 1px solid lightgray;
         display: table-cell;
         text-align: center;
       }
