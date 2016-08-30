@@ -52,7 +52,7 @@ tree = Tree.create!(user_id: matt.id, name: "Matt's Websites")
 Forest.create!(tree_id: tree.id, project_id: project.id)
 Tab.create!(user_id: matt.id,
             tree_id: tree.id,
-            url: nil,
+            url: "https://github.com/",
             parent_tab_id: nil,
             name: "Matt")
 
