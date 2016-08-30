@@ -6,10 +6,31 @@
     opacity: 0.4;
     height: 25px;
     width: 25px;
-    // padding: 5px;
+    padding: 5px;
     &:hover {
       opacity: 1.0;
     }
+  }
+}
+
+.create-tab, .empty-tree-button, .new-tree {
+  .add-del-edit {
+    img {
+      padding: 0;
+    }
+  }
+  .mem-add-text {
+    font-size: large;
+  }
+  #add-tree, #new-tree-button {
+    img {
+      padding: 5px 0 5px 15px;
+    }
+  }
+  .tree-add-text {
+    font-size: large;
+    padding: 20px 0 0 5px;
+    vertical-align: middle;
   }
 }
 
@@ -36,12 +57,12 @@
 
 .tree-button {
   float: right;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .proj-tree-button {
   float: right;
-  margin: 5px 10px;
+  margin: 10px 5px;
 }
 
 .new-small {

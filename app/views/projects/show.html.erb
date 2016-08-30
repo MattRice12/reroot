@@ -52,6 +52,7 @@
           <%= link_to new_member_path(project_id: project.id), class: 'btn add-del-edit', id: "add-member" do %>
             <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Member") %>
           <% end %>
+          <small class="mem-add-text"> Add new member! </small>
         </div>
       </h3>
     </ol>
@@ -67,18 +68,21 @@
       <%= link_to new_tree_path, class: 'btn add-del-edit', id: "add-tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
       <% end %>
+      <small class="tree-add-text"> Add new tree! </small>
     </div>
   <% elsif (user_trees - project_trees).empty? %>
     <div class="new-tree">
       <%= link_to new_forest_tree_path(project_id: project.id), class: 'btn add-del-edit', id: "add-tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
       <% end %>
+      <small class="tree-add-text"> Add new tree! </small>
     </div>
   <% else %>
     <div class="new-tree">
       <%= link_to new_forest_path(project_id: project.id), class: 'btn add-del-edit', id: "add-tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
       <% end %>
+      <small class="tree-add-text"> Add new tree! </small>
     </div>
   <% end %>
 

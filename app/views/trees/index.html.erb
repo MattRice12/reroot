@@ -9,6 +9,8 @@
       <%= link_to new_tree_path, class: 'btn add-del-edit', id: "new-tree-button" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
       <% end %>
+      <small class="tree-add-text"> Add new tree! </small>
+
     </div>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
@@ -42,6 +44,7 @@
         <%= link_to new_tree_path, class: 'btn add-del-edit', id: "new-tree" do %>
           <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree", alt: "Create New Tree") %>
         <% end %>
+        <small class="tree-add-text"> Add new tree! </small>
       </div>
     <% end %>
 
