@@ -6,11 +6,19 @@
     opacity: 0.4;
     height: 25px;
     width: 25px;
-    padding: 5px;
+    padding: 0 5px;
     &:hover {
       opacity: 1.0;
     }
   }
+}
+
+#add-member {
+  padding-left: 15px;
+}
+
+#delete-member {
+  margin-left: 15px;
 }
 
 .create-tab, .empty-tree-button, .new-tree {
