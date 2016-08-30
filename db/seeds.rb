@@ -125,12 +125,10 @@ coding_sites =
                                           ["MySQL - Wikipedia", "https://en.wikipedia.org/wiki/MySQL"]
                                         ]
                                       },
-                                      [
-                                        ["Database schema - Wikipedia", "https://en.wikipedia.org/wiki/Database_schema"],
-                                        ["Table (database) - Wikipedia", "https://en.wikipedia.org/wiki/Table_(database)"],
-                                        ["Query language - Wikipedia", "https://en.wikipedia.org/wiki/Query_language"],
-                                        ["View (SQL) - Wikipedia", "https://en.wikipedia.org/wiki/View_(SQL)"]
-                                      ]
+                                      ["Database schema - Wikipedia", "https://en.wikipedia.org/wiki/Database_schema"],
+                                      ["Table (database) - Wikipedia", "https://en.wikipedia.org/wiki/Table_(database)"],
+                                      ["Query language - Wikipedia", "https://en.wikipedia.org/wiki/Query_language"],
+                                      ["View (SQL) - Wikipedia", "https://en.wikipedia.org/wiki/View_(SQL)"]
                                     ]
                                 } #9
                               } #8
@@ -141,7 +139,34 @@ coding_sites =
                     } #4
                 } #3
               } #2
-            } #1
+            } #1c
+
+def tab!(url:, name:, parent_id: nil)
+  Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: parent_id, url: url, name: name)
+end
+
+def parse(tree, parent_id = nil)
+  case tree
+  when Array
+    tab!(url: tree.last, name: tree.first, parent_id: parent_id)
+  when Hash
+    tree.each do |(k, v)|
+      t = tab!(url: k.last, name: k.first, parent_id: parent_id)
+      case v
+      when Array
+        v.each do |elem|
+          parse(elem, t.id)
+        end
+      when Hash
+        parse(v, t.id)
+      else
+        fail "Unexpected data type, should be hash or array"
+      end
+    end
+  else
+    fail "Unexpected data type, should be hash or array"
+  end
+end
 
 #    ["Google", "www.google.com"],                                                                  #0   \    \                 1
 #      ["coding - Google Search", "https://www.google.com/#q=coding"],                                #1  / 0   \               2
@@ -202,36 +227,44 @@ coding_sites =
             #                       [[o], [q], [r]]},
             #                       [[s], [t], [u], [v]]]}}}]}}}}}}
 
-def hash_loops(user, tree, p_id, key, value)
+def hash_loops(user, tree, p_id, key, value, count)
+
     Tab.create!(user_id: user.id,
                 tree_id: tree.id,
                 parent_tab_id: p_id,
                 url:  key[1],
                 name: key[0])
 
-    p_id = p_id + 1
-
     if value.is_a?(Hash)
+      count = 0
+      p_id += 1
       value.each do |k2, v2|
-        hash_loops(user, tree, p_id, k2, v2)
+        count += 1
+        hash_loops(user, tree, p_id, k2, v2, count)
       end
 
     elsif value.is_a?(Array)
+      p_id += 1
       value.each do |val|
         if val.is_a?(Array)
-          Tab.create!(user_id: user.id,
-                      tree_id: tree.id,
-                      parent_tab_id: p_id,
-                      url:  val[1],
-                      name: val[0])
-        elsif val.is_a?(Hash)
+          # val.each do |v|
+            Tab.create!(user_id: user.id,
+                        tree_id: tree.id,
+                        parent_tab_id: p_id,
+                        url:  v[1],
+                        name: v[0])
+          # end
+        count += 1
+        else
           key = val.keys[0]
           value = val.values[0]
-          hash_loops(user, tree, p_id, key, value)
+          p_id = p_id + count
+          hash_loops(user, tree, p_id, key, value, count)
         end
       end
     end
 end
+
 
 def children
 
@@ -241,22 +274,31 @@ def parent
 
 end
 
+c = 0
 k1 = coding_sites.keys[0]
 v1 = coding_sites.values[0]
 
 tree2 = Tree.create!(user_id: matt.id, name: "Caching Websites")
 Forest.create!(tree_id: tree2.id, project_id: project.id)
-tab = Tab.create!(user_id: matt.id,
-            tree_id: tree2.id,
-            parent_tab_id: nil,
-            url:  k1[1],
-            name: k1[0])
-
-p_id = tab.id
-
-hash_loops(matt, tree2, p_id, k1, v1)
+# tab = Tab.create!(user_id: matt.id,
+#             tree_id: tree2.id,
+#             parent_tab_id: nil,
+#             url:  k1[1],
+#             name: k1[0])
 
 
+# p_id = tab.id
+
+# hash_loops(matt, tree2, p_id, k1, v1, c)
+def user
+  User.first
+end
+
+def tree
+  Tree.find_by(name: "Caching Websites")
+end
+
+parse(coding_sites)
 
 
 
