@@ -209,29 +209,25 @@ def hash_loops(user, tree, p_id, key, value)
                 url:  key[1],
                 name: key[0])
 
-    if value.is_a?(Hash)
+    p_id = p_id + 1
 
-      key = value.keys[0]
-      value = value.values[0]
-      p_id = p_id + 1
-      hash_loops(user, tree, p_id, key, value)
+    if value.is_a?(Hash)
+      value.each do |k2, v2|
+        hash_loops(user, tree, p_id, k2, v2)
+      end
 
     elsif value.is_a?(Array)
-      val_num = value.count
-      par_id = p_id + 1
-      val_num.times do
-        arr_position = 0
-        if value[arr_position].is_a?(Array)
+      value.each do |val|
+        if val.is_a?(Array)
           Tab.create!(user_id: user.id,
                       tree_id: tree.id,
-                      parent_tab_id: par_id,
-                      url:  value[arr_position][1],
-                      name: value[arr_position][0])
-
-          arr_position += 1
-        elsif value[arr_position].is_a?(Hash)
-          par_id += 1
-          hash_loops(user, tree, par_id, key, value)
+                      parent_tab_id: p_id,
+                      url:  val[1],
+                      name: val[0])
+        elsif val.is_a?(Hash)
+          key = val.keys[0]
+          value = val.values[0]
+          hash_loops(user, tree, p_id, key, value)
         end
       end
     end
@@ -242,7 +238,7 @@ def children
 end
 
 def parent
-  
+
 end
 
 k1 = coding_sites.keys[0]
