@@ -32,7 +32,7 @@
           <span class="create-tab leader-badge">
             <%= link_to project.user.name, user_path(project.user) %>
             <img src="https://cdn0.iconfinder.com/data/icons/awards-7/500/award_bravery--512.png" alt="Leader Image" title="Project Captain" />
-            <span class="small-text"><i><%= "#{pluralize(project.user.tabs.count, 'contribution')}" %></i></span>
+            <span class="small-text"><i><%= "#{pluralize(contributions(project.user).count, 'contribution')}" %></i></span>
           </span>
         </li>
         <% project.project_members.order("LOWER(name)").each do |user| %>
@@ -46,7 +46,7 @@
                 <% end %>
               </sup>
             <% end %>
-            <span class="small-text"><i><%= "#{pluralize(project.user.tabs.count, 'contribution')}" %></i></span>
+            <span class="small-text"><i><%= "#{pluralize(contributions(user).count, 'contribution')}" %></i></span>
           </li>
         <% end %>
         <div class="create-tab add-del-edit">
