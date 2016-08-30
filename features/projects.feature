@@ -28,11 +28,11 @@ Background: A User logs in
     And I should see "1 contribution"
     And I should see id "project-edit-button"
     And I should see id "project-delete-button"
-    And I should see "Members:"
+    And I should see "Members"
     And I should see "User1"
     And I should see id "add-member"
     And I should see "Leave Project"
-    And I should see "Trees:"
+    And I should see "Trees"
     And I should see id "add-tree"
 
   Scenario: A User visits the project show from dash
@@ -58,7 +58,7 @@ Background: A User logs in
     And I press "Create Project"
     Then I should see "Project Created."
     Then I should see "Project 2"
-    And I should see "Members:"
+    And I should see "Members"
 
   Scenario: A User edits a project
     When I click "Projects"

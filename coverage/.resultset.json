@@ -368,7 +368,7 @@
       ],
       "/Users/Matt/tiy/reroot/app/models/tree.rb": [
         1,
-        729,
+        755,
         null,
         1,
         1,
@@ -780,6 +780,16 @@
         1,
         22,
         null,
+        null,
+        1,
+        null,
+        null,
+        26,
+        null,
+        51,
+        51,
+        26,
+        null,
         null
       ],
       "/Users/Matt/tiy/reroot/app/helpers/tabs_helper.rb": [
@@ -1189,6 +1199,6 @@
         null
       ]
     },
-    "timestamp": 1472519728
+    "timestamp": 1472585172
   }
 }

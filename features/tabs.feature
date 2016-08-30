@@ -24,7 +24,7 @@ Background: A User logs in
     Then I should see "Tab 3"
 
   Scenario: I create a second tree but don't put in information
-    
+
 
 
   Scenario: I edit a tab
@@ -43,7 +43,7 @@ Background: A User logs in
 
   Scenario: I work with the mini-tree
     And I click "add-tab"
-    Then I should see "New Connection Under 'Tab 1'"
+    Then I should see "New Tab Under 'Tab 1'"
     And I should see "Mini-Tree for Tab 1"
     And I click "delete-tab"
     Then I should see "Tab Destroyed."
