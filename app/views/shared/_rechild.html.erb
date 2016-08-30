@@ -6,35 +6,11 @@
         <div class="editor">
 
 
-
 <%##### %>
 
 <h5 class="url-link"><%= link_to child.name, url_with_protocol(child.url) %></h5>
 
-<span>
-  <%= link_to edit_tab_path(child), class: 'btn add-del-edit edit', id: "edit-tab", title: "Edit Tab" do %>
-    <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
-  <% end %>
-</span>
-
-<span class="create-tab add-del-edit add">
-  <%= link_to new_tab_path(parent_tab_id: child.id), class: 'btn add-del-edit add', id: "add-tab", title: "New Child Tab" do %>
-    <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png") %>
-  <% end %>
-</span>
-
-<span>
-  <% if request.path.include?("project") %>
-    <%= link_to tab_path(child, parent_tab_id: params[:parent_tab_id], project: request.path, anchor: child.tree.name.parameterize), method: :delete, data: { confirm: 'Clicking OK will delete this tab! Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del', id: "delete-tab", title: "Delete Tab" do %>
-      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
-    <% end %>
-  <% else %>
-    <%= link_to tab_path(child, parent_tab_id: params[:parent_tab_id], anchor: child.tree.name.parameterize), method: :delete, data: { confirm: 'Clicking OK will delete this tab! Are you sure you want to delete this tab?'}, class: 'btn add-del-edit del', id: "delete-tab", title: "Delete Tab" do %>
-      <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
-    <% end %>
-  <% end %>
-</span>
-
+<%= react_component("Delete", child: child, includesProject: request.path.include?("project")) %>
 
 <div class="creation">
 

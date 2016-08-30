@@ -52,12 +52,16 @@ class TabsController < ApplicationController
     # tab2 = Tab.where(parent_tab_id: params[:parent_tab_id]) && Tab.where(id: params[:parent_tab_id])
             #=> Not sure why I needed the first part
     if tab.destroy
-      if tab2.any? { |t| t != tab } #targets non-root tabs in the mini-tree
-        return redirect(:back, TAB_DESTROYED)
-      elsif project = params[:project] #for when current_user is on the projects page
-        return redirect(project, TAB_DESTROYED)
+      if request.xhr?
+        return render json: { message: "Deleted" }
       else
-        return redirect(root_path, TAB_DESTROYED)
+        if tab2.any? { |t| t != tab } #targets non-root tabs in the mini-tree
+          return redirect(:back, TAB_DESTROYED)
+        elsif project = params[:project] #for when current_user is on the projects page
+          return redirect(project, TAB_DESTROYED)
+        else
+          return redirect(root_path, TAB_DESTROYED)
+        end
       end
     end
     return render message: TAB_NOT_EXIST

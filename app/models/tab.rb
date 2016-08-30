@@ -12,9 +12,9 @@ class Tab < ApplicationRecord
 
   # scope :top_level, -> { where(parent_tab_id: nil) }
 
-  def as_json(_ = nil)
-    super(include: [:obj])
-  end
+  # def as_json(_ = nil)
+  #   super(include: [:child])
+  # end
 
   def tab_root
     tab = self
