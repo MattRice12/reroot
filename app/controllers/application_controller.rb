@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   TAB_DESTROYED     = "Tab Destroyed."
   TREE_DESTROYED    = "Tree Destroyed."
-  FOREST_DESTROYED  = "This tree was removed from the project"
+  FOREST_DESTROYED  = "This tree was removed from the project."
   PROJECT_DESTROYED = "The project disbanded."
   NOT_DELETE        = "Error: You cannot delete this."
 

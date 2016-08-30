@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
   def search
-    search_params.includes(tabs: [:children])
+    search_params
   end
 end

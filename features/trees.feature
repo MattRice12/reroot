@@ -36,5 +36,6 @@ Background: A User logs in
 
   Scenario: I delete a tree
     And I click "delete-tree"
-    Then I should not see "Tree 1"
-    Then I should see "You have no trees"
+    Then I should see "Tree Destroyed."
+    And I should not see "Tree 1"
+    And I should see "You have no trees"

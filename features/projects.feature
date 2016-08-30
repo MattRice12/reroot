@@ -56,6 +56,7 @@ Background: A User logs in
     Then I should see "Start New Project"
     And I fill in "Name" with "Project 2"
     And I press "Create Project"
+    Then I should see "Project Created."
     Then I should see "Project 2"
     And I should see "Members:"
 
@@ -66,6 +67,7 @@ Background: A User logs in
     Then I should see "Edit Project Name"
     Then I fill in "Name" with "Project 1 edit"
     And I press "Update Project"
+    Then I should see "Project Name Updated."
     Then I should see "Project 1 edit"
     And I should see "Members"
 
@@ -108,13 +110,25 @@ Background: A User logs in
     Then I should see "Create a Tree for this Project"
     And I fill in "tree[name]" with "Tree 2"
     And I press "Create Tree"
-    Then I should see "Tree 2"
+    Then I should see "Tree Created and Added to Project."
+    And I should see "Tree 2"
 
   Scenario: A User adds a personal tree to the project
     When I click "Projects"
     And I click "Project 1"
     And I click "delete-tree"
+    Then I should see "This tree was removed from the project."
     And I click "add-tree"
     Then I should see "Add Tree"
     And I press "Add Tree"
-    Then I should see "Tree 1"
+    Then I should see "Tree Created and Added to Project."
+    And I should see "Tree 1"
+
+  Scenario: A User edits a tree in the project
+    When I click "Projects"
+    And I click "Project 1"
+    And I click "edit-tree"
+    And I fill in "tree[name]" with "Tree 1 edit"
+    And I press "Update Tree"
+    Then I should see "Tree Name Updated."
+    And I should see "Tree 1 edit"

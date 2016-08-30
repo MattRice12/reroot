@@ -20,6 +20,7 @@ Background: A User logs in
     And I fill in "Name" with "Tab 3"
     And I fill in "Url" with "www.google.com"
     And I press "Create Tab"
+    Then I should see "Tab Created."
     Then I should see "Tab 3"
 
   Scenario: I edit a tab
@@ -32,4 +33,14 @@ Background: A User logs in
 
   Scenario: I delete a tab
     And I click "delete-tab"
-    Then I should not see "Tab 1"
+    Then I should see "Tab Destroyed."
+    And I should not see "Tab 1"
+    And I should see "This tree is empty!"
+
+  Scenario: I work with the mini-tree
+    And I click "add-tab"
+    Then I should see "New Connection Under 'Tab 1'"
+    And I should see "Mini-Tree for Tab 1"
+    And I click "delete-tab"
+    Then I should see "Tab Destroyed."
+    And I should see "Your Trees"
