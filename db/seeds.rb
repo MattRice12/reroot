@@ -169,6 +169,32 @@ coding_sites =
                 }
               }
 
+
+# kittens =
+#   { ["Kitten - search", "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=kittens"] =>
+#       [
+#         ["Kitten Cam", "http://explore.org/live-cams/player/kitten-rescue-cam"],
+#         { ["Kitten - Wiki", "https://en.wikipedia.org/wiki/Kitten"] =>
+#             [
+#               ["Litter - Wiki", "https://en.wikipedia.org/wiki/Litter_(animal)"],
+#               { ["Cat - Wiki", "https://en.wikipedia.org/wiki/Cat"] =>
+#                 [
+#                   ["Mewing", "https://en.wikipedia.org/wiki/Cat_communication"],
+#                   {["Purring", "https://en.wikipedia.org/wiki/Purr"] =>
+#                     [
+#                       ["Neural Oscillation", "https://en.wikipedia.org/wiki/Neural_oscillation"],
+#                       ["Vocal Folds", "https://en.wikipedia.org/wiki/Vocal_folds"]
+#                     ]
+#                   },
+#                   ["Trilling", "https://en.wikipedia.org/wiki/Trill_consonant"]
+#                 ]
+#
+#               }
+#             ]
+#           }
+#       ]
+#   }
+
 def tab!(url:, name:, parent_id: nil)
   Tab.create!(user_id: user.id, tree_id: tree.id, parent_tab_id: parent_id, url: url, name: name)
 end
@@ -290,6 +316,8 @@ end
 tree2 = Tree.create!(user_id: matt.id, name: "Caching Websites")
 Forest.create!(tree_id: tree2.id, project_id: project.id)
 
+# Tree.create!(user_id: matt.id, name: "Kitten Research")
+
 
 # tab = Tab.create!(user_id: matt.id,
 #             tree_id: tree2.id,
@@ -309,3 +337,4 @@ def tree
 end
 
 parse(coding_sites)
+# parse(kittens)

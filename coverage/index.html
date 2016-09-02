@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-08-30T16:22:27-05:00">2016-08-30T16:22:27-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-09-01T12:36:17-05:00">2016-09-01T12:36:17-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -277,7 +277,7 @@
         <td>22</td>
         <td>17</td>
         <td>5</td>
-        <td>26.4</td>
+        <td>26.5</td>
       </tr>
       
       <tr>
@@ -710,10 +710,10 @@
           <code class="ruby">  def search_params</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="31">
+          <span class="hits">2</span>
           
-          <code class="ruby">    tabs = Tab.search(params[:search]).where(user_id: current_user.id)</code>
+          <code class="ruby">    tabs = Tab.search(params[:search]).where(tree_id: current_user.trees.each { |tree| tree.id } )</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="32">
@@ -5426,8 +5426,8 @@
           <code class="ruby">class Tree &lt; ApplicationRecord</code>
         </li>
       
-        <li class="covered" data-hits="553" data-linenumber="2">
-          <span class="hits">553</span>
+        <li class="covered" data-hits="556" data-linenumber="2">
+          <span class="hits">556</span>
           
           <code class="ruby">  default_scope { order(&#39;trees.created_at DESC&#39;) }</code>
         </li>
