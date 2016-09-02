@@ -21,4 +21,6 @@ Clearance for authentication.
 Skeleton for a minimalistic front-end framework.
 
 
+![ReRoot_UML.png](./ReRoot_UML.png)
+
 [![Build Status](https://semaphoreci.com/api/v1/amattrice/reroot/branches/master/badge.svg)](https://semaphoreci.com/amattrice/reroot)
