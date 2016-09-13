@@ -142,7 +142,7 @@
       }
       .in.user {
         width: initial;
-        min-width: 70px;
+        min-width: 17%;
       }
     }
   }
@@ -172,6 +172,9 @@
 }
 
 //////////////// SEARCH ////////////////
+.columns.input-field {
+  margin: 0;
+}
 .input-field {
   margin: 0;
   form {

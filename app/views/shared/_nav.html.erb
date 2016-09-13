@@ -1,10 +1,10 @@
 <nav>
   <div class="row nav-row">
     <div class="twelve columns nav-wrapper">
-      <div class="seven columns title-search">
+      <div class="six columns title-search">
         <div class="two columns nav-title"><a href="/" class="brand-logo">ReRoot</a>
         </div>
-        <div class="ten columns input-field ">
+        <div class="nine columns input-field ">
             <form>
               <div class="search-box">
                 <%= form_tag(search_path, id: "search-form") do %>
@@ -15,7 +15,7 @@
             </form>
           </div>
         </div>
-      <div class="five columns heading-block">
+      <div class="six columns heading-block">
             <% if signed_in? %>
               <div class="two columns heading in user"><%= link_to "#{current_user.name}", user_path(current_user) %></div>
               <div class="two columns heading in home"><%= link_to "Home", root_path %></div>
