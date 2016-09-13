@@ -43,6 +43,10 @@
     .in.proj {
       margin: 0 0 0 20px;
     }
+    .in.user {
+      width: initial;
+      min-width: 118px;
+    }
     .sign {
       min-width: 100px;
     }
@@ -135,6 +139,10 @@
       }
       .in {
         text-align: left;
+      }
+      .in.user {
+        width: initial;
+        min-width: 70px;
       }
     }
   }

@@ -39,6 +39,13 @@ class Tree < ApplicationRecord
 
   def tab_count
     self.tabs.count
+    # self.tabs.count_by_sql(
+    # """
+    #   SELECT COUNT(*)
+    #   FROM tabs, trees
+    #   WHERE tabs.tree_id = trees.id;
+    # """
+    # )
   end
 
   def user_tab_count(user)
