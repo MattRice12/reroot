@@ -9,12 +9,11 @@ class Tree < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
 
-  def as_json(_ = nil)
-    super(include: [:tree])
-  end
+  # def as_json(_ = nil)
+  #   super(include: [:tree])
+  # end
 
   def self.all_branches_for(tree)
-
     tabs = Tab.find_by_sql(
     """
       SELECT * FROM tabs
@@ -32,27 +31,45 @@ class Tree < ApplicationRecord
     Tab.where(tree_id: tree.id).where(parent_tab_id)
   end
 
-  def branch_count
-    # self.tabs.where.not(parent_tab_id: nil).map { |tab| tab.parent_tab_id }.uniq.count
-    self.tabs.where.not(parent_tab_id: nil).distinct.count(:parent_tab_id)
-  end
-
-  def tab_count
-    self.tabs.count
-    # self.tabs.count_by_sql(
-    # """
-    #   SELECT COUNT(*)
-    #   FROM tabs, trees
-    #   WHERE tabs.tree_id = trees.id;
-    # """
-    # )
-  end
-
   def user_tab_count(user)
     self.tabs.where(user_id: user.id).count
   end
 
   def project_count
     self.forests.where(tree_id: self.id).count
+    # self.forests.count_by_sql(
+    # """
+    #   SELECT COUNT(projects.id)
+    #   FROM projects
+    #   JOIN forests
+    #   ON projects.id = forests.project_id
+    #   JOIN trees
+    #   ON trees.id = forests.tree_id
+    #   WHERE forests.tree_id = #{self.id};
+    # """
+    # )
+  end
+
+  def branch_count
+    # self.tabs.where.not(parent_tab_id: nil).map { |tab| tab.parent_tab_id }.uniq.count
+    # self.tabs.where.not(parent_tab_id: nil).distinct.count(:parent_tab_id)
+    self.tabs.count_by_sql(
+    """
+      SELECT COUNT(DISTINCT tabs.parent_tab_id)
+      FROM tabs, trees
+      WHERE tabs.tree_id = trees.id AND trees.id = #{self.id} AND tabs.parent_tab_id IS NOT NULL;
+    """
+    )
+  end
+
+  def tab_count
+    # self.tabs.count
+    self.tabs.count_by_sql(
+    """
+      SELECT COUNT(tabs.id)
+      FROM tabs, trees
+      WHERE tabs.tree_id = trees.id AND trees.id = #{self.id};
+    """
+    )
   end
 end

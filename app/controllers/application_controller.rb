@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
   TREE_UNAUTH = "You are not authorized to access that tree."
   PROJ_UNAUTH = "You are not authorized to access that project."
 
+  def children_recursion
+     
+  end
+
+  def all_the_little_children
+    [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]
+  end
+
   def search_params
     tabs = Tab.search(params[:search]).where(tree_id: current_user.trees.each { |tree| tree.id } )
     render template: 'trees/search.html.erb', locals: { tabs: tabs }

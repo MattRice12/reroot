@@ -48,6 +48,7 @@ websites = { github:
 
 matt = User.create!(name: "Matt", email: "matt@example.com", password: "password")
 project = Project.create!(name: "About Matt", user_id: matt.id)
+Member.create!(user_id: matt.id, project_id: project.id)
 tree = Tree.create!(user_id: matt.id, name: "Matt's Websites")
 Forest.create!(tree_id: tree.id, project_id: project.id)
 Tab.create!(user_id: matt.id,
