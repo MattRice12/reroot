@@ -4,7 +4,7 @@ class TreesController < ApplicationController
     trees = Tree.all.includes(tabs: [:self_and_descendants]).includes(tabs: [:children])
     tabs = Tab.where(parent_tab_id: nil)
     # render locals: { trees: trees, tabs: tabs.includes(:children) }
-    render locals: { trees: trees, tabs: tabs.includes(all_the_little_children) }
+    render locals: { trees: trees, tabs: tabs.includes(children: all_the_little_children) }
   end
 
   def show
