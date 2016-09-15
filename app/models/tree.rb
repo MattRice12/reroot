@@ -36,18 +36,18 @@ class Tree < ApplicationRecord
   end
 
   def project_count
-    self.forests.where(tree_id: self.id).count
-    # self.forests.count_by_sql(
-    # """
-    #   SELECT COUNT(projects.id)
-    #   FROM projects
-    #   JOIN forests
-    #   ON projects.id = forests.project_id
-    #   JOIN trees
-    #   ON trees.id = forests.tree_id
-    #   WHERE forests.tree_id = #{self.id};
-    # """
-    # )
+    # self.forests.where(tree_id: self.id).count
+    self.forests.count_by_sql(
+    """
+      SELECT COUNT(projects.id)
+      FROM projects
+      JOIN forests
+      ON projects.id = forests.project_id
+      JOIN trees
+      ON trees.id = forests.tree_id
+      WHERE forests.tree_id = #{self.id};
+    """
+    )
   end
 
   def branch_count
