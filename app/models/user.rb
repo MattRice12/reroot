@@ -18,5 +18,4 @@ class User < ApplicationRecord
   def project_member?(project)
     members.find_by(project_id: project.id)
   end
-
 end

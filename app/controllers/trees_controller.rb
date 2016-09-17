@@ -3,8 +3,25 @@ class TreesController < ApplicationController
     return search_params if params[:search]
     trees = Tree.all.includes(tabs: [:children])
     tabs = Tab.where(parent_tab_id: nil)
-    # render locals: { trees: trees, tabs: tabs.includes(:children) }
     render locals: { trees: trees, tabs: tabs.includes(children: all_the_little_children) }
+
+    ### Practicing replacing AR with SQL --- eager loading not working ###
+    # trees = Tree.find_by_sql(
+    #   """
+    #   SELECT * FROM trees
+    #   """)
+    #
+    # tabs = Tab.find_by_sql(
+    #   """
+    #   SELECT a.*
+    #   FROM tabs a
+    #   JOIN trees
+    #   ON trees.id = a.tree_id
+    #   WHERE a.parent_tab_id IS NULL;
+    #   """
+    #   )
+    #
+    # render locals: { trees: trees, tabs: tabs }
   end
 
   def show
