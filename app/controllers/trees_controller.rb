@@ -20,7 +20,6 @@ class TreesController < ApplicationController
     #   WHERE a.parent_tab_id IS NULL;
     #   """
     #   )
-    #
     # render locals: { trees: trees, tabs: tabs }
   end
 

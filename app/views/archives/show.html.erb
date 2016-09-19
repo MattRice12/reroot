@@ -1,0 +1,27 @@
+<div class="row">
+  <h1 class="headinger"> <%= tree.name %>
+    <small class="btn small-edit editor">
+      <%= link_to edit_tree_path(tree), class: 'btn add-del-edit', id: "edit-tree", title: "Edit Tree" do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/designcontest/vintage/72/Pencil-icon.png") %>
+      <% end %>
+    </small>
+    <small class="btn small-edit editor">
+      <%= link_to tree_path(tree), method: :delete, data: { confirm: 'Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', id: "delete-tree", title: "Delete Tree" do %>
+        <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png") %>
+      <% end %>
+    </small>
+  </h1>
+
+  <% if tree.tabs.any? %>
+    <div class="tree">
+      <%= render "tree_leaves.html.erb", tree: tree, tabs: tabs %>
+    </div>
+    <ul class="tree-stats"><%= "Tree stats:" %>
+      <li class="stat-item"><%= "#{tree.name} is used in #{pluralize(tree.project_count, 'project')}." %></li>
+      <li class="stat-item"><%= "#{tree.name} has #{pluralize(tree.branch_count, 'branch')}."%></li>
+      <li class="stat-item"><%= "#{tree.name} has #{pluralize(tree.tab_count, 'tab')}." %></li>
+    </ul>
+  <% else %>
+    <%= render "empty_tree.html.erb", tree: tree, tabs: tabs %>
+  <% end %>
+</div>

@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
 
   def all_the_little_children
-    [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]] 
+    [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [children: [:children]]]]]]]]]]]]]]]
   end
 
   def search_params
