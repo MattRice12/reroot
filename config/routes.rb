@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :archives
   get    '/sign_in'     => 'clearance/sessions#new',     as: 'sign_in'
   delete '/sign_out'    => 'clearance/sessions#destroy', as: 'sign_out'
   get    '/sign_up'     => 'clearance/users#new',        as: 'sign_up'
@@ -27,13 +26,13 @@ Rails.application.routes.draw do
     member do
       get 'new_forest'
       post 'create_forest'
-
     end
   end
 
   resources :forests
   resources :tabs, as: 'tabs'
   resources :trees, as: 'trees'
+  resources :archives, as: 'archives'
 
   post :search, controller: 'search', as: 'search'
   root 'trees#index', as: 'root'
