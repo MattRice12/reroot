@@ -64,14 +64,14 @@
 <h2> Trees </h2>
 
 <div class="row trees">
-  <% if current_user.trees.empty? %>
+  <% if current_user.trees.blank? %>
     <div class="new-tree empty-tree-button">
       <%= link_to new_tree_path, class: 'btn add-del-edit', id: "add-tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree") %>
       <% end %>
       <small class="tree-add-text"> Add tree to project! </small>
     </div>
-  <% elsif (user_trees - project_trees).empty? %>
+  <% elsif (user_trees - project_trees).blank? %>
     <div class="new-tree">
       <%= link_to new_forest_tree_path(project_id: project.id), class: 'btn add-del-edit', id: "add-tree" do %>
         <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Add New Tree") %>
