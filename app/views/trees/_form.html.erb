@@ -9,8 +9,10 @@
   </div>
 
   <% if tree.persisted? %>
+    <%= f.hidden_field :archived, value: tree.archived %>
   <% else %>
     <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :archived, value: false %>
   <% end %>
 
   <% if params[:project_id] %>

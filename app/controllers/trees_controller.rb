@@ -93,7 +93,7 @@ class TreesController < ApplicationController
   private
 
   def tree_params
-    params.require(:tree).permit(:user_id, :name)
+    params.require(:tree).permit(:user_id, :name, :archived)
   end
 
   def forest_tree_params

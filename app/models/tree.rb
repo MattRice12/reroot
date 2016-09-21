@@ -1,5 +1,7 @@
 class Tree < ApplicationRecord
   default_scope { order('trees.created_at DESC') }
+  before_save :default_tree_archived
+  before_update :default_tree_archived
 
   has_many   :tabs,     dependent: :destroy
   has_many   :forests,  dependent: :destroy
@@ -71,5 +73,11 @@ class Tree < ApplicationRecord
       WHERE tabs.tree_id = trees.id AND trees.id = #{self.id};
     """
     )
+  end
+
+  def default_tree_archived
+    if self.archived == nil
+      self.archived = false
+    end
   end
 end

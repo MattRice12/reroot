@@ -13,7 +13,8 @@
 
     </div>
       <div class="tree-block">
-        <% current_user.trees.each do |tree| %>
+      <% current_user.trees.each do |tree| %>
+        <% if tree.archived == false %>
           <div class="tree">
 
             <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
@@ -40,6 +41,7 @@
               <%= render "empty_tree.html.erb", tree: tree %>
             <% end %>
           </div>
+        <% end %>
       <% end %>
     </div>
 
