@@ -72,9 +72,14 @@ class TreesController < ApplicationController
 
   def update
     tree = find_tree_params(:id)
-    project = find_proj_by_param_obj_proj(:tree)
-    return redirect(project, TREE_UPDATED) if project && tree.update(tree_params)
-    return redirect(tree, TREE_UPDATED) if !project && tree.update(tree_params)
+    if params[:project_id]
+      project = find_proj_by_param_obj_proj(:tree)
+      return redirect(project, TREE_UPDATED) if tree.update(tree_params)
+    elsif tree.archived = params[:archived]
+      return tree.save
+    else
+      return redirect(tree, TREE_UPDATED) if tree.update(tree_params)
+    end
     flash[:alert] = tree.errors
     render template: 'trees/edit.html.erb', locals: { tree: tree }
   end

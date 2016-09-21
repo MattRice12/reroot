@@ -3,7 +3,6 @@
 <div class="row">
   <div class="tree-set">
 
-
     <% if current_user.trees.any? %>
       <div class="tree-block">
         <% current_user.trees.each do |tree| %>
@@ -22,12 +21,7 @@
                   <% end %>
                 </span>
               </h1>
-
-              <% if tree.tabs.any? %>
-                <%= render "tree_leaves.html.erb", tree: tree, tabs: tabs %>
-              <% else %>
-                <%= render "empty_tree.html.erb", tree: tree %>
-              <% end %>
+              <%= render "trees/tree_leaves.html.erb", tree: tree, tabs: tabs %>
             </div>
           <% end %>
       <% end %>
@@ -35,12 +29,6 @@
 
     <% else %>
       <h3 class="empty-tree"> You have nothing in your archive </h3>
-      <div class="new-tree empty-tree-button">
-        <%= link_to new_tree_path, class: 'btn add-del-edit', id: "new-tree" do %>
-          <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/add-icon.png", title: "Create New Tree", alt: "Create New Tree") %>
-        <% end %>
-        <small class="tree-add-text"> Add new tree! </small>
-      </div>
     <% end %>
 
   </div>

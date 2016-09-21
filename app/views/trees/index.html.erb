@@ -17,6 +17,11 @@
           <div class="tree">
 
             <h1 class="tree-name" id="<%=tree.name.parameterize%>"> <%= link_to tree.name, tree_path(tree) %>
+
+              <span class="btn tree-button archive">
+                <%= link_to "Archive", tree_path(tree, archived: true), method: :patch %>
+              </span>
+
               <span class="btn tree-button editor">
                 <%= link_to tree_path(tree), method: :delete, data: { confirm: 'Clicking OK will delete the tree! Are you sure you want to delete this tree?'}, class: 'btn add-del-edit', id: "delete-tree", title: "Delete Tree" do %>
                   <%= image_tag("http://icons.iconarchive.com/icons/dryicons/simplistica/48/delete-icon.png", alt: "Delete Tree") %>
