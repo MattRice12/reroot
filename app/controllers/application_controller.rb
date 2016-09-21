@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   TREE_UPDATED    = "Tree Name Updated."
   PROJECT_UPDATED = "Project Name Updated."
 
+  TREE_ARCHIVED   = "Tree Archived"
+
   TAB_DESTROYED     = "Tab Destroyed."
   TREE_DESTROYED    = "Tree Destroyed."
   FOREST_DESTROYED  = "This tree was removed from the project."

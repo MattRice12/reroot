@@ -76,7 +76,7 @@ class TreesController < ApplicationController
       project = find_proj_by_param_obj_proj(:tree)
       return redirect(project, TREE_UPDATED) if tree.update(tree_params)
     elsif tree.archived = params[:archived]
-      return tree.save
+      return redirect(:back, "Tree updated.") if tree.save
     else
       return redirect(tree, TREE_UPDATED) if tree.update(tree_params)
     end

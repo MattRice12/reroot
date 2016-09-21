@@ -10,6 +10,7 @@ class Tree < ApplicationRecord
   belongs_to :user
 
   validates :name, presence: true, length: { maximum: 50 }
+  # validates :archived,
 
   # def as_json(_ = nil)
   #   super(include: [:tree])
