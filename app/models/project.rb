@@ -4,9 +4,8 @@ class Project < ApplicationRecord
   has_many :users,   through: :members
   has_many :trees,   through: :forests
 
-  belongs_to :user, touch: true
+  belongs_to :user
 
-  validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 125 }, uniqueness: true
 
   def as_json(_ = nil)

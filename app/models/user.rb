@@ -2,9 +2,8 @@ class User < ApplicationRecord
   include Clearance::User
 
   has_many  :trees
-  has_many  :tabs
 
-  has_many  :members,  dependent: :destroy
+  has_many  :members, dependent: :destroy
   has_many  :projects, through:   :members
 
   validates :name,     presence:  true, uniqueness: true
