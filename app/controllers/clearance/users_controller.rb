@@ -59,9 +59,10 @@ class Clearance::UsersController < Clearance::BaseController
 
   def destroy
     user = User.find_by(id: params.fetch(:id))
+    name = user.name
     if user.destroy
-      render message: "User deleted."
-      redirect_to users_path
+      flash[:alert] = "#{name}'s account was deleted."
+      redirect_to '/sign_in'
     else
       render message: "User not found."
     end
