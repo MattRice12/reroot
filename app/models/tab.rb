@@ -40,22 +40,22 @@ class Tab < ApplicationRecord
 #   end
 #
 # ##This is a recursive search from the root tab to all the rest; it can only start where parent_tab_id = null
-#   def self.tree_sql_for(instance)
-#    <<-SQL
-#      WITH RECURSIVE search_tab(id, path) AS (
-#          SELECT id, ARRAY[id]
-#          FROM tabs
-#          WHERE parent_tab_id IS NULL AND
-#          tabs.id = #{instance.id}
-#        UNION ALL
-#          SELECT tabs.id, path || tabs.id
-#          FROM search_tab
-#          JOIN tabs ON tabs.parent_tab_id = search_tab.id
-#          WHERE NOT tabs.id = ANY(path)
-#      )
-#      SELECT id FROM search_tab ORDER BY path
-#    SQL
-#   end
+  # def self.tree_sql_for(instance)
+  #  <<-SQL
+  #    WITH RECURSIVE search_tab(id, path) AS (
+  #        SELECT id, ARRAY[id]
+  #        FROM tabs
+  #        WHERE parent_tab_id IS NULL AND
+  #        tabs.id = #{instance.id}
+  #      UNION ALL
+  #        SELECT tabs.id, path || tabs.id
+  #        FROM search_tab
+  #        JOIN tabs ON tabs.parent_tab_id = search_tab.id
+  #        WHERE NOT tabs.id = ANY(path)
+  #    )
+  #    SELECT id FROM search_tab ORDER BY path
+  #  SQL
+  # end
 
   def default_tab_name
     if self.name == ""
