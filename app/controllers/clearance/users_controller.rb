@@ -52,8 +52,8 @@ class Clearance::UsersController < Clearance::BaseController
     @user = User.find_by(id: params[:id])
     if @user.update(custom_user_params)
       redirect_to @user
+      flash[:alert] = "User Account Updated"
     else
-      flash[:alert] = "Errors: Unable to update Account."
       render template: 'users/edit.html.erb'
     end
   end
@@ -71,7 +71,7 @@ class Clearance::UsersController < Clearance::BaseController
   private
 
   def custom_user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def redirect_signed_in_users

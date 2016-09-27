@@ -1,11 +1,10 @@
 <div id="clearance" class="sign-up">
   <h1 class="headinger"> Edit <%= current_user.name %>'s Account  </h1>
 
-
   <div class="errors">
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <% flash.now[:alert] = msg %>
       <% end %>
     </ul>
   </div>
@@ -24,10 +23,12 @@
     <div class="password-field">
       <%= form.label :password %>
       <%= form.password_field :password %>
-
     </div>
 
-
+    <div class="password-field">
+      <%= form.label "Confirm Password" %>
+      <%= form.password_field :password_confirmation %>
+    </div>
 
     <div class="submit-field">
       <%= form.submit "Submit", class: 'button-primary'%>
