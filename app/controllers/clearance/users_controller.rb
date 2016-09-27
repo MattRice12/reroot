@@ -27,18 +27,17 @@ class Clearance::UsersController < Clearance::BaseController
     if signed_in?
       redirect_to "/users"
     else
-      @user = user_from_params
+      @user = User.new
       render template: "users/new.html.erb"
     end
   end
 
   def create
-    @user = user_from_params
+    @user = User.new(custom_user_params)
     if @user.save
       sign_in @user
       redirect_to root_path
     else
-      flash[:alert] = "Errors: Unable to create Account."
       render template: "users/new.html.erb"
     end
   end

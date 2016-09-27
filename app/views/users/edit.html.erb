@@ -10,25 +10,7 @@
   </div>
 
   <%= form_for @user do |form| %>
-    <div class="text-field">
-      <%= form.label :name %>
-      <%= form.text_field :name %>
-    </div>
-
-    <div class="text-field">
-      <%= form.label :email %>
-      <%= form.text_field :email, type: 'email' %>
-    </div>
-
-    <div class="password-field">
-      <%= form.label :password %>
-      <%= form.password_field :password %>
-    </div>
-
-    <div class="password-field">
-      <%= form.label "Confirm Password" %>
-      <%= form.password_field :password_confirmation %>
-    </div>
+    <%= render partial: '/users/form.html.erb', object: form %>
 
     <div class="submit-field">
       <%= form.submit "Submit", class: 'button-primary'%>
