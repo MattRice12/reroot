@@ -32,3 +32,16 @@
     <li class="medium-text"> Total Tabs: <%= user.tabs.count %> </li>
   </ul>
 </h2>
+
+
+<div class="edit-name">
+  <% if user == current_user %>
+    <%= link_to "Edit Name", edit_user_path(user) %>
+  <% end %>
+</div>
+
+<div class="delete-account">
+  <% if user == current_user %>
+    <%= link_to "Delete Account", user_path(user), method: :delete, data: { confirm: 'Clicking Yes will delete your account. Are you sure you want continue?'} %>
+  <% end %>
+</div>

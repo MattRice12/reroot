@@ -44,15 +44,17 @@ class Clearance::UsersController < Clearance::BaseController
   end
 
   def edit
-    render locals: { user: User.find(params.fetch(:id)) }
+    @user = User.find_by(id: params[:id])
+    render template: "users/edit.html.erb"
   end
 
   def update
-    @user = user_from_params
-    if @user.save
-      redirect_to user
+    @user = User.find_by(id: params[:id])
+    if @user.update(custom_user_params)
+      redirect_to @user
     else
-      render template: 'user/edit.html.erb', locals: { user: user }
+      flash[:alert] = "Errors: Unable to update Account."
+      render template: 'users/edit.html.erb'
     end
   end
 
@@ -67,6 +69,10 @@ class Clearance::UsersController < Clearance::BaseController
   end
 
   private
+
+  def custom_user_params
+    params.require(:user).permit(:name, :email, :password)
+  end
 
   def redirect_signed_in_users
     if signed_in?
